@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="UPCEntitiesBD.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="contactenos">
+          <Key>
+            <PropertyRef Name="idcon" />
+          </Key>
+          <Property Name="idcon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nomcompcon" Type="varchar" MaxLength="50" />
+          <Property Name="dnicon" Type="char" MaxLength="8" />
+          <Property Name="corcon" Type="varchar" MaxLength="50" />
+          <Property Name="telcon" Type="char" MaxLength="7" />
+          <Property Name="celcon" Type="char" MaxLength="9" />
+          <Property Name="empcon" Type="varchar" MaxLength="50" />
+          <Property Name="comcon" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityContainer Name="UPCEntitiesBDStoreContainer">
+          <EntitySet Name="contactenos" EntityType="Self.contactenos" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UPCEntitiesBD" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="contactenos">
+          <Key>
+            <PropertyRef Name="idcon" />
+          </Key>
+          <Property Name="idcon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nomcompcon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dnicon" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="corcon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telcon" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+          <Property Name="celcon" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
+          <Property Name="empcon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="comcon" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="UPCEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="contactenos" EntityType="Self.contactenos" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UPCEntitiesBDStoreContainer" CdmEntityContainer="UPCEntities">
+          <EntitySetMapping Name="contactenos">
+            <EntityTypeMapping TypeName="UPCEntitiesBD.contactenos">
+              <MappingFragment StoreEntitySet="contactenos">
+                <ScalarProperty Name="idcon" ColumnName="idcon" />
+                <ScalarProperty Name="nomcompcon" ColumnName="nomcompcon" />
+                <ScalarProperty Name="dnicon" ColumnName="dnicon" />
+                <ScalarProperty Name="corcon" ColumnName="corcon" />
+                <ScalarProperty Name="telcon" ColumnName="telcon" />
+                <ScalarProperty Name="celcon" ColumnName="celcon" />
+                <ScalarProperty Name="empcon" ColumnName="empcon" />
+                <ScalarProperty Name="comcon" ColumnName="comcon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
