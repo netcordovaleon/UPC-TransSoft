@@ -7,7 +7,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{72731B3E-4D14-477B-9710-9CED916A10B5}</ProjectGuid>
+    <ProjectGuid>{311C139F-5770-4D73-9D4F-2EF57BB0A4CE}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -225,6 +225,20 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UPC.TS.DataContract\UPC.TS.DataContract.csproj">
+      <Project>{1da2287c-1b21-40e6-b11b-83ce8bbbce4e}</Project>
+      <Name>UPC.TS.DataContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UPC.TS.DataImplement\UPC.TS.DataImplement.csproj">
+      <Project>{643c3a87-13a2-47e6-9e7b-f562b8d749a0}</Project>
+      <Name>UPC.TS.DataImplement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UPC.TS.Entities\UPC.TS.Entities.csproj">
+      <Project>{1aec7d34-0561-4a4c-833a-4d36a07032ed}</Project>
+      <Name>UPC.TS.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -241,7 +255,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>2133</DevelopmentServerPort>
+          <DevelopmentServerPort>4178</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:2133/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
