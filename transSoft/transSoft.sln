@@ -5,13 +5,15 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01.AccesoDatos", "01.AccesoDatos", "{95876A47-E7A8-4E4E-829E-0CFAB9CC9873}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02.ReglasNegocio", "02.ReglasNegocio", "{A623C686-AAB9-45B1-89E1-A54E3945C44F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02.Negocio", "02.Negocio", "{A623C686-AAB9-45B1-89E1-A54E3945C44F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03.Infraestructura", "03.Infraestructura", "{76B91DBA-965A-4023-93DC-C23F9FA798C1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04.Cliente", "04.Cliente", "{EF6F7ECE-605A-4EE8-9854-02E40B70954A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UPC.TS.Web", "UPC.TS.Web\UPC.TS.Web.csproj", "{72731B3E-4D14-477B-9710-9CED916A10B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UPC.TS.Entidad", "UPC.TS.Entidad\UPC.TS.Entidad.csproj", "{F7EDB5A9-635B-4633-8AC6-670BC2BB05BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,11 +25,16 @@ Global
 		{72731B3E-4D14-477B-9710-9CED916A10B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72731B3E-4D14-477B-9710-9CED916A10B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72731B3E-4D14-477B-9710-9CED916A10B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7EDB5A9-635B-4633-8AC6-670BC2BB05BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7EDB5A9-635B-4633-8AC6-670BC2BB05BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7EDB5A9-635B-4633-8AC6-670BC2BB05BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7EDB5A9-635B-4633-8AC6-670BC2BB05BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{F7EDB5A9-635B-4633-8AC6-670BC2BB05BD} = {A623C686-AAB9-45B1-89E1-A54E3945C44F}
 		{72731B3E-4D14-477B-9710-9CED916A10B5} = {EF6F7ECE-605A-4EE8-9854-02E40B70954A}
 	EndGlobalSection
 EndGlobal
