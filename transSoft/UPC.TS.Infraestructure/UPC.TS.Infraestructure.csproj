@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constantes\TypeResponse.cs" />
+    <Compile Include="Contratos\IOperacionesCRUD.cs" />
     <Compile Include="Entidades\ResponseEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

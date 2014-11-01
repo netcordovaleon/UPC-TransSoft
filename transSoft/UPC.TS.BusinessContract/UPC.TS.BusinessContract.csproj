@@ -39,7 +39,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IContactenosLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UPC.TS.DataContract\UPC.TS.DataContract.csproj">
+      <Project>{1da2287c-1b21-40e6-b11b-83ce8bbbce4e}</Project>
+      <Name>UPC.TS.DataContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UPC.TS.DataImplement\UPC.TS.DataImplement.csproj">
+      <Project>{643c3a87-13a2-47e6-9e7b-f562b8d749a0}</Project>
+      <Name>UPC.TS.DataImplement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UPC.TS.Entities\UPC.TS.Entities.csproj">
+      <Project>{1aec7d34-0561-4a4c-833a-4d36a07032ed}</Project>
+      <Name>UPC.TS.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UPC.TS.Infraestructure\UPC.TS.Infraestructure.csproj">
+      <Project>{f57758b2-99d3-4c55-8bb9-0a38d6ee2edd}</Project>
+      <Name>UPC.TS.Infraestructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -70,11 +70,12 @@ namespace UPC.TS.DataImplement.Infraestructura
 
         }
 
-        public virtual void Update(T entity)
+        public virtual object Update(T entity)
         {
             dbSet.Attach(entity);
             _unitOfWork.Db.Entry(entity).State = System.Data.Entity.EntityState.Modified;
             this._unitOfWork.Db.SaveChanges();
+            return entity;
         }
         public int Delete(T entity)
         {

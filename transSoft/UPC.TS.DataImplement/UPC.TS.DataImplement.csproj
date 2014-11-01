@@ -59,6 +59,10 @@
       <Project>{1aec7d34-0561-4a4c-833a-4d36a07032ed}</Project>
       <Name>UPC.TS.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UPC.TS.Infraestructure\UPC.TS.Infraestructure.csproj">
+      <Project>{f57758b2-99d3-4c55-8bb9-0a38d6ee2edd}</Project>
+      <Name>UPC.TS.Infraestructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<unity xmlns="http://schemas.microsoft.com/practices/2010/unity">
+  <typeAliases>
+    
+    <typeAlias alias="IContactenosLogic" type="UPC.TS.BusinessContract.IContactenosLogic, UPC.TS.BusinessContract"/>
+    <typeAlias alias="ContactenosLogic" type="UPC.TS.BusinessLogic.ContactenosLogic, UPC.TS.BusinessLogic" />
+    
+  </typeAliases>
+
+  <container name="Servicio">
+    <register type="IContactenosLogic" mapTo="ContactenosLogic" />
+    
+  </container>
+</unity>

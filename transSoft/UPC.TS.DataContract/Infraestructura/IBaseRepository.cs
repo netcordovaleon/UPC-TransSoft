@@ -52,7 +52,7 @@
         /// </summary>
         /// <param name="entity">The entity to update</param>
         /// <param name="userId">The user performing the update</param>
-        void Update(T entity);
+        object Update(T entity);
 
 
 
