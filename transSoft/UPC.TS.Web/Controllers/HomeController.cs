@@ -6,8 +6,10 @@ using System.Web.Mvc;
 using UPC.TS.Entities;
 using UPC.TS.BusinessLogic;
 using UPC.TS.BusinessContract;
+using UPC.TS.Web.Models;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
+using AutoMapper;
 
 namespace UPC.TS.Web.Controllers
 {
@@ -15,10 +17,13 @@ namespace UPC.TS.Web.Controllers
     {
         public ActionResult Index()
         {
-            var entidad = new contactenos();
+            
+
+            var entidad = new ContactenosModels();
             entidad.nomcompcon = "Luis Alex Cordova Leon";
+            var entity = Mapper.Map<ContactenosModels, contactenos>(entidad);
             IContactenosLogic _contactenosLogic = Configuration.Unity.Container.Resolve<IContactenosLogic>();
-            _contactenosLogic.GrabarContacto(entidad);
+            //_contactenosLogic.GrabarContacto(entity);
             return View();
         }
 

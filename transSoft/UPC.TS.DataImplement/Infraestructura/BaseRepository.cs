@@ -7,6 +7,7 @@ using UPC.TS.DataContract.Infraestructura;
 using UPC.TS.DataContract;
 using System.Data.Entity;
 using System.Data;
+using System.Linq.Expressions;
 namespace UPC.TS.DataImplement.Infraestructura
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
@@ -97,6 +98,33 @@ namespace UPC.TS.DataImplement.Infraestructura
         public IEnumerable<T> GetAll()
         {
             return dbSet.AsEnumerable().ToList();
+        }
+
+
+        public T Get(System.Linq.Expressions.Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
+        {
+            IQueryable<T> query = dbSet;
+            Filter(ref query, filter);
+            return orderBy != null ? orderBy(query).SingleOrDefault() : query.SingleOrDefault();
+        }
+
+        public IEnumerable<T> GetMany(System.Linq.Expressions.Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "")
+        {
+            IQueryable<T> query = dbSet;
+            Filter(ref query, filter);
+            foreach (var includeProperty in includeProperties.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProperty);
+            }
+            return orderBy != null ? orderBy(query).ToList() : query.ToList();
+        }
+
+        private static void Filter<T>(ref IQueryable<T> query, Expression<Func<T, bool>> filter = null)
+        {
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
         }
     }
 }

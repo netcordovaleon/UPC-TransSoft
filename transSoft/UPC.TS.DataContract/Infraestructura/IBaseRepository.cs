@@ -4,7 +4,9 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.Specialized;
-
+    using System.Linq;
+    using System.Linq.Expressions;
+    using System.Web.Mvc;
     public interface IBaseRepository<T>
     {
         /// <summary>
@@ -65,6 +67,9 @@
         /// <returns></returns>
         int Delete(T entity);
 
+
+        T Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null);
+        IEnumerable<T> GetMany(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "");
         IUnitOfWork UnitOfWork { get; }
 
     }
