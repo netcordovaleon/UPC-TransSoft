@@ -42,6 +42,7 @@
     <Compile Include="Constantes\TypeResponse.cs" />
     <Compile Include="Contratos\IOperacionesCRUD.cs" />
     <Compile Include="Entidades\ResponseEntity.cs" />
+    <Compile Include="Mensajes\Respuesta\Response.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
