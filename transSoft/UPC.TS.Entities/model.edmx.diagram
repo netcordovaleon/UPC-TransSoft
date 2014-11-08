@@ -4,8 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4c7f40749be245d385e3492f0d86bda6" Name="Diagram1">
+      <Diagram DiagramId="4c7f40749be245d385e3492f0d86bda6" Name="Diagram1" ShowGrid="true" DisplayType="true">
         <EntityTypeShape EntityType="UPCEntitiesBD.contactenos" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UPCEntitiesBD.BUS" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="UPCEntitiesBD.CLIENTE" Width="1.5" PointX="3.75" PointY="3.75" />
+        <EntityTypeShape EntityType="UPCEntitiesBD.COMPRA" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="UPCEntitiesBD.CUPONES" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="UPCEntitiesBD.PASAJERO" Width="1.5" PointX="5.75" PointY="3.75" />
+        <EntityTypeShape EntityType="UPCEntitiesBD.PERFIL" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="UPCEntitiesBD.PERSONAL" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="UPCEntitiesBD.PROGRAMACION" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="UPCEntitiesBD.PROMOCION" Width="1.5" PointX="7.75" PointY="7.75" />
+        <EntityTypeShape EntityType="UPCEntitiesBD.RESERVA" Width="1.5" PointX="4.75" PointY="8.75" />
+        <EntityTypeShape EntityType="UPCEntitiesBD.TARIFA" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="UPCEntitiesBD.TARJETA" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="UPCEntitiesBD.TIPOSERVICIO" Width="1.5" PointX="9.75" PointY="3.75" />
+        <EntityTypeShape EntityType="UPCEntitiesBD.TIPOTARJETA" Width="1.5" PointX="9.75" PointY="6.75" />
+        <EntityTypeShape EntityType="UPCEntitiesBD.USUARIO" Width="1.5" PointX="9.75" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
