@@ -39,7 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IConsultaProgramacionLogic.cs" />
     <Compile Include="IContactenosLogic.cs" />
+    <Compile Include="ITarifasLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

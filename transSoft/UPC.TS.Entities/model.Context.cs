@@ -41,5 +41,6 @@ namespace UPC.TS.Entities
         public virtual DbSet<TIPOSERVICIO> TIPOSERVICIO { get; set; }
         public virtual DbSet<TIPOTARJETA> TIPOTARJETA { get; set; }
         public virtual DbSet<USUARIO> USUARIO { get; set; }
+        public virtual DbSet<VWCONSULTAPROGRAMACION> VWCONSULTAPROGRAMACION { get; set; }
     }
 }

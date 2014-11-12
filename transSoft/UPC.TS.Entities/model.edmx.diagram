@@ -21,6 +21,7 @@
         <EntityTypeShape EntityType="UPCEntitiesBD.TIPOSERVICIO" Width="1.5" PointX="9.75" PointY="3.75" />
         <EntityTypeShape EntityType="UPCEntitiesBD.TIPOTARJETA" Width="1.5" PointX="9.75" PointY="6.75" />
         <EntityTypeShape EntityType="UPCEntitiesBD.USUARIO" Width="1.5" PointX="9.75" PointY="9.75" />
+        <EntityTypeShape EntityType="UPCEntitiesBD.VWCONSULTAPROGRAMACION" Width="1.5" PointX="3.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

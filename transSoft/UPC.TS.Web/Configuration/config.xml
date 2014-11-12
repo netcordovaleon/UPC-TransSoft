@@ -4,11 +4,18 @@
     
     <typeAlias alias="IContactenosLogic" type="UPC.TS.BusinessContract.IContactenosLogic, UPC.TS.BusinessContract"/>
     <typeAlias alias="ContactenosLogic" type="UPC.TS.BusinessLogic.ContactenosLogic, UPC.TS.BusinessLogic" />
+
+    <typeAlias alias="ITarifasLogic" type="UPC.TS.BusinessContract.ITarifasLogic, UPC.TS.BusinessContract"/>
+    <typeAlias alias="TarifasLogic" type="UPC.TS.BusinessLogic.TarifasLogic, UPC.TS.BusinessLogic" />
+
+    <typeAlias alias="IConsultaProgramacionLogic" type="UPC.TS.BusinessContract.IConsultaProgramacionLogic, UPC.TS.BusinessContract"/>
+    <typeAlias alias="ConsultaProgramacionLogic" type="UPC.TS.BusinessLogic.ConsultaProgramacionLogic, UPC.TS.BusinessLogic" />
     
   </typeAliases>
 
   <container name="Servicio">
     <register type="IContactenosLogic" mapTo="ContactenosLogic" />
-    
+    <register type="ITarifasLogic" mapTo="TarifasLogic" />
+    <register type="IConsultaProgramacionLogic" mapTo="ConsultaProgramacionLogic" />
   </container>
 </unity>

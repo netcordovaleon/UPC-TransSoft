@@ -39,8 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsultaProgramacionLogic.cs" />
     <Compile Include="ContactenosLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TarifasLogic.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UPC.TS.BusinessContract\UPC.TS.BusinessContract.csproj">

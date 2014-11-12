@@ -1,0 +1,50 @@
+﻿@model UPC.TS.Web.Models.ReservaModels
+@{
+    ViewBag.Title = "Programaciones";
+}
+
+@Html.HiddenFor(c => c.filtros.TIPVIA)
+@Html.HiddenFor(c=>c.filtros.DESORI)
+@Html.HiddenFor(c => c.filtros.DESDES)
+@Html.HiddenFor(c => c.filtros.FECSAL)
+@Html.HiddenFor(c => c.filtros.FECRET)
+
+
+<div class="row">
+    <div class="col-md-12">
+        <table id="tblProgramacion" class="display upctbgrid" cellspacing="0" style="width:100%;">
+            <thead>
+                <tr>
+                    <th>Origen</th>
+                    <th>Destino</th>
+                    <th>Fecha Salida</th>
+                    <th>Horario</th>
+                    <th>Tarifa</th>
+                    <th>Servicio</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.listaProgramacion)
+                {
+                    <tr>
+                        <td>@item.ORITAR</td>
+                        <td>@item.DESTAR</td>
+                        <td>@item.FECSALPRO</td>
+                        <td>@item.HORSALPRO</td>
+                        <td>@item.PRETAR</td>
+                        <td>@item.NOMTIPSER</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+</div>
+</div>
+
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tblProgramacion').dataTable();
+        });
+    </script>   
+}

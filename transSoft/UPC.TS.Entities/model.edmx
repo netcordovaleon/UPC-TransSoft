@@ -209,6 +209,21 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.USUARIO' no tiene definida ni
           <Property Name="LOGUSU" Type="varchar" MaxLength="50" />
           <Property Name="CODPER" Type="int" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'db_qmadera.dbo.VWCONSULTAPROGRAMACION' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VWCONSULTAPROGRAMACION">
+          <Key>
+            <PropertyRef Name="CODPRO" />
+          </Key>
+          <Property Name="CODPRO" Type="int" Nullable="false" />
+          <Property Name="FECSALPRO" Type="varchar" MaxLength="11" />
+          <Property Name="HORSALPRO" Type="varchar" MaxLength="50" />
+          <Property Name="ORITAR" Type="varchar" MaxLength="50" />
+          <Property Name="DESTAR" Type="varchar" MaxLength="50" />
+          <Property Name="PRETAR" Type="decimal" Precision="19" Scale="2" />
+          <Property Name="NOMTIPSER" Type="varchar" MaxLength="50" />
+          <Property Name="CUPASI" Type="int" />
+        </EntityType>
         <EntityContainer Name="UPCEntitiesBDStoreContainer">
           <EntitySet Name="contactenos" EntityType="Self.contactenos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BUS" EntityType="Self.BUS" store:Type="Tables" store:Schema="dbo">
@@ -357,6 +372,18 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.USUARIO' no tiene definida ni
     [USUARIO].[CODPER] AS [CODPER]
     FROM [dbo].[USUARIO] AS [USUARIO]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VWCONSULTAPROGRAMACION" EntityType="Self.VWCONSULTAPROGRAMACION" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VWCONSULTAPROGRAMACION].[CODPRO] AS [CODPRO], 
+    [VWCONSULTAPROGRAMACION].[FECSALPRO] AS [FECSALPRO], 
+    [VWCONSULTAPROGRAMACION].[HORSALPRO] AS [HORSALPRO], 
+    [VWCONSULTAPROGRAMACION].[ORITAR] AS [ORITAR], 
+    [VWCONSULTAPROGRAMACION].[DESTAR] AS [DESTAR], 
+    [VWCONSULTAPROGRAMACION].[PRETAR] AS [PRETAR], 
+    [VWCONSULTAPROGRAMACION].[NOMTIPSER] AS [NOMTIPSER], 
+    [VWCONSULTAPROGRAMACION].[CUPASI] AS [CUPASI]
+    FROM [dbo].[VWCONSULTAPROGRAMACION] AS [VWCONSULTAPROGRAMACION]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -392,6 +419,7 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.USUARIO' no tiene definida ni
           <EntitySet Name="TIPOSERVICIO" EntityType="UPCEntitiesBD.TIPOSERVICIO" />
           <EntitySet Name="TIPOTARJETA" EntityType="UPCEntitiesBD.TIPOTARJETA" />
           <EntitySet Name="USUARIO" EntityType="UPCEntitiesBD.USUARIO" />
+          <EntitySet Name="VWCONSULTAPROGRAMACION" EntityType="UPCEntitiesBD.VWCONSULTAPROGRAMACION" />
         </EntityContainer>
         <EntityType Name="BUS">
           <Key>
@@ -553,6 +581,19 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.USUARIO' no tiene definida ni
           <Property Name="ESTREG" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="LOGUSU" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CODPER" Type="Int32" />
+        </EntityType>
+        <EntityType Name="VWCONSULTAPROGRAMACION">
+          <Key>
+            <PropertyRef Name="CODPRO" />
+          </Key>
+          <Property Name="CODPRO" Type="Int32" Nullable="false" />
+          <Property Name="FECSALPRO" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="HORSALPRO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ORITAR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DESTAR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PRETAR" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="NOMTIPSER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CUPASI" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -747,6 +788,20 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.USUARIO' no tiene definida ni
                 <ScalarProperty Name="ESTREG" ColumnName="ESTREG" />
                 <ScalarProperty Name="CLAUSU" ColumnName="CLAUSU" />
                 <ScalarProperty Name="CODUSU" ColumnName="CODUSU" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWCONSULTAPROGRAMACION">
+            <EntityTypeMapping TypeName="UPCEntitiesBD.VWCONSULTAPROGRAMACION">
+              <MappingFragment StoreEntitySet="VWCONSULTAPROGRAMACION">
+                <ScalarProperty Name="CUPASI" ColumnName="CUPASI" />
+                <ScalarProperty Name="NOMTIPSER" ColumnName="NOMTIPSER" />
+                <ScalarProperty Name="PRETAR" ColumnName="PRETAR" />
+                <ScalarProperty Name="DESTAR" ColumnName="DESTAR" />
+                <ScalarProperty Name="ORITAR" ColumnName="ORITAR" />
+                <ScalarProperty Name="HORSALPRO" ColumnName="HORSALPRO" />
+                <ScalarProperty Name="FECSALPRO" ColumnName="FECSALPRO" />
+                <ScalarProperty Name="CODPRO" ColumnName="CODPRO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

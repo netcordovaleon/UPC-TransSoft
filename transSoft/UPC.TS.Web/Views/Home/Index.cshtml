@@ -1,31 +1,77 @@
-﻿@{
+﻿@model UPC.TS.Web.Models.FiltrosReservaModels
+
+@{
     ViewBag.Title = "Principal";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+<div class="row">
+    <div class="col-md-3">
+
+    <h3 class="text-left"><i class="fa fa-search"></i>&nbsp;Itinerario</h3>
+
+    @using (Html.BeginForm("Programacion", "Reserva", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+        <div class="radio-inline">
+            <label>
+                @Html.RadioButtonFor(c => c.TIPVIA, "1") Solo ida
+            </label>
+        </div>
+        <div class="radio-inline">
+            <label>
+                @Html.RadioButtonFor(c => c.TIPVIA, "2") Ida y vuelta
+            </label>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(c=>c.DESORI)
+            @Html.DropDownListFor(c => c.DESORI, Model.LIST_ORI, "Seleccione", new { @Class= "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(c => c.DESDES)
+            @Html.DropDownListFor(c => c.DESDES, Model.LIST_DES, "Seleccione", new { @Class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(c => c.FECSAL)
+            @Html.TextBoxFor(c => c.FECSAL, new { @Class="form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(c => c.FECRET)
+            @Html.TextBoxFor(c => c.FECRET, new { @Class="form-control" })
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-search-plus"></i>&nbsp;Buscar</button>
+            <button type="reset" class="btn">Cancelar</button>
+        </div>
+    }
+    </div>
+    <div class="col-md-9">
+        <div class="jumbotron">
+            <h1>ASP.NET</h1>
+            <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+            <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Getting started</h2>
+                <p>
+                    ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                    enables a clean separation of concerns and gives you full control over markup
+                    for enjoyable, agile development.
+                </p>
+                <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Get more libraries</h2>
+                <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+                <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Web Hosting</h2>
+                <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+                <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+            </div>
+        </div>
+
+    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
