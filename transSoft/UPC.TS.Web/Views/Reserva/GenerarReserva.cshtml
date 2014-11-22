@@ -1,0 +1,305 @@
+﻿@model UPC.TS.Web.Models.ReservaModels
+@{
+    ViewBag.Title = "Generar Reserva";
+}
+<style type="text/css">
+    .asiento-seleccionado {
+        background: #65cb5d !important;
+        color: #fff !important;
+    }
+
+    .asiento-reservado {
+        background: #fab944 !important;
+        color: #fff !important;
+    }
+
+    .asiento-pagado {
+        background: #000 !important;
+        color: #fff !important;
+    }
+</style>
+
+
+@Html.HiddenFor(c =>c.CODPRO_ORI)
+@Html.HiddenFor(c =>c.CODPRO_DES)
+<div class="panel panel-default">
+    <div class="panel-heading">Historial de asientos</div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn asiento-seleccionado">Seleccionado</button>
+                <button class="btn asiento-reservado">Reservado</button>
+                <button class="btn asiento-pagado">Pagado</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">Seleccion asiento BUS SALIDA</div>
+            <div class="panel-body" id="group-Origen">
+                <center>
+                    <div class="row">
+                        <div class="form-group">
+                            <button class="btn">01</button>
+                            <button class="btn">02</button>
+                            <!--<button class="btn" style="background:#ffffff;">00</button>-->
+                            <button class="btn">03</button>
+                            <button class="btn">04</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <button class="btn">05</button>
+                            <button class="btn">06</button>
+                            <!--<button class="btn" style="background:#ffffff;">00</button>-->
+                            <button class="btn">07</button>
+                            <button class="btn">08</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <button class="btn">09</button>
+                            <button class="btn">10</button>
+                            <!--<button class="btn" style="background:#ffffff;">00</button>-->
+                            <button class="btn">11</button>
+                            <button class="btn">12</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <button class="btn">13</button>
+                            <button class="btn">14</button>
+                            @*<button class="btn" style="background:#ffffff;">00</button>*@
+                            <button class="btn">15</button>
+                            <button class="btn">16</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <button class="btn">17</button>
+                            <button class="btn">18</button>
+                            @*<button class="btn" style="background:#ffffff;">00</button>*@
+                            <button class="btn">19</button>
+                            <button class="btn">20</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <button class="btn">21</button>
+                            <button class="btn">22</button>
+                            <button class="btn">23</button>
+                            <button class="btn">24</button>
+                            <button class="btn">25</button>
+                        </div>
+                    </div>
+                </center>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">Seleccion asiento BUS REGRESO</div>
+            <div class="panel-body" id="group-Destino">
+                <center>
+                    <div class="row">
+                        <div class="form-group">
+                            <button class="btn">01</button>
+                            <button class="btn">02</button>
+                            @*<button class="btn" style="background:#ffffff;">00</button>*@
+                            <button class="btn">03</button>
+                            <button class="btn">04</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <button class="btn">05</button>
+                            <button class="btn">06</button>
+                            @*<button class="btn" style="background:#ffffff;">00</button>*@
+                            <button class="btn">07</button>
+                            <button class="btn">08</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <button class="btn">09</button>
+                            <button class="btn">10</button>
+                            @*<button class="btn" style="background:#ffffff;">00</button>*@
+                            <button class="btn">11</button>
+                            <button class="btn">12</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <button class="btn">13</button>
+                            <button class="btn">14</button>
+                            @*<button class="btn" style="background:#ffffff;">00</button>*@
+                            <button class="btn">15</button>
+                            <button class="btn">16</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <button class="btn">17</button>
+                            <button class="btn">18</button>
+                            @*<button class="btn" style="background:#ffffff;">00</button>*@
+                            <button class="btn">19</button>
+                            <button class="btn">20</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <button class="btn">21</button>
+                            <button class="btn">22</button>
+                            <button class="btn">23</button>
+                            <button class="btn">24</button>
+                            <button class="btn">25</button>
+                        </div>
+                    </div>
+                </center>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Registro Pasajeros</div>
+            <div class="panel-body">
+
+            @using (Html.BeginForm("", "", FormMethod.Post, new { @Id="frmRegPasajero", @class = "form-horizontal", role = "form" }))
+                {
+                @Html.HiddenFor(c=>c.pasajero.NUMASI_ORI)
+                @Html.HiddenFor(c=>c.pasajero.NUMASI_DES)
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.LabelFor(c => c.pasajero.TIPDOC)
+                        @Html.TextBoxFor(c => c.pasajero.TIPDOC, new { @Class = "form-control" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(c => c.pasajero.NUMDOC)
+                        @Html.TextBoxFor(c => c.pasajero.NUMDOC, new { @Class = "form-control" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.LabelFor(c => c.pasajero.SEXPAS)
+                        @Html.TextBoxFor(c => c.pasajero.SEXPAS, new { @Class = "form-control" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(c => c.pasajero.NOMPAS)
+                        @Html.TextBoxFor(c => c.pasajero.NOMPAS, new { @Class = "form-control" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.LabelFor(c => c.pasajero.APEPPAS)
+                        @Html.TextBoxFor(c => c.pasajero.APEPPAS, new { @Class = "form-control" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(c => c.pasajero.APEMPAS)
+                        @Html.TextBoxFor(c => c.pasajero.APEMPAS, new { @Class = "form-control" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.LabelFor(c => c.pasajero.DIRPAS)
+                        @Html.TextBoxFor(c => c.pasajero.DIRPAS, new { @Class = "form-control" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        @Html.LabelFor(c => c.pasajero.TELPAS)
+                        @Html.TextBoxFor(c => c.pasajero.TELPAS, new { @Class = "form-control" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(c => c.pasajero.CELPAS)
+                        @Html.TextBoxFor(c => c.pasajero.CELPAS, new { @Class = "form-control" })
+                    </div>
+                </div>
+                <br />
+                <button type="button" id="btnCancelarPasajero" class="btn pull-right"><i class="fa fa-stop"></i>&nbsp;Cancelar</button>
+                <button type="button" id="btnAgregarPasajero" class="btn btn-primary pull-right"><i class="fa fa-save"></i>&nbsp;Agregar</button>
+                }
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<br />
+<button type="button" id="btnRegresarProgramacion" class="btn pull-right"><i class="fa fa-arrow-left"></i>&nbsp;Regresar</button>
+<button type="button" id="btnGenerarReserva" class="btn btn-primary pull-right"><i class="fa fa-car"></i>&nbsp;Confirmar Reserva</button>
+
+@section scripts {
+
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            //EVENTS
+            $("#btnRegresarProgramacion").click(function () { regresarProgramacion(); });
+            $("#btnAgregarPasajero").click(function () { agregarPasajero(); });
+            $("#btnGenerarReserva").click(function () { generarReserva(); });
+            $("#group-Origen button").click(function () { seleccionarAsientoORI(this); });
+            $("#group-Destino button").click(function () { seleccionarAsientoDES(this); });
+        });
+
+        function regresarProgramacion() {
+            var url = '@Url.Action("Programacion", "Reserva", new { CODPRO_ORI = Model.CODPRO_ORI, CODPRO_DES = Model.CODPRO_DES  })'
+            document.location.href = url;
+        }
+
+
+        //SELECCIONAR ASIENTO DE IDA
+        function seleccionarAsientoORI(asiento) {
+            $("#group-Origen button").each(function () {
+                $(this).removeClass("asiento-seleccionado");
+            });
+
+            if ($(asiento).attr("class") == "btn") {
+                $(asiento).addClass("asiento-seleccionado");
+                $("#NUMASI_ORI").val($(asiento).text());
+            }
+        }
+
+        //SELECCIONAR ASIENTO DE VUELTA
+        function seleccionarAsientoDES(asiento) {
+            $("#group-Destino button").each(function () {
+                $(this).removeClass("asiento-seleccionado");
+            });
+
+            if ($(asiento).attr("class") == "btn") {
+                $(asiento).addClass("asiento-seleccionado");
+                //alert($(asiento).text());
+            }
+        }
+
+        function agregarPasajero() {
+            $.ajax({
+                url: '@Url.Action("RegistrarAsientoPas", "Reserva")',
+                type: 'POST',
+                async: true,
+                data: $("#frmRegPasajero").serialize(),
+                success: function (result) {
+                    alert(result.Message);
+                },
+                error: errorAjax
+            });
+        }
+
+        function generarReserva() {
+            $.ajax({
+                url: '@Url.Action("GenerarReservaPasajes", "Reserva")',
+                type: 'POST',
+                async: true,
+                data: { CODPRO: $("#CODPRO_ORI").val() },
+                success: function (result) {
+                    alert(result.Message);
+                },
+                error: errorAjax
+            });
+        }
+    </script>
+
+}

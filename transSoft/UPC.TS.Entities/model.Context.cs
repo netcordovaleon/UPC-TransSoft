@@ -25,22 +25,23 @@ namespace UPC.TS.Entities
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<contactenos> contactenos { get; set; }
+        public virtual DbSet<VWCONSULTAPROGRAMACION> VWCONSULTAPROGRAMACION { get; set; }
         public virtual DbSet<BUS> BUS { get; set; }
         public virtual DbSet<CLIENTE> CLIENTE { get; set; }
         public virtual DbSet<COMPRA> COMPRA { get; set; }
+        public virtual DbSet<contactenos> contactenos { get; set; }
         public virtual DbSet<CUPONES> CUPONES { get; set; }
-        public virtual DbSet<PASAJERO> PASAJERO { get; set; }
         public virtual DbSet<PERFIL> PERFIL { get; set; }
         public virtual DbSet<PERSONAL> PERSONAL { get; set; }
         public virtual DbSet<PROGRAMACION> PROGRAMACION { get; set; }
         public virtual DbSet<PROMOCION> PROMOCION { get; set; }
-        public virtual DbSet<RESERVA> RESERVA { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TARIFA> TARIFA { get; set; }
         public virtual DbSet<TARJETA> TARJETA { get; set; }
         public virtual DbSet<TIPOSERVICIO> TIPOSERVICIO { get; set; }
         public virtual DbSet<TIPOTARJETA> TIPOTARJETA { get; set; }
         public virtual DbSet<USUARIO> USUARIO { get; set; }
-        public virtual DbSet<VWCONSULTAPROGRAMACION> VWCONSULTAPROGRAMACION { get; set; }
+        public virtual DbSet<PASAJERO> PASAJERO { get; set; }
+        public virtual DbSet<RESERVA> RESERVA { get; set; }
     }
 }

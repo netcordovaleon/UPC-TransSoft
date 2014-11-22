@@ -32,6 +32,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -39,9 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constantes\Sesiones.cs" />
     <Compile Include="Constantes\TypeResponse.cs" />
     <Compile Include="Contratos\IOperacionesCRUD.cs" />
     <Compile Include="Entidades\ResponseEntity.cs" />
+    <Compile Include="Enum\EstadoTranReserva.cs" />
+    <Compile Include="Enum\PerfilesSistema.cs" />
+    <Compile Include="Enum\TipoViaje.cs" />
     <Compile Include="Mensajes\Respuesta\Response.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

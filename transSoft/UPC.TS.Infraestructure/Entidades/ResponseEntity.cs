@@ -20,6 +20,12 @@ namespace UPC.TS.Infraestructure.Entidades
             this.Success = false;
         }
 
+        public ResponseEntity(string _message, bool _success = false)
+        {
+            this.Message = _message;
+            this.Success = _success;
+        }
+
         //MENSAJE PERSONALIZADO 1
         public ResponseEntity(string _message, TypeResponse _type, bool _success = false)
         {
@@ -29,12 +35,12 @@ namespace UPC.TS.Infraestructure.Entidades
         }
 
         //MENSAJE PERSONALIZADO 2
-        public ResponseEntity(string _message, bool _success = false, object _data = null, Enum _type = null) {
-            this.Message = _message;
-            this.Success = _success;
-            this.Data = _data;
-            this.Type = TypeResponse.Error;
-        }
+        //public ResponseEntity(string _message, bool _success = false, object _data = null, Enum _type = null) {
+        //    this.Message = _message;
+        //    this.Success = _success;
+        //    this.Data = _data;
+        //    this.Type = TypeResponse.Error;
+        //}
     }
 }
 

@@ -9,12 +9,18 @@
 @Html.HiddenFor(c => c.filtros.FECSAL)
 @Html.HiddenFor(c => c.filtros.FECRET)
 
+<!--VARIABLES DE SELECCION-->
+@Html.HiddenFor(c=>c.CODPRO_ORI)
+<!--VARIABLES DE SELECCION-->
 
-<div class="row">
-    <div class="col-md-12">
+
+<div class="panel panel-default">
+    <div class="panel-heading">Rutas Programadas para (@Model.filtros.DESORI - @Model.filtros.DESDES)</div>
+    <div class="panel-body">
         <table id="tblProgramacion" class="display upctbgrid" cellspacing="0" style="width:100%;">
             <thead>
                 <tr>
+                    <th class="center" style="width:5%;">&nbsp;</th>
                     <th>Origen</th>
                     <th>Destino</th>
                     <th>Fecha Salida</th>
@@ -27,24 +33,57 @@
                 @foreach (var item in Model.listaProgramacion)
                 {
                     <tr>
+                        <td><input type="radio" name="progOrigen" value='@item.CODPRO' onclick="javascript:selProgOrigen(@item.CODPRO)" /></td>
                         <td>@item.ORITAR</td>
                         <td>@item.DESTAR</td>
                         <td>@item.FECSALPRO</td>
                         <td>@item.HORSALPRO</td>
                         <td>@item.PRETAR</td>
-                        <td>@item.NOMTIPSER</td>
+                        <td>@item.NOMTIPSER &nbsp;<a class="btn btn-success"><i class="fa fa-info"></i></a></td>
                     </tr>
                 }
             </tbody>
-        </table>
-</div>
+        </table>        
+    </div>
 </div>
 
+<button id="btnRegresarPrincipal" class="btn pull-right"><i class="fa fa-arrow-left"></i>&nbsp;Regresar</button>
+@if (Session[UPC.TS.Infraestructure.Constantes.Sesiones.sessionUsuarioLog] == null) { 
+    <button id="btnContinuarRegistro" class="btn btn-primary pull-right"><i class="fa fa-save"></i>&nbsp;Deseo registrarme para continuar</button>
+} else { 
+    <button id="btnContinuarGenReserva" class="btn btn-primary pull-right"><i class="fa fa-car"></i>&nbsp;Continuar</button>
+}
 
 @section scripts {
     <script type="text/javascript">
         $(document).ready(function () {
             $('#tblProgramacion').dataTable();
+            //EVENTS
+            $("#btnContinuarGenReserva").click(function () { irGenerarReserva(); });
+            $("#btnContinuarRegistro").click(function () { irRegistrarse(); });
+            $("#btnRegresarPrincipal").click(function () { regresarPrincipal(); });
         });
+
+        function regresarPrincipal(){
+            document.location.href = '@Url.Action("Index","Home")';
+        }
+
+        function selProgOrigen(valor) {
+            $("#CODPRO_ORI").val(valor);
+        }
+
+        function irGenerarReserva() {
+            var url = '@Url.Action("GenerarReserva","Reserva")';
+            document.location.href = url;
+        }
+
+        function irRegistrarse() {
+            if ($("#CODPRO_ORI").val() == "0" || $("#CODPRO_ORI").val() == null || $("#CODPRO_ORI").val() == "") {
+                alert("Debe seleccionar una programacion");
+            } else {
+                var url = '@Url.Action("RegistroUsuario", "Reserva")' + "?CODPRO_ORI=" + $("#CODPRO_ORI").val();
+                document.location.href = url;
+            }
+        }
     </script>   
 }

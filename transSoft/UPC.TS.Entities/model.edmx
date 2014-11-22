@@ -5,8 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="UPCEntitiesBD.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'db_qmadera.dbo.BUS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="BUS">
           <Key>
             <PropertyRef Name="CODBUS" />
@@ -18,8 +16,6 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.BUS' no tiene definida ningun
           <Property Name="ESTREG" Type="char" MaxLength="1" />
           <Property Name="CODTIPSER" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'db_qmadera.dbo.CLIENTE' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="CLIENTE">
           <Key>
             <PropertyRef Name="CODCLI" />
@@ -28,8 +24,6 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.CLIENTE' no tiene definida ni
           <Property Name="CODUSU" Type="int" />
           <Property Name="CORCLI" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'db_qmadera.dbo.COMPRA' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="COMPRA">
           <Key>
             <PropertyRef Name="CODCOM" />
@@ -55,8 +49,6 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.COMPRA' no tiene definida nin
           <Property Name="empcon" Type="varchar" MaxLength="50" />
           <Property Name="comcon" Type="varchar" MaxLength="300" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'db_qmadera.dbo.CUPONES' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="CUPONES">
           <Key>
             <PropertyRef Name="CODCUP" />
@@ -67,8 +59,6 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.CUPONES' no tiene definida ni
           <Property Name="FECVIG" Type="datetime" />
           <Property Name="CODCLI" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'db_qmadera.dbo.PASAJERO' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PASAJERO">
           <Key>
             <PropertyRef Name="CODPAS" />
@@ -86,9 +76,9 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.PASAJERO' no tiene definida n
           <Property Name="CODRES" Type="int" />
           <Property Name="TIPDOC" Type="char" MaxLength="1" />
           <Property Name="NUMDOC" Type="varchar" MaxLength="20" />
+          <Property Name="NUMASI" Type="varchar" MaxLength="20" />
+          <Property Name="TIPVIA" Type="char" MaxLength="1" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'db_qmadera.dbo.PERFIL' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PERFIL">
           <Key>
             <PropertyRef Name="CODPER" />
@@ -97,8 +87,6 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.PERFIL' no tiene definida nin
           <Property Name="NOMPER" Type="varchar" MaxLength="50" />
           <Property Name="ESTREG" Type="char" MaxLength="1" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'db_qmadera.dbo.PERSONAL' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PERSONAL">
           <Key>
             <PropertyRef Name="CODPER" />
@@ -110,8 +98,6 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.PERSONAL' no tiene definida n
           <Property Name="ESTREG" Type="char" MaxLength="1" />
           <Property Name="CODUSU" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'db_qmadera.dbo.PROGRAMACION' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PROGRAMACION">
           <Key>
             <PropertyRef Name="CODPRO" />
@@ -124,8 +110,6 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.PROGRAMACION' no tiene defini
           <Property Name="CODTAR" Type="int" />
           <Property Name="CODPROM" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'db_qmadera.dbo.PROMOCION' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PROMOCION">
           <Key>
             <PropertyRef Name="CODPROM" />
@@ -137,8 +121,6 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.PROMOCION' no tiene definida 
           <Property Name="ESTREG" Type="char" MaxLength="1" />
           <Property Name="DESPROM" Type="varchar" MaxLength="200" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'db_qmadera.dbo.RESERVA' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="RESERVA">
           <Key>
             <PropertyRef Name="CODRES" />
@@ -149,9 +131,18 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.RESERVA' no tiene definida ni
           <Property Name="ESTTRAN" Type="char" MaxLength="1" />
           <Property Name="CODCLI" Type="int" />
           <Property Name="CODPRO" Type="int" />
+          <Property Name="CODPRODES" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'db_qmadera.dbo.TARIFA' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="TARIFA">
           <Key>
             <PropertyRef Name="CODTAR" />
@@ -163,8 +154,6 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.TARIFA' no tiene definida nin
           <Property Name="ESTREG" Type="char" MaxLength="1" />
           <Property Name="CODTIPSER" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'db_qmadera.dbo.TARJETA' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="TARJETA">
           <Key>
             <PropertyRef Name="CODTARJETA" />
@@ -176,8 +165,6 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.TARJETA' no tiene definida ni
           <Property Name="CODTIPTAR" Type="int" />
           <Property Name="CODCLI" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'db_qmadera.dbo.TIPOSERVICIO' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="TIPOSERVICIO">
           <Key>
             <PropertyRef Name="CODTIPSER" />
@@ -187,8 +174,6 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.TIPOSERVICIO' no tiene defini
           <Property Name="DESTIPSER" Type="varchar" MaxLength="200" />
           <Property Name="ESTREG" Type="char" MaxLength="1" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'db_qmadera.dbo.TIPOTARJETA' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="TIPOTARJETA">
           <Key>
             <PropertyRef Name="CODTIPTAR" />
@@ -197,8 +182,6 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.TIPOTARJETA' no tiene definid
           <Property Name="NOMTIPTAR" Type="varchar" MaxLength="50" />
           <Property Name="ESTREG" Type="char" MaxLength="1" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'db_qmadera.dbo.USUARIO' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="USUARIO">
           <Key>
             <PropertyRef Name="CODUSU" />
@@ -225,153 +208,23 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.VWCONSULTAPROGRAMACION' no ti
           <Property Name="CUPASI" Type="int" />
         </EntityType>
         <EntityContainer Name="UPCEntitiesBDStoreContainer">
+          <EntitySet Name="BUS" EntityType="Self.BUS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMPRA" EntityType="Self.COMPRA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="contactenos" EntityType="Self.contactenos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BUS" EntityType="Self.BUS" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [BUS].[CODBUS] AS [CODBUS], 
-    [BUS].[PLABUS] AS [PLABUS], 
-    [BUS].[ANIOBUS] AS [ANIOBUS], 
-    [BUS].[NROEJE] AS [NROEJE], 
-    [BUS].[ESTREG] AS [ESTREG], 
-    [BUS].[CODTIPSER] AS [CODTIPSER]
-    FROM [dbo].[BUS] AS [BUS]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [CLIENTE].[CODCLI] AS [CODCLI], 
-    [CLIENTE].[CODUSU] AS [CODUSU], 
-    [CLIENTE].[CORCLI] AS [CORCLI]
-    FROM [dbo].[CLIENTE] AS [CLIENTE]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="COMPRA" EntityType="Self.COMPRA" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [COMPRA].[CODCOM] AS [CODCOM], 
-    [COMPRA].[FECCOM] AS [FECCOM], 
-    [COMPRA].[MONTO] AS [MONTO], 
-    [COMPRA].[CODRES] AS [CODRES], 
-    [COMPRA].[CODCUP] AS [CODCUP], 
-    [COMPRA].[MEDPAGO] AS [MEDPAGO], 
-    [COMPRA].[CODTARJETA] AS [CODTARJETA]
-    FROM [dbo].[COMPRA] AS [COMPRA]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="CUPONES" EntityType="Self.CUPONES" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [CUPONES].[CODCUP] AS [CODCUP], 
-    [CUPONES].[PORDESC] AS [PORDESC], 
-    [CUPONES].[ESTREG] AS [ESTREG], 
-    [CUPONES].[FECVIG] AS [FECVIG], 
-    [CUPONES].[CODCLI] AS [CODCLI]
-    FROM [dbo].[CUPONES] AS [CUPONES]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="PASAJERO" EntityType="Self.PASAJERO" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [PASAJERO].[CODPAS] AS [CODPAS], 
-    [PASAJERO].[NOMPAS] AS [NOMPAS], 
-    [PASAJERO].[APEPPAS] AS [APEPPAS], 
-    [PASAJERO].[APEMPAS] AS [APEMPAS], 
-    [PASAJERO].[DIRPAS] AS [DIRPAS], 
-    [PASAJERO].[SEXPAS] AS [SEXPAS], 
-    [PASAJERO].[CELPAS] AS [CELPAS], 
-    [PASAJERO].[TELPAS] AS [TELPAS], 
-    [PASAJERO].[ESTREG] AS [ESTREG], 
-    [PASAJERO].[ESTTRAN] AS [ESTTRAN], 
-    [PASAJERO].[CODRES] AS [CODRES], 
-    [PASAJERO].[TIPDOC] AS [TIPDOC], 
-    [PASAJERO].[NUMDOC] AS [NUMDOC]
-    FROM [dbo].[PASAJERO] AS [PASAJERO]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="PERFIL" EntityType="Self.PERFIL" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [PERFIL].[CODPER] AS [CODPER], 
-    [PERFIL].[NOMPER] AS [NOMPER], 
-    [PERFIL].[ESTREG] AS [ESTREG]
-    FROM [dbo].[PERFIL] AS [PERFIL]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="PERSONAL" EntityType="Self.PERSONAL" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [PERSONAL].[CODPER] AS [CODPER], 
-    [PERSONAL].[NOMPER] AS [NOMPER], 
-    [PERSONAL].[APEPER] AS [APEPER], 
-    [PERSONAL].[DNIPER] AS [DNIPER], 
-    [PERSONAL].[ESTREG] AS [ESTREG], 
-    [PERSONAL].[CODUSU] AS [CODUSU]
-    FROM [dbo].[PERSONAL] AS [PERSONAL]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="PROGRAMACION" EntityType="Self.PROGRAMACION" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [PROGRAMACION].[CODPRO] AS [CODPRO], 
-    [PROGRAMACION].[FECSALPRO] AS [FECSALPRO], 
-    [PROGRAMACION].[HORSALPRO] AS [HORSALPRO], 
-    [PROGRAMACION].[ESTREG] AS [ESTREG], 
-    [PROGRAMACION].[CODBUS] AS [CODBUS], 
-    [PROGRAMACION].[CODTAR] AS [CODTAR], 
-    [PROGRAMACION].[CODPROM] AS [CODPROM]
-    FROM [dbo].[PROGRAMACION] AS [PROGRAMACION]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="PROMOCION" EntityType="Self.PROMOCION" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [PROMOCION].[CODPROM] AS [CODPROM], 
-    [PROMOCION].[PORDESC] AS [PORDESC], 
-    [PROMOCION].[FECINI] AS [FECINI], 
-    [PROMOCION].[FECFIN] AS [FECFIN], 
-    [PROMOCION].[ESTREG] AS [ESTREG], 
-    [PROMOCION].[DESPROM] AS [DESPROM]
-    FROM [dbo].[PROMOCION] AS [PROMOCION]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="RESERVA" EntityType="Self.RESERVA" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [RESERVA].[CODRES] AS [CODRES], 
-    [RESERVA].[FECRES] AS [FECRES], 
-    [RESERVA].[ESTREG] AS [ESTREG], 
-    [RESERVA].[ESTTRAN] AS [ESTTRAN], 
-    [RESERVA].[CODCLI] AS [CODCLI], 
-    [RESERVA].[CODPRO] AS [CODPRO]
-    FROM [dbo].[RESERVA] AS [RESERVA]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="TARIFA" EntityType="Self.TARIFA" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TARIFA].[CODTAR] AS [CODTAR], 
-    [TARIFA].[ORITAR] AS [ORITAR], 
-    [TARIFA].[DESTAR] AS [DESTAR], 
-    [TARIFA].[PRETAR] AS [PRETAR], 
-    [TARIFA].[ESTREG] AS [ESTREG], 
-    [TARIFA].[CODTIPSER] AS [CODTIPSER]
-    FROM [dbo].[TARIFA] AS [TARIFA]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="TARJETA" EntityType="Self.TARJETA" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TARJETA].[CODTARJETA] AS [CODTARJETA], 
-    [TARJETA].[NUMTAR] AS [NUMTAR], 
-    [TARJETA].[CODTAR] AS [CODTAR], 
-    [TARJETA].[ESTREG] AS [ESTREG], 
-    [TARJETA].[CODTIPTAR] AS [CODTIPTAR], 
-    [TARJETA].[CODCLI] AS [CODCLI]
-    FROM [dbo].[TARJETA] AS [TARJETA]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="TIPOSERVICIO" EntityType="Self.TIPOSERVICIO" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TIPOSERVICIO].[CODTIPSER] AS [CODTIPSER], 
-    [TIPOSERVICIO].[NOMTIPSER] AS [NOMTIPSER], 
-    [TIPOSERVICIO].[DESTIPSER] AS [DESTIPSER], 
-    [TIPOSERVICIO].[ESTREG] AS [ESTREG]
-    FROM [dbo].[TIPOSERVICIO] AS [TIPOSERVICIO]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="TIPOTARJETA" EntityType="Self.TIPOTARJETA" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TIPOTARJETA].[CODTIPTAR] AS [CODTIPTAR], 
-    [TIPOTARJETA].[NOMTIPTAR] AS [NOMTIPTAR], 
-    [TIPOTARJETA].[ESTREG] AS [ESTREG]
-    FROM [dbo].[TIPOTARJETA] AS [TIPOTARJETA]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [USUARIO].[CODUSU] AS [CODUSU], 
-    [USUARIO].[CLAUSU] AS [CLAUSU], 
-    [USUARIO].[ESTREG] AS [ESTREG], 
-    [USUARIO].[LOGUSU] AS [LOGUSU], 
-    [USUARIO].[CODPER] AS [CODPER]
-    FROM [dbo].[USUARIO] AS [USUARIO]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="CUPONES" EntityType="Self.CUPONES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PASAJERO" EntityType="Self.PASAJERO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERFIL" EntityType="Self.PERFIL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERSONAL" EntityType="Self.PERSONAL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROGRAMACION" EntityType="Self.PROGRAMACION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROMOCION" EntityType="Self.PROMOCION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RESERVA" EntityType="Self.RESERVA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TARIFA" EntityType="Self.TARIFA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TARJETA" EntityType="Self.TARJETA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPOSERVICIO" EntityType="Self.TIPOSERVICIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPOTARJETA" EntityType="Self.TIPOTARJETA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VWCONSULTAPROGRAMACION" EntityType="Self.VWCONSULTAPROGRAMACION" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [VWCONSULTAPROGRAMACION].[CODPRO] AS [CODPRO], 
@@ -389,38 +242,39 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.VWCONSULTAPROGRAMACION' no ti
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="UPCEntitiesBD" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="contactenos">
-          <Key>
-            <PropertyRef Name="idcon" />
-          </Key>
-          <Property Name="idcon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nomcompcon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="dnicon" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
-          <Property Name="corcon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="telcon" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
-          <Property Name="celcon" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
-          <Property Name="empcon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="comcon" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityContainer Name="UPCEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="contactenos" EntityType="Self.contactenos" />
+          <EntitySet Name="VWCONSULTAPROGRAMACION" EntityType="UPCEntitiesBD.VWCONSULTAPROGRAMACION" />
           <EntitySet Name="BUS" EntityType="UPCEntitiesBD.BUS" />
           <EntitySet Name="CLIENTE" EntityType="UPCEntitiesBD.CLIENTE" />
           <EntitySet Name="COMPRA" EntityType="UPCEntitiesBD.COMPRA" />
+          <EntitySet Name="contactenos" EntityType="UPCEntitiesBD.contactenos" />
           <EntitySet Name="CUPONES" EntityType="UPCEntitiesBD.CUPONES" />
-          <EntitySet Name="PASAJERO" EntityType="UPCEntitiesBD.PASAJERO" />
           <EntitySet Name="PERFIL" EntityType="UPCEntitiesBD.PERFIL" />
           <EntitySet Name="PERSONAL" EntityType="UPCEntitiesBD.PERSONAL" />
           <EntitySet Name="PROGRAMACION" EntityType="UPCEntitiesBD.PROGRAMACION" />
           <EntitySet Name="PROMOCION" EntityType="UPCEntitiesBD.PROMOCION" />
-          <EntitySet Name="RESERVA" EntityType="UPCEntitiesBD.RESERVA" />
+          <EntitySet Name="sysdiagrams" EntityType="UPCEntitiesBD.sysdiagrams" />
           <EntitySet Name="TARIFA" EntityType="UPCEntitiesBD.TARIFA" />
           <EntitySet Name="TARJETA" EntityType="UPCEntitiesBD.TARJETA" />
           <EntitySet Name="TIPOSERVICIO" EntityType="UPCEntitiesBD.TIPOSERVICIO" />
           <EntitySet Name="TIPOTARJETA" EntityType="UPCEntitiesBD.TIPOTARJETA" />
           <EntitySet Name="USUARIO" EntityType="UPCEntitiesBD.USUARIO" />
-          <EntitySet Name="VWCONSULTAPROGRAMACION" EntityType="UPCEntitiesBD.VWCONSULTAPROGRAMACION" />
+          <EntitySet Name="PASAJERO" EntityType="UPCEntitiesBD.PASAJERO" />
+          <EntitySet Name="RESERVA" EntityType="UPCEntitiesBD.RESERVA" />
         </EntityContainer>
+        <EntityType Name="VWCONSULTAPROGRAMACION">
+          <Key>
+            <PropertyRef Name="CODPRO" />
+          </Key>
+          <Property Name="CODPRO" Type="Int32" Nullable="false" />
+          <Property Name="FECSALPRO" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="HORSALPRO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ORITAR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DESTAR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PRETAR" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="NOMTIPSER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CUPASI" Type="Int32" />
+        </EntityType>
         <EntityType Name="BUS">
           <Key>
             <PropertyRef Name="CODBUS" />
@@ -452,6 +306,19 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.VWCONSULTAPROGRAMACION' no ti
           <Property Name="MEDPAGO" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="CODTARJETA" Type="Int32" />
         </EntityType>
+        <EntityType Name="contactenos">
+          <Key>
+            <PropertyRef Name="idcon" />
+          </Key>
+          <Property Name="idcon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nomcompcon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dnicon" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="corcon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telcon" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+          <Property Name="celcon" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
+          <Property Name="empcon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="comcon" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="CUPONES">
           <Key>
             <PropertyRef Name="CODCUP" />
@@ -461,24 +328,6 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.VWCONSULTAPROGRAMACION' no ti
           <Property Name="ESTREG" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="FECVIG" Type="DateTime" Precision="3" />
           <Property Name="CODCLI" Type="Int32" />
-        </EntityType>
-        <EntityType Name="PASAJERO">
-          <Key>
-            <PropertyRef Name="CODPAS" />
-          </Key>
-          <Property Name="CODPAS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NOMPAS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="APEPPAS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="APEMPAS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DIRPAS" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="SEXPAS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="CELPAS" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="TELPAS" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="ESTREG" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="ESTTRAN" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="CODRES" Type="Int32" />
-          <Property Name="TIPDOC" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="NUMDOC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PERFIL">
           <Key>
@@ -522,16 +371,15 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.VWCONSULTAPROGRAMACION' no ti
           <Property Name="ESTREG" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="DESPROM" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="RESERVA">
+        <EntityType Name="sysdiagrams">
           <Key>
-            <PropertyRef Name="CODRES" />
+            <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="CODRES" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FECRES" Type="DateTime" Precision="3" />
-          <Property Name="ESTREG" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="ESTTRAN" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <Property Name="CODCLI" Type="Int32" />
-          <Property Name="CODPRO" Type="Int32" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TARIFA">
           <Key>
@@ -582,18 +430,37 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.VWCONSULTAPROGRAMACION' no ti
           <Property Name="LOGUSU" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CODPER" Type="Int32" />
         </EntityType>
-        <EntityType Name="VWCONSULTAPROGRAMACION">
+        <EntityType Name="PASAJERO">
           <Key>
-            <PropertyRef Name="CODPRO" />
+            <PropertyRef Name="CODPAS" />
           </Key>
-          <Property Name="CODPRO" Type="Int32" Nullable="false" />
-          <Property Name="FECSALPRO" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
-          <Property Name="HORSALPRO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ORITAR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DESTAR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PRETAR" Type="Decimal" Precision="19" Scale="2" />
-          <Property Name="NOMTIPSER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CUPASI" Type="Int32" />
+          <Property Name="CODPAS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMPAS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="APEPPAS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="APEMPAS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIRPAS" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="SEXPAS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="CELPAS" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TELPAS" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ESTREG" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ESTTRAN" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="CODRES" Type="Int32" />
+          <Property Name="TIPDOC" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="NUMDOC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NUMASI" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TIPVIA" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="RESERVA">
+          <Key>
+            <PropertyRef Name="CODRES" />
+          </Key>
+          <Property Name="CODRES" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FECRES" Type="DateTime" Precision="3" />
+          <Property Name="ESTREG" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ESTTRAN" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="CODCLI" Type="Int32" />
+          <Property Name="CODPRO" Type="Int32" />
+          <Property Name="CODPRODES" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -601,17 +468,17 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.VWCONSULTAPROGRAMACION' no ti
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="UPCEntitiesBDStoreContainer" CdmEntityContainer="UPCEntities">
-          <EntitySetMapping Name="contactenos">
-            <EntityTypeMapping TypeName="UPCEntitiesBD.contactenos">
-              <MappingFragment StoreEntitySet="contactenos">
-                <ScalarProperty Name="idcon" ColumnName="idcon" />
-                <ScalarProperty Name="nomcompcon" ColumnName="nomcompcon" />
-                <ScalarProperty Name="dnicon" ColumnName="dnicon" />
-                <ScalarProperty Name="corcon" ColumnName="corcon" />
-                <ScalarProperty Name="telcon" ColumnName="telcon" />
-                <ScalarProperty Name="celcon" ColumnName="celcon" />
-                <ScalarProperty Name="empcon" ColumnName="empcon" />
-                <ScalarProperty Name="comcon" ColumnName="comcon" />
+          <EntitySetMapping Name="VWCONSULTAPROGRAMACION">
+            <EntityTypeMapping TypeName="UPCEntitiesBD.VWCONSULTAPROGRAMACION">
+              <MappingFragment StoreEntitySet="VWCONSULTAPROGRAMACION">
+                <ScalarProperty Name="CUPASI" ColumnName="CUPASI" />
+                <ScalarProperty Name="NOMTIPSER" ColumnName="NOMTIPSER" />
+                <ScalarProperty Name="PRETAR" ColumnName="PRETAR" />
+                <ScalarProperty Name="DESTAR" ColumnName="DESTAR" />
+                <ScalarProperty Name="ORITAR" ColumnName="ORITAR" />
+                <ScalarProperty Name="HORSALPRO" ColumnName="HORSALPRO" />
+                <ScalarProperty Name="FECSALPRO" ColumnName="FECSALPRO" />
+                <ScalarProperty Name="CODPRO" ColumnName="CODPRO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -649,6 +516,20 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.VWCONSULTAPROGRAMACION' no ti
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="contactenos">
+            <EntityTypeMapping TypeName="UPCEntitiesBD.contactenos">
+              <MappingFragment StoreEntitySet="contactenos">
+                <ScalarProperty Name="comcon" ColumnName="comcon" />
+                <ScalarProperty Name="empcon" ColumnName="empcon" />
+                <ScalarProperty Name="celcon" ColumnName="celcon" />
+                <ScalarProperty Name="telcon" ColumnName="telcon" />
+                <ScalarProperty Name="corcon" ColumnName="corcon" />
+                <ScalarProperty Name="dnicon" ColumnName="dnicon" />
+                <ScalarProperty Name="nomcompcon" ColumnName="nomcompcon" />
+                <ScalarProperty Name="idcon" ColumnName="idcon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CUPONES">
             <EntityTypeMapping TypeName="UPCEntitiesBD.CUPONES">
               <MappingFragment StoreEntitySet="CUPONES">
@@ -657,25 +538,6 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.VWCONSULTAPROGRAMACION' no ti
                 <ScalarProperty Name="ESTREG" ColumnName="ESTREG" />
                 <ScalarProperty Name="PORDESC" ColumnName="PORDESC" />
                 <ScalarProperty Name="CODCUP" ColumnName="CODCUP" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PASAJERO">
-            <EntityTypeMapping TypeName="UPCEntitiesBD.PASAJERO">
-              <MappingFragment StoreEntitySet="PASAJERO">
-                <ScalarProperty Name="NUMDOC" ColumnName="NUMDOC" />
-                <ScalarProperty Name="TIPDOC" ColumnName="TIPDOC" />
-                <ScalarProperty Name="CODRES" ColumnName="CODRES" />
-                <ScalarProperty Name="ESTTRAN" ColumnName="ESTTRAN" />
-                <ScalarProperty Name="ESTREG" ColumnName="ESTREG" />
-                <ScalarProperty Name="TELPAS" ColumnName="TELPAS" />
-                <ScalarProperty Name="CELPAS" ColumnName="CELPAS" />
-                <ScalarProperty Name="SEXPAS" ColumnName="SEXPAS" />
-                <ScalarProperty Name="DIRPAS" ColumnName="DIRPAS" />
-                <ScalarProperty Name="APEMPAS" ColumnName="APEMPAS" />
-                <ScalarProperty Name="APEPPAS" ColumnName="APEPPAS" />
-                <ScalarProperty Name="NOMPAS" ColumnName="NOMPAS" />
-                <ScalarProperty Name="CODPAS" ColumnName="CODPAS" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -725,15 +587,14 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.VWCONSULTAPROGRAMACION' no ti
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="RESERVA">
-            <EntityTypeMapping TypeName="UPCEntitiesBD.RESERVA">
-              <MappingFragment StoreEntitySet="RESERVA">
-                <ScalarProperty Name="CODPRO" ColumnName="CODPRO" />
-                <ScalarProperty Name="CODCLI" ColumnName="CODCLI" />
-                <ScalarProperty Name="ESTTRAN" ColumnName="ESTTRAN" />
-                <ScalarProperty Name="ESTREG" ColumnName="ESTREG" />
-                <ScalarProperty Name="FECRES" ColumnName="FECRES" />
-                <ScalarProperty Name="CODRES" ColumnName="CODRES" />
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="UPCEntitiesBD.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -791,17 +652,37 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.VWCONSULTAPROGRAMACION' no ti
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VWCONSULTAPROGRAMACION">
-            <EntityTypeMapping TypeName="UPCEntitiesBD.VWCONSULTAPROGRAMACION">
-              <MappingFragment StoreEntitySet="VWCONSULTAPROGRAMACION">
-                <ScalarProperty Name="CUPASI" ColumnName="CUPASI" />
-                <ScalarProperty Name="NOMTIPSER" ColumnName="NOMTIPSER" />
-                <ScalarProperty Name="PRETAR" ColumnName="PRETAR" />
-                <ScalarProperty Name="DESTAR" ColumnName="DESTAR" />
-                <ScalarProperty Name="ORITAR" ColumnName="ORITAR" />
-                <ScalarProperty Name="HORSALPRO" ColumnName="HORSALPRO" />
-                <ScalarProperty Name="FECSALPRO" ColumnName="FECSALPRO" />
+          <EntitySetMapping Name="PASAJERO">
+            <EntityTypeMapping TypeName="UPCEntitiesBD.PASAJERO">
+              <MappingFragment StoreEntitySet="PASAJERO">
+                <ScalarProperty Name="TIPVIA" ColumnName="TIPVIA" />
+                <ScalarProperty Name="NUMASI" ColumnName="NUMASI" />
+                <ScalarProperty Name="NUMDOC" ColumnName="NUMDOC" />
+                <ScalarProperty Name="TIPDOC" ColumnName="TIPDOC" />
+                <ScalarProperty Name="CODRES" ColumnName="CODRES" />
+                <ScalarProperty Name="ESTTRAN" ColumnName="ESTTRAN" />
+                <ScalarProperty Name="ESTREG" ColumnName="ESTREG" />
+                <ScalarProperty Name="TELPAS" ColumnName="TELPAS" />
+                <ScalarProperty Name="CELPAS" ColumnName="CELPAS" />
+                <ScalarProperty Name="SEXPAS" ColumnName="SEXPAS" />
+                <ScalarProperty Name="DIRPAS" ColumnName="DIRPAS" />
+                <ScalarProperty Name="APEMPAS" ColumnName="APEMPAS" />
+                <ScalarProperty Name="APEPPAS" ColumnName="APEPPAS" />
+                <ScalarProperty Name="NOMPAS" ColumnName="NOMPAS" />
+                <ScalarProperty Name="CODPAS" ColumnName="CODPAS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RESERVA">
+            <EntityTypeMapping TypeName="UPCEntitiesBD.RESERVA">
+              <MappingFragment StoreEntitySet="RESERVA">
+                <ScalarProperty Name="CODPRODES" ColumnName="CODPRODES" />
                 <ScalarProperty Name="CODPRO" ColumnName="CODPRO" />
+                <ScalarProperty Name="CODCLI" ColumnName="CODCLI" />
+                <ScalarProperty Name="ESTTRAN" ColumnName="ESTTRAN" />
+                <ScalarProperty Name="ESTREG" ColumnName="ESTREG" />
+                <ScalarProperty Name="FECRES" ColumnName="FECRES" />
+                <ScalarProperty Name="CODRES" ColumnName="CODRES" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

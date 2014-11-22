@@ -27,5 +27,7 @@ namespace UPC.TS.Entities
         public Nullable<int> CODRES { get; set; }
         public string TIPDOC { get; set; }
         public string NUMDOC { get; set; }
+        public string NUMASI { get; set; }
+        public string TIPVIA { get; set; }
     }
 }

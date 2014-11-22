@@ -9,11 +9,15 @@ namespace UPC.TS.Web.Models
 {
     public class ReservaModels
     {
+        public int CODPRO_ORI { get; set; }
+        public int CODPRO_DES { get; set; }
         public FiltrosReservaModels filtros { get; set; }
+        public PasajeroModels pasajero { get; set; }
         public IEnumerable<ProgramacionDataModels> listaProgramacion { get; set; }
         public ReservaModels()
         {
             this.filtros = new FiltrosReservaModels();
+            this.pasajero = new PasajeroModels();
             this.listaProgramacion = new List<ProgramacionDataModels>();
         }
 

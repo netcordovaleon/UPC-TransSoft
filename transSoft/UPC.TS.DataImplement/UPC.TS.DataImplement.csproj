@@ -45,12 +45,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClienteData.cs" />
     <Compile Include="ConsultaProgramacion.cs" />
     <Compile Include="ContactenosData.cs" />
     <Compile Include="Infraestructura\BaseRepository.cs" />
     <Compile Include="Infraestructura\UnitOfWork.cs" />
+    <Compile Include="PasajeroData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReservaData.cs" />
     <Compile Include="TarifasData.cs" />
+    <Compile Include="UsuarioData.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UPC.TS.DataContract\UPC.TS.DataContract.csproj">

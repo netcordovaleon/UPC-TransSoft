@@ -97,6 +97,9 @@
     <Compile Include="RESERVA.cs">
       <DependentUpon>model.tt</DependentUpon>
     </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
     <Compile Include="TARIFA.cs">
       <DependentUpon>model.tt</DependentUpon>
     </Compile>

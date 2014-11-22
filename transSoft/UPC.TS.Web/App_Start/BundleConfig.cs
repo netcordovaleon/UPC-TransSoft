@@ -23,13 +23,16 @@ namespace UPC.TS.Web
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",
                       "~/Scripts/jquery.dataTables.min.js",
+                      "~/Scripts/bootstrap-datepicker.js",
+                      "~/Scripts/bootstrap-datepicker.es.js",
                       "~/Scripts/core.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/font-awesome.min.css",
-                      "~/Content/jquery.dataTables.min.css"));
+                      "~/Content/jquery.dataTables.min.css",
+                      "~/Content/datepicker3.css"));
         }
     }
 }

@@ -1,4 +1,8 @@
-﻿$('.upctbgrid').DataTable({
+﻿function errorAjax() {
+    alert("Se producjo un error inesperado mantengase en contacto con el administrador del Sistema");
+}
+
+$('.upctbgrid').DataTable({
     "language": {
         "sProcessing": "Procesando...",
         "sLengthMenu": "Mostrar _MENU_ registros",
@@ -24,3 +28,6 @@
         }
     }                                              
 });
+
+$.fn.datepicker.defaults.language = "es";
+$.fn.datepicker.defaults.format = "dd/mm/yyyy";

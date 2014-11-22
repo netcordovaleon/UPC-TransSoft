@@ -12,6 +12,7 @@ using UPC.TS.Entities;
 using UPC.TS.Infraestructure.Entidades;
 using UPC.TS.Infraestructure.Mensajes.Respuesta;
 
+
 namespace UPC.TS.BusinessLogic
 {
     public class ContactenosLogic : IContactenosLogic
@@ -30,7 +31,7 @@ namespace UPC.TS.BusinessLogic
                     _contactenosData.Registrar(entidad);
                 else
                     _contactenosData.Actualizar(entidad);
-                return new ResponseEntity("Se registro satisfactoriamente", true);
+                return new ResponseEntity("Se registro satisfactoriamente",true);
             } catch (Exception) {
                 return new ResponseEntity(Response.ErrorGeneral);
             }
