@@ -24,14 +24,58 @@ namespace UPC.TS.BusinessLogic
             this._uow = new UnitOfWork();
             this._tarifasData = new TarifasData(_uow);
         }
-        public IEnumerable<TARIFA> ListarOrigen()
+
+        public ResponseEntity GrabarTarifa(SRV_TARIFA entidad)
+        {
+            try
+            {
+                if (entidad.CODTAR.Equals(0))
+                    _tarifasData.Registrar(entidad);
+                else
+                    _tarifasData.Actualizar(entidad);
+                return new ResponseEntity("Se grabo los datos de la tarifa satisfactoriamente", true);
+            }
+            catch (Exception)
+            {
+                return new ResponseEntity(Response.ErrorGeneral);
+            }
+        }
+
+        public ResponseEntity EliminarTarifa(int id)
+        {
+            try
+            {
+                _tarifasData.Eliminar(id);
+                return new ResponseEntity("Se elimino la tarifa seleccionada satisfactoriamente", true);
+            } catch (Exception) {
+                return new ResponseEntity(Response.ErrorGeneral);
+            }
+        }
+
+        public SRV_TARIFA BuscarPorId(int id)
+        {
+            return _tarifasData.BuscarPorId(id);
+        }
+
+        public IEnumerable<SRV_TARIFA> ListarTarifas()
+        {
+            return _tarifasData.ListarTodo();
+        }
+
+        public IEnumerable<SRV_TARIFA> ListarOrigen()
         {
             return _tarifasData.ListarOrigen();
         }
 
-        public IEnumerable<TARIFA> ListarDestino()
+        public IEnumerable<SRV_TARIFA> ListarDestino()
         {
             return _tarifasData.ListarDestino();
+        }
+
+
+        public IEnumerable<SRV_TARIFA> ListarTarifaFiltro(SRV_TARIFA entidad)
+        {
+            return _tarifasData.ListarTarifaFiltro(entidad);
         }
     }
 }

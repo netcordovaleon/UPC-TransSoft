@@ -12,13 +12,14 @@ namespace UPC.TS.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class BUS
+    public partial class SRV_TARIFA
     {
-        public int CODBUS { get; set; }
-        public string PLABUS { get; set; }
-        public string ANIOBUS { get; set; }
-        public Nullable<int> NROEJE { get; set; }
+        public int CODTAR { get; set; }
+        public string ORITAR { get; set; }
+        public string DESTAR { get; set; }
+        public Nullable<decimal> PRETAR { get; set; }
         public string ESTREG { get; set; }
         public Nullable<int> CODTIPSER { get; set; }
+        public string CODESTTAR { get; set; }
     }
 }

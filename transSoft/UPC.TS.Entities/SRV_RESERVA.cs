@@ -12,22 +12,14 @@ namespace UPC.TS.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class PASAJERO
+    public partial class SRV_RESERVA
     {
-        public int CODPAS { get; set; }
-        public string NOMPAS { get; set; }
-        public string APEPPAS { get; set; }
-        public string APEMPAS { get; set; }
-        public string DIRPAS { get; set; }
-        public string SEXPAS { get; set; }
-        public string CELPAS { get; set; }
-        public string TELPAS { get; set; }
+        public int CODRES { get; set; }
+        public Nullable<System.DateTime> FECRES { get; set; }
         public string ESTREG { get; set; }
         public string ESTTRAN { get; set; }
-        public Nullable<int> CODRES { get; set; }
-        public string TIPDOC { get; set; }
-        public string NUMDOC { get; set; }
-        public string NUMASI { get; set; }
-        public string TIPVIA { get; set; }
+        public Nullable<int> CODCLI { get; set; }
+        public Nullable<int> CODPRO { get; set; }
+        public Nullable<int> CODPRODES { get; set; }
     }
 }

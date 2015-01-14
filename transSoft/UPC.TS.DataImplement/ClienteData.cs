@@ -11,17 +11,17 @@ using UPC.TS.Infraestructure;
 
 namespace UPC.TS.DataImplement
 {
-    public class ClienteData : BaseRepository<CLIENTE>, ICliente
+    public class ClienteData : BaseRepository<SRV_CLIENTE>, ICliente
     {
 
         public ClienteData(IUnitOfWork unit) : base(unit) { }
 
-        public CLIENTE Registrar(CLIENTE entidad)
+        public SRV_CLIENTE Registrar(SRV_CLIENTE entidad)
         {
-            return (CLIENTE)this.Insert(entidad);
+            return (SRV_CLIENTE)this.Insert(entidad);
         }
 
-        public CLIENTE Actualizar(CLIENTE entidad)
+        public SRV_CLIENTE Actualizar(SRV_CLIENTE entidad)
         {
             throw new NotImplementedException();
         }
@@ -31,17 +31,17 @@ namespace UPC.TS.DataImplement
             throw new NotImplementedException();
         }
 
-        public CLIENTE BuscarPorId(int id)
+        public SRV_CLIENTE BuscarPorId(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<CLIENTE> ListarTodo()
+        public IEnumerable<SRV_CLIENTE> ListarTodo()
         {
             throw new NotImplementedException();
         }
 
-        public CLIENTE ObtenerUsuarioPorCorreo(string correo)
+        public SRV_CLIENTE ObtenerUsuarioPorCorreo(string correo)
         {
             return this.Get(c => c.CORCLI == correo);
         }

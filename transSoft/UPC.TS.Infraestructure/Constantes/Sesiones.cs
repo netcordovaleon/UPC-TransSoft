@@ -10,5 +10,6 @@ namespace UPC.TS.Infraestructure.Constantes
     {
         public const string sessionUsuarioLog = "sessionUsuario";
         public const string sessionListaPasajeros = "sessionListaPasajeros";
+        public const string sessionTipoPerfil = "sessionTipoPerfil";
     }
 }

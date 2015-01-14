@@ -12,6 +12,7 @@ using UPC.TS.DataImplement.Infraestructura;
 using UPC.TS.Entities;
 using UPC.TS.Infraestructure.Entidades;
 using UPC.TS.Infraestructure.Mensajes.Respuesta;
+using UPC.TS.Infraestructure.Enum;
 
 namespace UPC.TS.BusinessLogic
 {
@@ -28,7 +29,7 @@ namespace UPC.TS.BusinessLogic
         }
 
 
-        public ResponseEntity RegistrarReserva(List<PASAJERO> listPasajero, RESERVA reserva)
+        public ResponseEntity RegistrarReserva(List<SRV_PASAJERO> listPasajero, SRV_RESERVA reserva)
         {
             using (TransactionScope tran = new TransactionScope())
             {
@@ -39,11 +40,27 @@ namespace UPC.TS.BusinessLogic
                         _pasajeroData.Registrar(item);
                     }                        
                     tran.Complete();
-                    return new ResponseEntity("Se registro su reserva satisfactoriamente", true);
+                    return new ResponseEntity(string.Format("Se registro su reserva satisfactoriamente, Su numero de Reserva es : {0}",  Infraestructure.Funciones.StringAdding.Right("000000" + entidadReserva.CODRES.ToString(), 5)) , true);
                 } catch (Exception) {
                     tran.Dispose();
                     return new ResponseEntity(Response.ErrorGeneral);
                 }
+            }
+        }
+
+
+        public ResponseEntity AnularReserva(int codReserva)
+        {
+            try
+            {
+                var reserva = _reservaData.BuscarPorId(codReserva);
+                reserva.ESTTRAN = EstadoTranReserva.ANULADO;
+                _reservaData.Actualizar(reserva);
+                return new ResponseEntity("Anulo la reserva seleccionada satisfactoriamente", true);
+            }
+            catch (Exception)
+            {
+                return new ResponseEntity(Response.ErrorGeneral);
             }
         }
     }

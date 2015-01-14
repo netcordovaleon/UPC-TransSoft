@@ -12,12 +12,13 @@ namespace UPC.TS.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class USUARIO
+    public partial class SRV_PROMOCION
     {
-        public int CODUSU { get; set; }
-        public string CLAUSU { get; set; }
+        public int CODPROM { get; set; }
+        public Nullable<decimal> PORDESC { get; set; }
+        public Nullable<System.DateTime> FECINI { get; set; }
+        public Nullable<System.DateTime> FECFIN { get; set; }
         public string ESTREG { get; set; }
-        public string LOGUSU { get; set; }
-        public Nullable<int> CODPER { get; set; }
+        public string DESPROM { get; set; }
     }
 }

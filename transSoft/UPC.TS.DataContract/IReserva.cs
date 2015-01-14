@@ -9,7 +9,7 @@ using UPC.TS.Entities;
 
 namespace UPC.TS.DataContract
 {
-    public interface IReserva : IOperacionesCRUD<RESERVA>
+    public interface IReserva : IOperacionesCRUD<SRV_RESERVA>
     {
     }
 }

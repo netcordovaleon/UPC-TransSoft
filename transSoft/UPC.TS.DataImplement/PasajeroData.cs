@@ -11,18 +11,18 @@ using UPC.TS.Infraestructure;
 
 namespace UPC.TS.DataImplement
 {
-    public class PasajeroData : BaseRepository<PASAJERO>, IPasajero
+    public class PasajeroData : BaseRepository<SRV_PASAJERO>, IPasajero
     {
         public PasajeroData(IUnitOfWork unit) : base(unit) { }
 
-        public PASAJERO Registrar(PASAJERO entidad)
+        public SRV_PASAJERO Registrar(SRV_PASAJERO entidad)
         {
-            return (PASAJERO)this.Insert(entidad);
+            return (SRV_PASAJERO)this.Insert(entidad);
         }
 
-        public PASAJERO Actualizar(PASAJERO entidad)
+        public SRV_PASAJERO Actualizar(SRV_PASAJERO entidad)
         {
-            return (PASAJERO)this.Update(entidad);
+            return (SRV_PASAJERO)this.Update(entidad);
         }
 
         public bool Eliminar(int id)
@@ -30,14 +30,19 @@ namespace UPC.TS.DataImplement
             throw new NotImplementedException();
         }
 
-        public PASAJERO BuscarPorId(int id)
+        public SRV_PASAJERO BuscarPorId(int id)
+        {
+            return this.Get(c => c.CODPAS == id);
+        }
+
+        public IEnumerable<SRV_PASAJERO> ListarTodo()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<PASAJERO> ListarTodo()
+        public IEnumerable<SRV_PASAJERO> ListarPasajeroPorReserva(int CODRES)
         {
-            throw new NotImplementedException();
+            return this.GetMany(c => c.CODRES == CODRES);
         }
     }
 }

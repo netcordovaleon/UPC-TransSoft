@@ -25,14 +25,27 @@ namespace UPC.TS.Web
                       "~/Scripts/jquery.dataTables.min.js",
                       "~/Scripts/bootstrap-datepicker.js",
                       "~/Scripts/bootstrap-datepicker.es.js",
-                      "~/Scripts/core.js"));
+                      "~/Scripts/core.js",
+                      //"~/Scripts/pnotify.buttons.js",
+                      //"~/Scripts/pnotify.callbacks.js",
+                      //"~/Scripts/pnotify.confirm.js",
+                      "~/Scripts/pnotify.core.js",
+                      "~/Scripts/pnotify.reference.js",
+                      "~/Scripts/pnotify.tooltip.js"
+                      ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/font-awesome.min.css",
                       "~/Content/jquery.dataTables.min.css",
-                      "~/Content/datepicker3.css"));
+                      "~/Content/datepicker3.css",
+                      "~/Content/devnote-stable.css",
+                      "~/Content/devnote.css",
+                      "~/Content/pnotify.core.css",
+                      "~/Content/pnotify.history.css",
+                      "~/Content/pnotify.picon.css"
+                      ));
         }
     }
 }

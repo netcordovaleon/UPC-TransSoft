@@ -12,14 +12,13 @@ namespace UPC.TS.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class COMPRA
+    public partial class SRV_TARJETA
     {
-        public int CODCOM { get; set; }
-        public Nullable<System.DateTime> FECCOM { get; set; }
-        public Nullable<decimal> MONTO { get; set; }
-        public Nullable<int> CODRES { get; set; }
-        public Nullable<int> CODCUP { get; set; }
-        public string MEDPAGO { get; set; }
-        public Nullable<int> CODTARJETA { get; set; }
+        public int CODTARJETA { get; set; }
+        public string NUMTAR { get; set; }
+        public string CODTAR { get; set; }
+        public string ESTREG { get; set; }
+        public Nullable<int> CODTIPTAR { get; set; }
+        public Nullable<int> CODCLI { get; set; }
     }
 }

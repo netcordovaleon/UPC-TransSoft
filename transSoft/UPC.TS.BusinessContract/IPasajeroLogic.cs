@@ -11,7 +11,9 @@ namespace UPC.TS.BusinessContract
 {
     public interface IPasajeroLogic
     {
-        ResponseEntity GrabarPASAJERO(PASAJERO entidad);
-        ResponseEntity RegistrarPASAJEROS(List<PASAJERO> listPasajero);
+        ResponseEntity GrabarPasajeros(SRV_PASAJERO entidad);
+        ResponseEntity RegistrarPasajeros(List<SRV_PASAJERO> listPasajero);
+        IEnumerable<SRV_PASAJERO> ListarPasajeroPorReserva(int codReserva);
+        SRV_PASAJERO BuscarPorId(int id);
     }
 }

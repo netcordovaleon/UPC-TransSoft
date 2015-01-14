@@ -12,11 +12,10 @@ namespace UPC.TS.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class TIPOSERVICIO
+    public partial class SRV_TIPO_TARJETA
     {
-        public int CODTIPSER { get; set; }
-        public string NOMTIPSER { get; set; }
-        public string DESTIPSER { get; set; }
+        public int CODTIPTAR { get; set; }
+        public string NOMTIPTAR { get; set; }
         public string ESTREG { get; set; }
     }
 }

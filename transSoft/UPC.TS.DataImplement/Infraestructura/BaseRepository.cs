@@ -8,6 +8,7 @@ using UPC.TS.DataContract;
 using System.Data.Entity;
 using System.Data;
 using System.Linq.Expressions;
+using UPC.TS.Infraestructure.Enum;
 namespace UPC.TS.DataImplement.Infraestructura
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
@@ -65,6 +66,7 @@ namespace UPC.TS.DataImplement.Infraestructura
 
         public virtual object Insert(T entity)
         {
+            SetValue(ref entity, "ESTREG", (int)Estados.Auditoria.Activo);
             dynamic obj = dbSet.Add(entity);
             this._unitOfWork.Db.SaveChanges();
             return obj;
@@ -73,20 +75,27 @@ namespace UPC.TS.DataImplement.Infraestructura
 
         public virtual object Update(T entity)
         {
+            SetValue(ref entity, "ESTREG", (int)Estados.Auditoria.Activo);
             dbSet.Attach(entity);
             _unitOfWork.Db.Entry(entity).State = System.Data.Entity.EntityState.Modified;
             this._unitOfWork.Db.SaveChanges();
             return entity;
         }
-        public int Delete(T entity)
+        public void Delete(object id)
         {
-            if (_unitOfWork.Db.Entry(entity).State == System.Data.Entity.EntityState.Detached)
-            {
-                dbSet.Attach(entity);
-            }
-            dynamic obj = dbSet.Remove(entity);
+
+            T entity = dbSet.Find(id);
+            SetValue(ref entity, "ESTREG", (int)Estados.Auditoria.Inactivo );
+            dbSet.Attach(entity);
+            _unitOfWork.Db.Entry(entity).State = System.Data.Entity.EntityState.Modified;
             this._unitOfWork.Db.SaveChanges();
-            return obj.Id;
+            //if (_unitOfWork.Db.Entry(entity).State == System.Data.Entity.EntityState.Detached)
+            //{
+            //    dbSet.Attach(entity);
+            //}
+            //dynamic obj = dbSet.Remove(entity);
+            //this._unitOfWork.Db.SaveChanges();
+            //return obj.Id;
         }
         public IUnitOfWork UnitOfWork { get { return _unitOfWork; } }
         internal DbContext Database { get { return _unitOfWork.Db; } }
@@ -125,6 +134,14 @@ namespace UPC.TS.DataImplement.Infraestructura
             {
                 query = query.Where(filter);
             }
+        }
+
+        private static void SetValue(ref T obj, string property, object value)
+        {
+            var propertyInfo = obj.GetType().GetProperty(property);
+            var type = Nullable.GetUnderlyingType(propertyInfo.PropertyType) ?? propertyInfo.PropertyType;
+            var safeValue = (value == null) ? null : Convert.ChangeType(value, type);
+            propertyInfo.SetValue(obj, safeValue, null);
         }
     }
 }

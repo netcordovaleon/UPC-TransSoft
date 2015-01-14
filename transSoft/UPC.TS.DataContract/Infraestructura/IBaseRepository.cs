@@ -65,7 +65,7 @@
         /// <param name="entity">The entity to delete</param>
         /// <param name="userId">The user Id who deleted the entity</param>
         /// <returns></returns>
-        int Delete(T entity);
+        void Delete(object id);
 
 
         T Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null);

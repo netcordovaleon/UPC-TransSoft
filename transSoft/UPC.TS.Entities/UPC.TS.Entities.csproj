@@ -48,19 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BUS.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CLIENTE.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="COMPRA.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
     <Compile Include="contactenos.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CUPONES.cs">
       <DependentUpon>model.tt</DependentUpon>
     </Compile>
     <Compile Include="model.Context.cs">
@@ -78,44 +66,65 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>model.edmx</DependentUpon>
     </Compile>
-    <Compile Include="PASAJERO.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PERFIL.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PERSONAL.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PROGRAMACION.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PROMOCION.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RESERVA.cs">
+    <Compile Include="SRV_BUS.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SRV_CLIENTE.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SRV_COMPRA.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SRV_CUPONES.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SRV_PASAJERO.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SRV_PERFIL.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SRV_PERSONAL.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SRV_PROGRAMACION.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SRV_PROMOCION.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SRV_RESERVA.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SRV_TARIFA.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SRV_TARJETA.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SRV_TIPO_SERVICIO.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SRV_TIPO_TARJETA.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SRV_USUARIO.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SRV_VW_ASIENTOS_RESERVADOSDES.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SRV_VW_ASIENTOS_RESERVADOSORI.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SRV_VW_CONSULTA_PROGRAMACION.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SRV_VW_RESERVAS.cs">
       <DependentUpon>model.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TARIFA.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TARJETA.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TIPOSERVICIO.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TIPOTARJETA.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="USUARIO.cs">
-      <DependentUpon>model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="VWCONSULTAPROGRAMACION.cs">
       <DependentUpon>model.tt</DependentUpon>
     </Compile>
   </ItemGroup>

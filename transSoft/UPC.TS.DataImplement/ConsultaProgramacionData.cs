@@ -11,13 +11,14 @@ using UPC.TS.Infraestructure;
 
 namespace UPC.TS.DataImplement
 {
-    public class ConsultaProgramacion : BaseRepository<VWCONSULTAPROGRAMACION>, IConsultaProgramacion
+    public class ConsultaProgramacionData : BaseRepository<SRV_VW_CONSULTA_PROGRAMACION>, IConsultaProgramacion
     {
-        public ConsultaProgramacion(IUnitOfWork unit) : base(unit) { }
-        public IEnumerable<VWCONSULTAPROGRAMACION> ListarProgramacion(string ORITAR, string DESTAR, string FECSALPRO)
+        public ConsultaProgramacionData(IUnitOfWork unit) : base(unit) { }
+        public IEnumerable<SRV_VW_CONSULTA_PROGRAMACION> ListarProgramacion(string ORITAR, string DESTAR, string FECSALPRO)
         {
             var result = this.GetMany(c => c.ORITAR == ORITAR && c.DESTAR == DESTAR && c.FECSALPRO == FECSALPRO);
             return result;
         }
+
     }
 }

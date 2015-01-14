@@ -40,7 +40,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IClienteLogic.cs" />
+    <Compile Include="IConsultaAsientosDESLogic.cs" />
+    <Compile Include="IConsultaAsientosORILogic.cs" />
     <Compile Include="IConsultaProgramacionLogic.cs" />
+    <Compile Include="IConsultaReservaLogic.cs" />
     <Compile Include="IContactenosLogic.cs" />
     <Compile Include="IPasajeroLogic.cs" />
     <Compile Include="IReservaLogic.cs" />

@@ -20,17 +20,19 @@ namespace UPC.TS.Web.MapperConfig
             #region Mapping WebModel to Entity
 
             Mapper.CreateMap<ContactenosModels, contactenos>();
-            Mapper.CreateMap<UsuarioModels, USUARIO>();
-            Mapper.CreateMap<PasajeroModels, PASAJERO>();
+            Mapper.CreateMap<UsuarioModels, SRV_USUARIO>();
+            Mapper.CreateMap<PasajeroModels, SRV_PASAJERO>();
+            Mapper.CreateMap<TarifaModels, SRV_TARIFA>();
 
             
             #endregion
 
             #region Mapping Entity to WebModel
 
+            Mapper.CreateMap<SRV_TARIFA,TarifaModels>();
             Mapper.CreateMap<contactenos, ContactenosModels>();
-            Mapper.CreateMap<USUARIO, UsuarioModels>();
-            Mapper.CreateMap<PASAJERO, PasajeroModels>();
+            Mapper.CreateMap<SRV_USUARIO, UsuarioModels>();
+            Mapper.CreateMap<SRV_PASAJERO, PasajeroModels>();
             #endregion
         }    
     }

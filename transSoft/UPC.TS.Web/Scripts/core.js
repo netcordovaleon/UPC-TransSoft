@@ -2,6 +2,11 @@
     alert("Se producjo un error inesperado mantengase en contacto con el administrador del Sistema");
 }
 
+function TrimString(x) {
+    return x.replace(/^\s+|\s+$/gm, '');
+}
+
+
 $('.upctbgrid').DataTable({
     "language": {
         "sProcessing": "Procesando...",
@@ -31,3 +36,22 @@ $('.upctbgrid').DataTable({
 
 $.fn.datepicker.defaults.language = "es";
 $.fn.datepicker.defaults.format = "dd/mm/yyyy";
+
+
+function showNotifyByData(data) {
+    //var stack_bar_top = { "dir1": "down", "dir2": "right", "push": "top", "spacing1": 0, "spacing2": 0 };
+    new PNotify({
+        title: data.Title,
+        text: data.Message,
+        type: data.TypeResponse 
+    });
+}
+
+function showNotify(title, message, typeMessage) {
+    //var stack_bar_top = { "dir1": "down", "dir2": "right", "push": "top", "spacing1": 0, "spacing2": 0 };
+    new PNotify({
+        title: title,
+        text: message,
+        type: typeMessage
+    });
+}

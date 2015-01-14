@@ -12,14 +12,13 @@ namespace UPC.TS.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class RESERVA
+    public partial class SRV_PERSONAL
     {
-        public int CODRES { get; set; }
-        public Nullable<System.DateTime> FECRES { get; set; }
+        public int CODPER { get; set; }
+        public string NOMPER { get; set; }
+        public string APEPER { get; set; }
+        public string DNIPER { get; set; }
         public string ESTREG { get; set; }
-        public string ESTTRAN { get; set; }
-        public Nullable<int> CODCLI { get; set; }
-        public Nullable<int> CODPRO { get; set; }
-        public Nullable<int> CODPRODES { get; set; }
+        public Nullable<int> CODUSU { get; set; }
     }
 }

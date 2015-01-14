@@ -14,19 +14,18 @@ using UPC.TS.Infraestructure.Mensajes.Respuesta;
 
 namespace UPC.TS.BusinessLogic
 {
-    public class ConsultaProgramacionLogic : IConsultaProgramacionLogic
+    public class ConsultaAsientosDESLogic : IConsultaAsientosDESLogic
     {
         private readonly IUnitOfWork _uow;
-        private readonly IConsultaProgramacion _consultaProgramacionData;
-        public ConsultaProgramacionLogic()
+        private readonly IConsultaAsientosDES _consultaDES;
+        public ConsultaAsientosDESLogic()
         {
             this._uow = new UnitOfWork();
-            this._consultaProgramacionData = new ConsultaProgramacionData(_uow);
+            this._consultaDES = new ConsultaAsientosDESData(_uow);
         }
-
-        public IEnumerable<SRV_VW_CONSULTA_PROGRAMACION> ListarProgramacion(string origen, string destino, string fechaSalida)
+        public IEnumerable<SRV_VW_ASIENTOS_RESERVADOSDES> ListarAsientosDES(int codProgramacion)
         {
-            return _consultaProgramacionData.ListarProgramacion(origen, destino, fechaSalida);
+            return _consultaDES.ListarAsientosDES(codProgramacion);
         }
     }
 }

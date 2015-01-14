@@ -11,19 +11,19 @@ using UPC.TS.Infraestructure;
 
 namespace UPC.TS.DataImplement
 {
-    public class ReservaData : BaseRepository<RESERVA>, IReserva
+    public class ReservaData : BaseRepository<SRV_RESERVA>, IReserva
     {
 
         public ReservaData(IUnitOfWork unit) : base(unit) { }
 
-        public RESERVA Registrar(RESERVA entidad)
+        public SRV_RESERVA Registrar(SRV_RESERVA entidad)
         {
-            return (RESERVA)this.Insert(entidad);
+            return (SRV_RESERVA)this.Insert(entidad);
         }
 
-        public RESERVA Actualizar(RESERVA entidad)
+        public SRV_RESERVA Actualizar(SRV_RESERVA entidad)
         {
-            throw new NotImplementedException();
+            return (SRV_RESERVA)this.Update(entidad);
         }
 
         public bool Eliminar(int id)
@@ -31,12 +31,12 @@ namespace UPC.TS.DataImplement
             throw new NotImplementedException();
         }
 
-        public RESERVA BuscarPorId(int id)
+        public SRV_RESERVA BuscarPorId(int id)
         {
-            throw new NotImplementedException();
+            return (SRV_RESERVA)this.Get(c => c.CODRES == id);
         }
 
-        public IEnumerable<RESERVA> ListarTodo()
+        public IEnumerable<SRV_RESERVA> ListarTodo()
         {
             throw new NotImplementedException();
         }

@@ -22,6 +22,16 @@
 
     <typeAlias alias="IClienteLogic" type="UPC.TS.BusinessContract.IClienteLogic, UPC.TS.BusinessContract"/>
     <typeAlias alias="ClienteLogic" type="UPC.TS.BusinessLogic.ClienteLogic, UPC.TS.BusinessLogic" />
+
+    <typeAlias alias="IConsultaAsientosORILogic" type="UPC.TS.BusinessContract.IConsultaAsientosORILogic, UPC.TS.BusinessContract"/>
+    <typeAlias alias="ConsultaAsientosORILogic" type="UPC.TS.BusinessLogic.ConsultaAsientosORILogic, UPC.TS.BusinessLogic" />
+
+    <typeAlias alias="IConsultaAsientosDESLogic" type="UPC.TS.BusinessContract.IConsultaAsientosDESLogic, UPC.TS.BusinessContract"/>
+    <typeAlias alias="ConsultaAsientosDESLogic" type="UPC.TS.BusinessLogic.ConsultaAsientosDESLogic, UPC.TS.BusinessLogic" />
+
+    <typeAlias alias="IConsultaReservaLogic" type="UPC.TS.BusinessContract.IConsultaReservaLogic, UPC.TS.BusinessContract"/>
+    <typeAlias alias="ConsultaReservaLogic" type="UPC.TS.BusinessLogic.ConsultaReservaLogic, UPC.TS.BusinessLogic" />
+    
     
   </typeAliases>
 
@@ -33,5 +43,8 @@
     <register type="IPasajeroLogic" mapTo="PasajeroLogic" />
     <register type="IReservaLogic" mapTo="ReservaLogic" />
     <register type="IClienteLogic" mapTo="ClienteLogic" />
+    <register type="IConsultaAsientosORILogic" mapTo="ConsultaAsientosORILogic" />
+    <register type="IConsultaAsientosDESLogic" mapTo="ConsultaAsientosDESLogic" />
+    <register type="IConsultaReservaLogic" mapTo="ConsultaReservaLogic" />
   </container>
 </unity>

@@ -23,7 +23,7 @@ namespace UPC.TS.BusinessLogic
             this._uow = new UnitOfWork();
             this._clienteData = new ClienteData(_uow);
         }
-        public CLIENTE ObtenerUsuarioPorCorreo(string correo)
+        public SRV_CLIENTE ObtenerUsuarioPorCorreo(string correo)
         {
             var result = _clienteData.ObtenerUsuarioPorCorreo(correo);
             return result;

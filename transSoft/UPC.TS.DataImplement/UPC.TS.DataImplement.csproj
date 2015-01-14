@@ -46,7 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClienteData.cs" />
-    <Compile Include="ConsultaProgramacion.cs" />
+    <Compile Include="ConsultaAsientosDESData.cs" />
+    <Compile Include="ConsultaAsientosORIData.cs" />
+    <Compile Include="ConsultaProgramacionData.cs" />
+    <Compile Include="ConsultaReservaData.cs" />
     <Compile Include="ContactenosData.cs" />
     <Compile Include="Infraestructura\BaseRepository.cs" />
     <Compile Include="Infraestructura\UnitOfWork.cs" />

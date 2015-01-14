@@ -41,7 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClienteLogic.cs" />
+    <Compile Include="ConsultaAsientosDESLogic.cs" />
+    <Compile Include="ConsultaAsientosORILogic.cs" />
     <Compile Include="ConsultaProgramacionLogic.cs" />
+    <Compile Include="ConsultaReservaLogic.cs" />
     <Compile Include="ContactenosLogic.cs" />
     <Compile Include="PasajeroLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

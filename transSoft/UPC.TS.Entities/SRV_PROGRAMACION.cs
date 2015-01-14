@@ -12,13 +12,14 @@ namespace UPC.TS.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class PROMOCION
+    public partial class SRV_PROGRAMACION
     {
-        public int CODPROM { get; set; }
-        public Nullable<decimal> PORDESC { get; set; }
-        public Nullable<System.DateTime> FECINI { get; set; }
-        public Nullable<System.DateTime> FECFIN { get; set; }
+        public int CODPRO { get; set; }
+        public Nullable<System.DateTime> FECSALPRO { get; set; }
+        public string HORSALPRO { get; set; }
         public string ESTREG { get; set; }
-        public string DESPROM { get; set; }
+        public Nullable<int> CODBUS { get; set; }
+        public Nullable<int> CODTAR { get; set; }
+        public Nullable<int> CODPROM { get; set; }
     }
 }

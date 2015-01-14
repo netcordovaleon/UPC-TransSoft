@@ -10,7 +10,12 @@ namespace UPC.TS.BusinessContract
 {
     public interface ITarifasLogic
     {
-        IEnumerable<TARIFA> ListarOrigen();
-        IEnumerable<TARIFA> ListarDestino();
+        ResponseEntity GrabarTarifa(SRV_TARIFA entidad);
+        ResponseEntity EliminarTarifa(int id);
+        SRV_TARIFA BuscarPorId(int id);
+        IEnumerable<SRV_TARIFA> ListarTarifas();       
+        IEnumerable<SRV_TARIFA> ListarOrigen();
+        IEnumerable<SRV_TARIFA> ListarDestino();
+        IEnumerable<SRV_TARIFA> ListarTarifaFiltro(SRV_TARIFA entidad);
     }
 }

@@ -9,5 +9,6 @@ namespace UPC.TS.Infraestructure.Enum
     public class EstadoTranReserva
     {
         public const string RESERVADO = "R";
+        public const string ANULADO = "A";
     }
 }

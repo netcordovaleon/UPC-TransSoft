@@ -23,8 +23,21 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+
+
+                    @if (Session[UPC.TS.Infraestructure.Constantes.Sesiones.sessionUsuarioLog] != null)
+                    {
+                        if (Session[UPC.TS.Infraestructure.Constantes.Sesiones.sessionTipoPerfil] == "USU") { 
+                            <li>@Html.ActionLink("Anular Reserva", "AnularReserva", "Reserva")</li>
+                            <li>@Html.ActionLink("Mantenimiento Pasajero", "BuscarReservas", "Pasajero")</li>                        
+                        }
+                        else { 
+                            <li>@Html.ActionLink("Ges. Tarifa", "Index", "Tarifa")</li>
+                        }
+                        
+
+                    }
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -46,6 +59,7 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

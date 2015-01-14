@@ -12,14 +12,10 @@ namespace UPC.TS.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class PROGRAMACION
+    public partial class SRV_CLIENTE
     {
-        public int CODPRO { get; set; }
-        public Nullable<System.DateTime> FECSALPRO { get; set; }
-        public string HORSALPRO { get; set; }
-        public string ESTREG { get; set; }
-        public Nullable<int> CODBUS { get; set; }
-        public Nullable<int> CODTAR { get; set; }
-        public Nullable<int> CODPROM { get; set; }
+        public int CODCLI { get; set; }
+        public Nullable<int> CODUSU { get; set; }
+        public string CORCLI { get; set; }
     }
 }

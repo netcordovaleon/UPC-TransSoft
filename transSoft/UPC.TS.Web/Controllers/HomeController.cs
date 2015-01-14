@@ -27,6 +27,8 @@ namespace UPC.TS.Web.Controllers
             var model = new FiltrosReservaModels();
             var origenes = _tarifasLogic.ListarOrigen();
             var destinos = _tarifasLogic.ListarDestino();
+            origenes = origenes.Where(c => c.CODESTTAR == "P");
+            destinos = destinos.Where(c => c.CODESTTAR == "P");
             model.LIST_ORI = (from c in origenes select new SelectListItem { Text = c.ORITAR, Value = c.ORITAR });
             model.LIST_DES = (from c in destinos select new SelectListItem { Text = c.DESTAR, Value = c.DESTAR });
             return View(model);

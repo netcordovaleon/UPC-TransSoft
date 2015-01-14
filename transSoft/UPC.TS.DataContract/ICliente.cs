@@ -9,8 +9,8 @@ using UPC.TS.Entities;
 
 namespace UPC.TS.DataContract
 {
-    public interface ICliente : IOperacionesCRUD<CLIENTE> 
+    public interface ICliente : IOperacionesCRUD<SRV_CLIENTE> 
     {
-        CLIENTE ObtenerUsuarioPorCorreo(string correo);
+        SRV_CLIENTE ObtenerUsuarioPorCorreo(string correo);
     }
 }

@@ -10,9 +10,9 @@ using UPC.TS.Entities;
 
 namespace UPC.TS.DataContract
 {
-    public interface IUsuario : IOperacionesCRUD<USUARIO> 
+    public interface IUsuario : IOperacionesCRUD<SRV_USUARIO> 
     {
-        bool IngresarSistema(USUARIO entidad);
-        bool ExisteUsuarioReg(USUARIO entidad);
+        bool IngresarSistema(SRV_USUARIO entidad);
+        bool ExisteUsuarioReg(SRV_USUARIO entidad);
     }
 }

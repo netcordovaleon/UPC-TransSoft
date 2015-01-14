@@ -25,12 +25,19 @@ namespace UPC.TS.BusinessLogic
             this._pasajeroData = new PasajeroData(_uow);
         }
 
-        public ResponseEntity GrabarPASAJERO(PASAJERO entidad)
+        public ResponseEntity GrabarPasajeros(SRV_PASAJERO entidad)
         {
-            throw new NotImplementedException();
+            if (entidad.CODPAS.Equals(0))
+            {
+                _pasajeroData.Registrar(entidad);
+            }
+            else {
+                _pasajeroData.Actualizar(entidad);
+            }
+            return new ResponseEntity("Se grabaron los datos del pasajero satisfactoriamente", true);
         }
 
-        public ResponseEntity RegistrarPASAJEROS(List<PASAJERO> listPasajero)
+        public ResponseEntity RegistrarPasajeros(List<SRV_PASAJERO> listPasajero)
         {
             using (TransactionScope tran = new TransactionScope()) {
                 try
@@ -48,6 +55,18 @@ namespace UPC.TS.BusinessLogic
                     return new ResponseEntity(Response.ErrorGeneral);
                 }
             }
+        }
+
+
+        public IEnumerable<SRV_PASAJERO> ListarPasajeroPorReserva(int codReserva)
+        {
+            return _pasajeroData.ListarPasajeroPorReserva(codReserva);
+        }
+
+
+        public SRV_PASAJERO BuscarPorId(int id)
+        {
+            return _pasajeroData.BuscarPorId(id);
         }
     }
 }

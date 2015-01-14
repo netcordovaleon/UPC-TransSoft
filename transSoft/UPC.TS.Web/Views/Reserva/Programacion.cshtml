@@ -1,4 +1,5 @@
-﻿@model UPC.TS.Web.Models.ReservaModels
+﻿@using UPC.TS.Infraestructure.Constantes;
+@model UPC.TS.Web.Models.ReservaModels
 @{
     ViewBag.Title = "Programaciones";
 }
@@ -11,6 +12,7 @@
 
 <!--VARIABLES DE SELECCION-->
 @Html.HiddenFor(c=>c.CODPRO_ORI)
+@Html.HiddenFor(c => c.CODPRO_DES)
 <!--VARIABLES DE SELECCION-->
 
 
@@ -27,25 +29,72 @@
                     <th>Horario</th>
                     <th>Tarifa</th>
                     <th>Servicio</th>
+                    <th>Disponible</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model.listaProgramacion)
                 {
                     <tr>
-                        <td><input type="radio" name="progOrigen" value='@item.CODPRO' onclick="javascript:selProgOrigen(@item.CODPRO)" /></td>
+                        <td class="center">
+                            <center>
+                                <input type="radio" name="progOrigen" value='@item.CODPRO' onclick="javascript:selProgOrigen(@item.CODPRO)" />
+                            </center>
+                        </td>
                         <td>@item.ORITAR</td>
                         <td>@item.DESTAR</td>
                         <td>@item.FECSALPRO</td>
                         <td>@item.HORSALPRO</td>
                         <td>@item.PRETAR</td>
                         <td>@item.NOMTIPSER &nbsp;<a class="btn btn-success"><i class="fa fa-info"></i></a></td>
+                        <td>@item.CUPASI</td>
                     </tr>
                 }
             </tbody>
         </table>        
     </div>
 </div>
+
+@if (@Model.filtros.TIPVIA.Equals("I_V")) { 
+<div class="panel panel-default">
+    <div class="panel-heading">Rutas Programadas para (@Model.filtros.DESDES - @Model.filtros.DESORI)</div>
+    <div class="panel-body">
+        <table id="tblProgramacionDestino" class="display upctbgrid" cellspacing="0" style="width:100%;">
+            <thead>
+                <tr>
+                    <th class="center" style="width:5%;">&nbsp;</th>
+                    <th>Origen</th>
+                    <th>Destino</th>
+                    <th>Fecha Salida</th>
+                    <th>Horario</th>
+                    <th>Tarifa</th>
+                    <th>Servicio</th>
+                    <th>Disponible</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.listaProgramacionDestino)
+                {
+                    <tr>
+                        <td class="center">
+                            <center>
+                                <input type="radio" name="progOrigen" value='@item.CODPRO' onclick="javascript:selProgDestino(@item.CODPRO)" />
+                            </center>
+                        </td>
+                        <td>@item.ORITAR</td>
+                        <td>@item.DESTAR</td>
+                        <td>@item.FECSALPRO</td>
+                        <td>@item.HORSALPRO</td>
+                        <td>@item.PRETAR</td>
+                        <td>@item.NOMTIPSER &nbsp;<a class="btn btn-success"><i class="fa fa-info"></i></a></td>
+                        <td>@item.CUPASI</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+}
 
 <button id="btnRegresarPrincipal" class="btn pull-right"><i class="fa fa-arrow-left"></i>&nbsp;Regresar</button>
 @if (Session[UPC.TS.Infraestructure.Constantes.Sesiones.sessionUsuarioLog] == null) { 
@@ -58,6 +107,8 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#tblProgramacion').dataTable();
+            $('#tblProgramacionDestino').dataTable();
+            
             //EVENTS
             $("#btnContinuarGenReserva").click(function () { irGenerarReserva(); });
             $("#btnContinuarRegistro").click(function () { irRegistrarse(); });
@@ -72,17 +123,33 @@
             $("#CODPRO_ORI").val(valor);
         }
 
+        function selProgDestino(valor) {
+            $("#CODPRO_DES").val(valor);
+        }
+
         function irGenerarReserva() {
-            var url = '@Url.Action("GenerarReserva","Reserva")';
+            var url = '@Url.Action("GenerarReserva","Reserva")'  + "?CODPRO_ORI=" + $("#CODPRO_ORI").val() + "&CODPRO_DES=" + $("#CODPRO_DES").val();
             document.location.href = url;
         }
 
         function irRegistrarse() {
-            if ($("#CODPRO_ORI").val() == "0" || $("#CODPRO_ORI").val() == null || $("#CODPRO_ORI").val() == "") {
-                alert("Debe seleccionar una programacion");
+
+            if ('@Model.filtros.TIPVIA' != "I_V") {
+                if ($("#CODPRO_ORI").val() == "0" || $("#CODPRO_ORI").val() == null || $("#CODPRO_ORI").val() == "") {
+                    showNotify('@TitleResponse.alert', "Debe seleccionar una programacion", '@TypeResponse.alert.ToString()');
+                } else {
+                    var url = '@Url.Action("RegistroUsuario", "Reserva")' + "?CODPRO_ORI=" + TrimString($("#CODPRO_ORI").val()) + "&CODPRO_DES=" + $("#CODPRO_DES").val();
+                    document.location.href = url;
+                }
             } else {
-                var url = '@Url.Action("RegistroUsuario", "Reserva")' + "?CODPRO_ORI=" + $("#CODPRO_ORI").val();
-                document.location.href = url;
+                if ($("#CODPRO_ORI").val() == "0" || $("#CODPRO_ORI").val() == null || $("#CODPRO_ORI").val() == "") {
+                    showNotify('@TitleResponse.alert', "Debe seleccionar una programacion", '@TypeResponse.alert.ToString()');
+                } else if ($("#CODPRO_DES").val() == "0" || $("#CODPRO_DES").val() == null || $("#CODPRO_DES").val() == "") {
+                    showNotify('@TitleResponse.alert', "Debe seleccionar una programacion", '@TypeResponse.alert.ToString()');
+                } else {
+                    var url = '@Url.Action("RegistroUsuario", "Reserva")' + "?CODPRO_ORI=" + TrimString($("#CODPRO_ORI").val()) + "&CODPRO_DES=" + $("#CODPRO_DES").val();
+                    document.location.href = url;
+                }
             }
         }
     </script>   

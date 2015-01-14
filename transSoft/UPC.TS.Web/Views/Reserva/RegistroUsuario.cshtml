@@ -1,4 +1,5 @@
-﻿@model UPC.TS.Web.Models.ReservaUsuarioModels
+﻿@using UPC.TS.Infraestructure.Constantes;
+@model UPC.TS.Web.Models.ReservaUsuarioModels
 @{
     ViewBag.Title = "Registro Usuario";
 }
@@ -17,10 +18,12 @@
                     <div class="form-group">
                         @Html.LabelFor(c => c.usuario.LOGUSU)
                         @Html.TextBoxFor(c => c.usuario.LOGUSU, new { @Class = "form-control", @placeholder = "correo@dominio.com" })
+                        @Html.ValidationMessageFor(c => c.usuario.LOGUSU)
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(c => c.usuario.CLAUSU)
                         @Html.PasswordFor(c => c.usuario.CLAUSU, new { @Class = "form-control" })
+                        @Html.ValidationMessageFor(c => c.usuario.CLAUSU)
                     </div>
                     <div class="form-group">
                         <button type="button" id="btnLogueo" class="btn btn-primary center"><i class="fa fa-key"></i>&nbsp;Acceder</button>
@@ -40,10 +43,12 @@
                     <div class="form-group">
                         @Html.LabelFor(c => c.usuario.LOGUSU)
                         @Html.TextBoxFor(c => c.usuario.LOGUSU, new { @Class = "form-control", @placeholder = "correo@dominio.com" })
+                        @Html.ValidationMessageFor(c => c.usuario.LOGUSU)
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(c => c.usuario.CLAUSU)
                         @Html.PasswordFor(c => c.usuario.CLAUSU, new { @Class = "form-control" })
+                        @Html.ValidationMessageFor(c => c.usuario.CLAUSU)
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(c => c.usuario.CLAUSU_REP)
@@ -66,9 +71,30 @@
                     $("#btnRegistro").click(function () { registrarUsuario(); });
                 });
 
+                function formLogueoValido() {
+                    if (!$("#frmLogueo").valid())
+                        return false;
+                    else
+                        return true;
+                }
+
+                function formRegUsuarioValido() {
+                    if (!$("#frmRegistro").valid())
+                        return false;
+                    else
+                        return true;
+                }
+
                 function registrarUsuario() {
+                    if (!formRegUsuarioValido()) return;
+
+                    if ($("#frmRegistro #usuario_CLAUSU_REP").val() == "") {
+                        showNotify('@TitleResponse.alert', "Debe indicar la contraseña repetida", '@TypeResponse.alert.ToString()')
+                        return;
+                    }
+
                     if ($("#frmRegistro #usuario_CLAUSU").val() != $("#frmRegistro #usuario_CLAUSU_REP").val()) {
-                        alert("Las contraseñas no coinciden");
+                        showNotify('@TitleResponse.alert', "Las contraseñas no coinciden", '@TypeResponse.alert.ToString()')
                         return;
                     }
 
@@ -79,8 +105,10 @@
                         data: $("#frmRegistro").serialize(),
                         success: function (result) {
                             if (result.Success) {
-                                var url = '@Url.Action("GenerarReserva", "Reserva", new { CODPRO_ORI = Model.CODPRO_ORI, CODPRO_DES = Model.CODPRO_DES })';
+                                var url = '@Url.Action("GenerarReserva", "Reserva")' + "?CODPRO_ORI=" + TrimString($("#CODPRO_ORI").val()) + "&CODPRO_DES=" + $("#CODPRO_DES").val();
                                 document.location.href = url;
+                            } else {
+                                showNotifyByData(result);
                             }
                         },
                         error: errorAjax
@@ -88,6 +116,7 @@
                 }
 
                 function loguearseUsuario() {
+                    if (!formLogueoValido()) return;
                     $.ajax({
                         url: '@Url.Action("IngresarSistema", "Reserva")',
                         type: 'POST',
@@ -95,8 +124,10 @@
                         data: $("#frmLogueo").serialize(),
                         success: function (result) {
                             if (result.Success) {
-                                var url = '@Url.Action("GenerarReserva", "Reserva", new { CODPRO_ORI = Model.CODPRO_ORI, CODPRO_DES = Model.CODPRO_DES })';
+                                var url = '@Url.Action("GenerarReserva", "Reserva")' + "?CODPRO_ORI=" + TrimString($("#CODPRO_ORI").val()) + "&CODPRO_DES=" + $("#CODPRO_DES").val();
                                 document.location.href = url;
+                            } else {
+                                showNotifyByData(result);
                             }
                         },
                         error: errorAjax

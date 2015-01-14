@@ -12,10 +12,13 @@ namespace UPC.TS.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class TIPOTARJETA
+    public partial class SRV_BUS
     {
-        public int CODTIPTAR { get; set; }
-        public string NOMTIPTAR { get; set; }
+        public int CODBUS { get; set; }
+        public string PLABUS { get; set; }
+        public string ANIOBUS { get; set; }
+        public Nullable<int> NROEJE { get; set; }
         public string ESTREG { get; set; }
+        public Nullable<int> CODTIPSER { get; set; }
     }
 }

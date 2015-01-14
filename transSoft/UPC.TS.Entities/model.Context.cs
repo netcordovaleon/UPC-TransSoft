@@ -25,23 +25,26 @@ namespace UPC.TS.Entities
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<VWCONSULTAPROGRAMACION> VWCONSULTAPROGRAMACION { get; set; }
-        public virtual DbSet<BUS> BUS { get; set; }
-        public virtual DbSet<CLIENTE> CLIENTE { get; set; }
-        public virtual DbSet<COMPRA> COMPRA { get; set; }
         public virtual DbSet<contactenos> contactenos { get; set; }
-        public virtual DbSet<CUPONES> CUPONES { get; set; }
-        public virtual DbSet<PERFIL> PERFIL { get; set; }
-        public virtual DbSet<PERSONAL> PERSONAL { get; set; }
-        public virtual DbSet<PROGRAMACION> PROGRAMACION { get; set; }
-        public virtual DbSet<PROMOCION> PROMOCION { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<TARIFA> TARIFA { get; set; }
-        public virtual DbSet<TARJETA> TARJETA { get; set; }
-        public virtual DbSet<TIPOSERVICIO> TIPOSERVICIO { get; set; }
-        public virtual DbSet<TIPOTARJETA> TIPOTARJETA { get; set; }
-        public virtual DbSet<USUARIO> USUARIO { get; set; }
-        public virtual DbSet<PASAJERO> PASAJERO { get; set; }
-        public virtual DbSet<RESERVA> RESERVA { get; set; }
+        public virtual DbSet<SRV_BUS> SRV_BUS { get; set; }
+        public virtual DbSet<SRV_CLIENTE> SRV_CLIENTE { get; set; }
+        public virtual DbSet<SRV_COMPRA> SRV_COMPRA { get; set; }
+        public virtual DbSet<SRV_CUPONES> SRV_CUPONES { get; set; }
+        public virtual DbSet<SRV_PASAJERO> SRV_PASAJERO { get; set; }
+        public virtual DbSet<SRV_PERFIL> SRV_PERFIL { get; set; }
+        public virtual DbSet<SRV_PERSONAL> SRV_PERSONAL { get; set; }
+        public virtual DbSet<SRV_PROGRAMACION> SRV_PROGRAMACION { get; set; }
+        public virtual DbSet<SRV_PROMOCION> SRV_PROMOCION { get; set; }
+        public virtual DbSet<SRV_RESERVA> SRV_RESERVA { get; set; }
+        public virtual DbSet<SRV_TARJETA> SRV_TARJETA { get; set; }
+        public virtual DbSet<SRV_TIPO_SERVICIO> SRV_TIPO_SERVICIO { get; set; }
+        public virtual DbSet<SRV_TIPO_TARJETA> SRV_TIPO_TARJETA { get; set; }
+        public virtual DbSet<SRV_USUARIO> SRV_USUARIO { get; set; }
+        public virtual DbSet<SRV_VW_ASIENTOS_RESERVADOSDES> SRV_VW_ASIENTOS_RESERVADOSDES { get; set; }
+        public virtual DbSet<SRV_VW_ASIENTOS_RESERVADOSORI> SRV_VW_ASIENTOS_RESERVADOSORI { get; set; }
+        public virtual DbSet<SRV_VW_CONSULTA_PROGRAMACION> SRV_VW_CONSULTA_PROGRAMACION { get; set; }
+        public virtual DbSet<SRV_VW_RESERVAS> SRV_VW_RESERVAS { get; set; }
+        public virtual DbSet<SRV_TARIFA> SRV_TARIFA { get; set; }
     }
 }

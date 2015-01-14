@@ -22,6 +22,9 @@ namespace UPC.TS.Web.Controllers
         IUsuarioLogic _usuarioLogic;
         IReservaLogic _reservaLogic;
         IClienteLogic _clienteLogic;
+        IConsultaAsientosORILogic _consultaAsientosORILogic;
+        IConsultaAsientosDESLogic _consultaAsientosDESLogic;
+        IConsultaReservaLogic _consultaReservaLogic;
         public ReservaController()
         {
             
@@ -29,6 +32,9 @@ namespace UPC.TS.Web.Controllers
             this._usuarioLogic = Configuration.Unity.Container.Resolve<IUsuarioLogic>();
             this._reservaLogic = Configuration.Unity.Container.Resolve<IReservaLogic>();
             this._clienteLogic = Configuration.Unity.Container.Resolve<IClienteLogic>();
+            this._consultaAsientosORILogic = Configuration.Unity.Container.Resolve<IConsultaAsientosORILogic>();
+            this._consultaAsientosDESLogic = Configuration.Unity.Container.Resolve<IConsultaAsientosDESLogic>();
+            this._consultaReservaLogic = Configuration.Unity.Container.Resolve<IConsultaReservaLogic>();
         }
 
         #endregion
@@ -38,9 +44,21 @@ namespace UPC.TS.Web.Controllers
         public ActionResult Programacion(FiltrosReservaModels filtros)
         {
             var model = new ReservaModels();
+
+            #region PROGRAMACION PARA ORIGEN
             var listadoProgramacion = _consultaProgramacionLogic.ListarProgramacion(filtros.DESORI, filtros.DESDES, filtros.FECSAL);
             model.filtros = filtros;
-            model.listaProgramacion = model.castProgramacionType((List<VWCONSULTAPROGRAMACION>)listadoProgramacion);
+            model.listaProgramacion = model.castProgramacionType((List<SRV_VW_CONSULTA_PROGRAMACION>)listadoProgramacion);
+            #endregion
+
+            #region PROGRAMACION PARA DESTINO
+            if (filtros.TIPVIA.Equals("I_V")) { 
+                var listadoProgramacionDestino = _consultaProgramacionLogic.ListarProgramacion(filtros.DESDES, filtros.DESORI, filtros.FECRET);
+                model.listaProgramacionDestino = model.castProgramacionType((List<SRV_VW_CONSULTA_PROGRAMACION>)listadoProgramacionDestino);
+            }
+            #endregion
+
+
             return View(model);
         }
         #endregion
@@ -56,20 +74,20 @@ namespace UPC.TS.Web.Controllers
         }
 
         public JsonResult IngresarSistema(ReservaUsuarioModels model) {
-            var entidad = Mapper.Map<UsuarioModels, USUARIO>(model.usuario);
+            var entidad = Mapper.Map<UsuarioModels, SRV_USUARIO>(model.usuario);
             var result = _usuarioLogic.IngresarSistema(entidad);
             if (result.Success) {
-                Session[Sesiones.sessionUsuarioLog] = model.usuario.LOGUSU.ToUpper();
+                Session[Sesiones.sessionUsuarioLog] = model.usuario.LOGUSU;
             }
             return Json(result);
         }
 
         public JsonResult RegistrarUsuario(ReservaUsuarioModels model) {
-            var usuario = Mapper.Map<UsuarioModels, USUARIO>(model.usuario);
-            var cliente = new CLIENTE(){  CORCLI = usuario.LOGUSU };
+            var usuario = Mapper.Map<UsuarioModels, SRV_USUARIO>(model.usuario);
+            var cliente = new SRV_CLIENTE(){  CORCLI = usuario.LOGUSU };
             var result = _usuarioLogic.AgregarUsuarioReserva(usuario, cliente);
             if (result.Success) {
-                Session[Sesiones.sessionUsuarioLog] = model.usuario.LOGUSU.ToUpper();
+                Session[Sesiones.sessionUsuarioLog] = model.usuario.LOGUSU;
             }
             return Json(result);
         }
@@ -88,14 +106,17 @@ namespace UPC.TS.Web.Controllers
         }
 
         public ActionResult GenerarReservaPasajes(int? CODPRO, int? CODPRODES) {
-            var reserva = new RESERVA() { 
+            var reserva = new SRV_RESERVA() { 
                  CODPRO = CODPRO.Value,
                  FECRES = DateTime.Now,
                  ESTTRAN = Infraestructure.Enum.EstadoTranReserva.RESERVADO,
                  CODCLI = _clienteLogic.ObtenerUsuarioPorCorreo(Session[Sesiones.sessionUsuarioLog].ToString()).CODCLI,
             };
-            if (CODPRODES.HasValue) { reserva.CODPRODES = CODPRODES.Value; }
-            var result = _reservaLogic.RegistrarReserva((List<PASAJERO>)Session[Sesiones.sessionListaPasajeros], reserva);
+            if (CODPRODES.HasValue) {
+                if (CODPRODES.Value != 0)
+                    reserva.CODPRODES = CODPRODES.Value; 
+            }
+            var result = _reservaLogic.RegistrarReserva((List<SRV_PASAJERO>)Session[Sesiones.sessionListaPasajeros], reserva);
             return Json(result);
             
         }
@@ -103,11 +124,12 @@ namespace UPC.TS.Web.Controllers
         public ActionResult RegistrarAsientoPas(PasajeroModels pasajero) {
             try
             {
-                var entidadPasajero = Mapper.Map<PasajeroModels, PASAJERO>(pasajero);
-                List<PASAJERO> listPasajero;
+                var entidadPasajero = Mapper.Map<PasajeroModels, SRV_PASAJERO>(pasajero);
+                var entidadPasajeroVuelta = Mapper.Map<PasajeroModels, SRV_PASAJERO>(pasajero);
+                List<SRV_PASAJERO> listPasajero;
                 if (Session[Sesiones.sessionListaPasajeros] == null)
                 {
-                    listPasajero = new List<PASAJERO>();
+                    listPasajero = new List<SRV_PASAJERO>();
                     if (string.IsNullOrWhiteSpace(pasajero.NUMASI_DES)) {
                         entidadPasajero.NUMASI = pasajero.NUMASI_ORI;
                         entidadPasajero.TIPVIA = Infraestructure.Enum.TipoViaje.ViajeIDA;
@@ -119,15 +141,15 @@ namespace UPC.TS.Web.Controllers
                         listPasajero.Add(entidadPasajero);
 
                         //REGISTRAMOS LA VUELTA
-                        entidadPasajero.NUMASI = pasajero.NUMASI_DES;
-                        entidadPasajero.TIPVIA = Infraestructure.Enum.TipoViaje.ViajeVUELTA;
-                        listPasajero.Add(entidadPasajero);
+                        entidadPasajeroVuelta.NUMASI = pasajero.NUMASI_DES;
+                        entidadPasajeroVuelta.TIPVIA = Infraestructure.Enum.TipoViaje.ViajeVUELTA;
+                        listPasajero.Add(entidadPasajeroVuelta);
                     }
                 }
                 else
                 {
 
-                    listPasajero = (List<PASAJERO>)Session[Sesiones.sessionListaPasajeros];
+                    listPasajero = (List<SRV_PASAJERO>)Session[Sesiones.sessionListaPasajeros];
                     if (string.IsNullOrWhiteSpace(pasajero.NUMASI_DES)) {
                         entidadPasajero.NUMASI = pasajero.NUMASI_ORI;
                         entidadPasajero.TIPVIA = Infraestructure.Enum.TipoViaje.ViajeIDA;
@@ -139,18 +161,74 @@ namespace UPC.TS.Web.Controllers
                         listPasajero.Add(entidadPasajero);
 
                         //REGISTRAMOS LA VUELTA
-                        entidadPasajero.NUMASI = pasajero.NUMASI_DES;
-                        entidadPasajero.TIPVIA = Infraestructure.Enum.TipoViaje.ViajeVUELTA;
-                        listPasajero.Add(entidadPasajero);
+                        entidadPasajeroVuelta.NUMASI = pasajero.NUMASI_DES;
+                        entidadPasajeroVuelta.TIPVIA = Infraestructure.Enum.TipoViaje.ViajeVUELTA;
+                        listPasajero.Add(entidadPasajeroVuelta);
                     }
                     
                 }
                 Session[Sesiones.sessionListaPasajeros] = listPasajero;
-                return Json(new { Success = true, Message = "Registro el pasajero satisfactoriamente" });
+                return Json(new { Success = true, Message = "Registro el pasajero satisfactoriamente", TypeResponse = Infraestructure.Constantes.TypeResponse.success.ToString(), Title = Infraestructure.Constantes.TitleResponse.success, Data = listPasajero });
             }
             catch (Exception) {
-                return Json(new { Success = false, Message = "Ocurrio un error al registrar al pasajero" });
+                Session[Sesiones.sessionListaPasajeros] = null;
+                return Json(new { Success = false, Message = "Ocurrio un error al registrar al pasajero", TypeResponse = Infraestructure.Constantes.TypeResponse.error.ToString(), Title = Infraestructure.Constantes.TitleResponse.error });
             }
+        }
+
+        public JsonResult EliminarAsientoPas(string DNI) {
+            try
+            {
+                var listPasajero = (List<SRV_PASAJERO>)Session[Sesiones.sessionListaPasajeros];
+                var item = listPasajero.Where(c => c.NUMDOC == DNI).First();
+                listPasajero.Remove(item);
+                Session[Sesiones.sessionListaPasajeros] = listPasajero;
+                return Json(new { Success = true, Message = "Elimino el pasajero satisfactoriamente", TypeResponse = Infraestructure.Constantes.TypeResponse.success.ToString(), Title = Infraestructure.Constantes.TitleResponse.success, Data = listPasajero });
+            }
+            catch (Exception)
+            {
+                return Json(new { Success = false, Message = "Ocurrio un error al eliminar el pasajero", TypeResponse = Infraestructure.Constantes.TypeResponse.error.ToString(), Title = Infraestructure.Constantes.TitleResponse.error });
+            }
+        }
+
+        public JsonResult ListarAsientosReservadosORI(int CODPRO) {
+            var result = _consultaAsientosORILogic.ListarAsientosORI(CODPRO);
+            return Json(result);
+        }
+
+        public JsonResult ListarAsientosReservadosDES(int CODPRO)
+        {
+            var result = _consultaAsientosDESLogic.ListarAsientosDES(CODPRO);
+            return Json(result);
+        }
+
+        #endregion
+
+        #region ANULACION DE RESERVAS
+
+        public ActionResult AnularReserva()
+        {
+            var model = new ReservaModels();
+            var listaReservas = _consultaReservaLogic.ListarReservaPorUsuario(Session[Sesiones.sessionUsuarioLog].ToString());
+            model.listaReservasVista = model.castReservaVistaType((List<SRV_VW_RESERVAS>)listaReservas);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AnularReserva(ReservaModels model)
+        {
+            var listaReservas = new List<SRV_VW_RESERVAS>();
+            if (!model.filtros.CODRES.HasValue)
+                listaReservas = _consultaReservaLogic.ListarReservaPorUsuario(Session[Sesiones.sessionUsuarioLog].ToString()).ToList();
+            else
+                listaReservas = _consultaReservaLogic.ListarReservaPorUsuarioyReserva(model.filtros.CODRES.Value,Session[Sesiones.sessionUsuarioLog].ToString()).ToList();
+            model.listaReservasVista = model.castReservaVistaType((List<SRV_VW_RESERVAS>)listaReservas);
+            return View(model);
+        }
+
+        public JsonResult AnularReservaActiva(int CODRES) {
+            var result = _reservaLogic.AnularReserva(CODRES);
+            return Json(result);
         }
 
         #endregion

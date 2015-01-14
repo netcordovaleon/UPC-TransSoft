@@ -11,46 +11,75 @@ using UPC.TS.Infraestructure;
 
 namespace UPC.TS.DataImplement
 {
-    public class TarifasData : BaseRepository<TARIFA>, ITarifas
+    public class TarifasData : BaseRepository<SRV_TARIFA>, ITarifas
     {
         public TarifasData(IUnitOfWork unit) : base(unit) { }
-        public IEnumerable<TARIFA> ListarOrigen()
+        public IEnumerable<SRV_TARIFA> ListarOrigen()
         {
             var tarifas = this.GetAll();
-            var origen = (from c in tarifas select new TARIFA { ORITAR = c.ORITAR }).Distinct();
+            var origen = (from c in tarifas where c.ESTREG == "1" select new SRV_TARIFA { ORITAR = c.ORITAR, CODESTTAR = c.CODESTTAR }).Distinct().Select(x => new SRV_TARIFA
+            {
+                ORITAR = x.ORITAR,
+                CODESTTAR = x.CODESTTAR
+            });
             return origen;
         }
 
-        public IEnumerable<TARIFA> ListarDestino()
+        public IEnumerable<SRV_TARIFA> ListarDestino()
         {
             var tarifas = this.GetAll();
-            var destino = (from c in tarifas select new TARIFA { DESTAR = c.DESTAR }).Distinct();
+            var destino = (from c in tarifas where c.ESTREG == "1" select new SRV_TARIFA { DESTAR = c.DESTAR, CODESTTAR = c.CODESTTAR }).Distinct().Select(x => new SRV_TARIFA
+            {
+                DESTAR = x.DESTAR,
+                CODESTTAR = x.CODESTTAR
+            });
+
             return destino;
         }
 
-        public TARIFA Registrar(TARIFA entidad)
+        public SRV_TARIFA Registrar(SRV_TARIFA entidad)
         {
-            throw new NotImplementedException();
+
+            return (SRV_TARIFA)this.Insert(entidad);
         }
 
-        public TARIFA Actualizar(TARIFA entidad)
+        public SRV_TARIFA Actualizar(SRV_TARIFA entidad)
         {
-            throw new NotImplementedException();
+            return (SRV_TARIFA)this.Update(entidad);
         }
 
         public bool Eliminar(int id)
         {
-            throw new NotImplementedException();
+            this.Delete(id);
+            return true;
         }
 
-        public TARIFA BuscarPorId(int id)
+        public SRV_TARIFA BuscarPorId(int id)
         {
-            throw new NotImplementedException();
+            return this.Single(id);
         }
 
-        public IEnumerable<TARIFA> ListarTodo()
+        public IEnumerable<SRV_TARIFA> ListarTodo()
         {
-            throw new NotImplementedException();
+            return this.GetMany(c=>c.ESTREG == "1");
+        }
+
+
+        public IEnumerable<SRV_TARIFA> ListarTarifaFiltro(SRV_TARIFA entidad)
+        {
+            var lista = new List<SRV_TARIFA>();
+            lista = this.GetMany(c => c.ESTREG == "1").ToList();
+            if (!string.IsNullOrEmpty(entidad.DESTAR)) {
+                lista = lista.Where(c => c.DESTAR == entidad.DESTAR).ToList();
+            }
+            else if (!string.IsNullOrEmpty(entidad.ORITAR)) {
+                lista = lista.Where(c => c.ORITAR == entidad.ORITAR).ToList();
+            }
+            else if (!string.IsNullOrEmpty(entidad.CODESTTAR))
+            {
+                lista = lista.Where(c => c.CODESTTAR == entidad.CODESTTAR).ToList();
+            }
+            return lista;
         }
     }
 }

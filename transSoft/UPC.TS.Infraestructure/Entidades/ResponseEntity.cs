@@ -11,36 +11,57 @@ namespace UPC.TS.Infraestructure.Entidades
         public string Message { get; set; }
         public object Data { get; set; }
         public bool Success { get; set; }
+        public string Title { get; set; }
+        public string TypeResponse { get; set; }
         public TypeResponse Type { get; set; }
 
-
         //MENSAJE ERROR
+
+        public ResponseEntity() { }
         public ResponseEntity(string _message) {
             this.Message = _message;
             this.Success = false;
+            this.TypeResponse = Infraestructure.Constantes.TypeResponse.error.ToString();
+            this.Title = getTitle(Infraestructure.Constantes.TypeResponse.error);
         }
 
         public ResponseEntity(string _message, bool _success = false)
         {
             this.Message = _message;
             this.Success = _success;
+            if (_success)
+            {
+                this.TypeResponse = Infraestructure.Constantes.TypeResponse.success.ToString();
+                this.Title = getTitle(Infraestructure.Constantes.TypeResponse.success);
+            }
+            else {
+                this.TypeResponse = Infraestructure.Constantes.TypeResponse.error.ToString();
+                this.Title = getTitle(Infraestructure.Constantes.TypeResponse.error);
+            }
         }
 
         //MENSAJE PERSONALIZADO 1
-        public ResponseEntity(string _message, TypeResponse _type, bool _success = false)
+        public ResponseEntity(string _message, TypeResponse _type, object _data)
         {
             this.Message = _message;
-            this.Success = _success;
-            this.Type = _type;
+            this.Success = false;
+            this.TypeResponse = _type.ToString();
+            this.Data = _data;
+            this.Title = getTitle(_type);
         }
 
-        //MENSAJE PERSONALIZADO 2
-        //public ResponseEntity(string _message, bool _success = false, object _data = null, Enum _type = null) {
-        //    this.Message = _message;
-        //    this.Success = _success;
-        //    this.Data = _data;
-        //    this.Type = TypeResponse.Error;
-        //}
+        public string getTitle(TypeResponse _type) {
+            string tituloAlertPNotify = string.Empty;
+            if (_type.ToString() == "error")
+                tituloAlertPNotify = Constantes.TitleResponse.error;
+            if (_type.ToString() == "alert")
+                tituloAlertPNotify = Constantes.TitleResponse.alert;
+            if (_type.ToString() == "info")
+                tituloAlertPNotify = Constantes.TitleResponse.info;
+            if (_type.ToString() == "success")
+                tituloAlertPNotify = Constantes.TitleResponse.success;
+            return tituloAlertPNotify;
+        }
     }
 }
 

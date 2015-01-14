@@ -9,13 +9,12 @@ namespace UPC.TS.Infraestructure.Constantes
 {
     public enum TypeResponse {
         [Description("Respuesta tipo Error")]
-        Error = 0,
+        error,
         [Description("Respuesta tipo Correcto")]
-        Success = 1,
+        success,
         [Description("Respuesta tipo Advertencia")]
-        Warning = 2,
+        alert,
         [Description("Respuesta tipo Informativa")]
-        Information = 2
+        info
     }
-
 }

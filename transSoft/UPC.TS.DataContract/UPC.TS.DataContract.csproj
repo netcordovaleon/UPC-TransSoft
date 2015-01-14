@@ -46,7 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ICliente.cs" />
+    <Compile Include="IConsultaAsientosDES.cs" />
+    <Compile Include="IConsultaAsientosORI.cs" />
     <Compile Include="IConsultaProgramacion.cs" />
+    <Compile Include="IConsultaReserva.cs" />
     <Compile Include="IContactenos.cs" />
     <Compile Include="Infraestructura\IBaseRepository.cs" />
     <Compile Include="Infraestructura\IDbRepository.cs" />

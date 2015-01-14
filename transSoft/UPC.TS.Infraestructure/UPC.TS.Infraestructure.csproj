@@ -43,12 +43,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constantes\Sesiones.cs" />
+    <Compile Include="Constantes\TitleResponse.cs" />
     <Compile Include="Constantes\TypeResponse.cs" />
     <Compile Include="Contratos\IOperacionesCRUD.cs" />
     <Compile Include="Entidades\ResponseEntity.cs" />
+    <Compile Include="Enum\Estados.cs" />
     <Compile Include="Enum\EstadoTranReserva.cs" />
     <Compile Include="Enum\PerfilesSistema.cs" />
     <Compile Include="Enum\TipoViaje.cs" />
+    <Compile Include="Funciones\StringAdding.cs" />
     <Compile Include="Mensajes\Respuesta\Response.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

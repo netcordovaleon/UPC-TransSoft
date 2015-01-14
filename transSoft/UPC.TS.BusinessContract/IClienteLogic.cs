@@ -11,6 +11,6 @@ namespace UPC.TS.BusinessContract
 {
     public interface IClienteLogic
     {
-        CLIENTE ObtenerUsuarioPorCorreo(string correo);
+        SRV_CLIENTE ObtenerUsuarioPorCorreo(string correo);
     }
 }

@@ -9,8 +9,8 @@ using UPC.TS.Infraestructure.Entidades;
 
 namespace UPC.TS.BusinessContract
 {
-    public interface IConsultaProgramacionLogic
+    public interface IConsultaAsientosDESLogic
     {
-        IEnumerable<SRV_VW_CONSULTA_PROGRAMACION> ListarProgramacion(string origen, string destino, string fechaSalida);
+        IEnumerable<SRV_VW_ASIENTOS_RESERVADOSDES> ListarAsientosDES(int codProgramacion);
     }
 }

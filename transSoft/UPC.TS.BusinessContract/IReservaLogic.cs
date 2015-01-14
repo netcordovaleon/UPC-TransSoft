@@ -11,6 +11,7 @@ namespace UPC.TS.BusinessContract
 {
     public interface IReservaLogic
     {
-        ResponseEntity RegistrarReserva(List<PASAJERO> listPasajero, RESERVA reserva);
+        ResponseEntity RegistrarReserva(List<SRV_PASAJERO> listPasajero, SRV_RESERVA reserva);
+        ResponseEntity AnularReserva(int codReserva);
     }
 }

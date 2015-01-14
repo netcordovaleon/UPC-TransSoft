@@ -8,9 +8,10 @@ using UPC.TS.Infraestructure.Contratos;
 using UPC.TS.Entities;
 namespace UPC.TS.DataContract
 {
-    public interface ITarifas  : IOperacionesCRUD<TARIFA> 
+    public interface ITarifas  : IOperacionesCRUD<SRV_TARIFA> 
     {
-        IEnumerable<TARIFA> ListarOrigen();
-        IEnumerable<TARIFA> ListarDestino();
+        IEnumerable<SRV_TARIFA> ListarOrigen();
+        IEnumerable<SRV_TARIFA> ListarDestino();
+        IEnumerable<SRV_TARIFA> ListarTarifaFiltro(SRV_TARIFA entidad);
     }
 }

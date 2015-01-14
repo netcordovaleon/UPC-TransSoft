@@ -12,13 +12,10 @@ namespace UPC.TS.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class TARJETA
+    public partial class SRV_PERFIL
     {
-        public int CODTARJETA { get; set; }
-        public string NUMTAR { get; set; }
-        public string CODTAR { get; set; }
+        public int CODPER { get; set; }
+        public string NOMPER { get; set; }
         public string ESTREG { get; set; }
-        public Nullable<int> CODTIPTAR { get; set; }
-        public Nullable<int> CODCLI { get; set; }
     }
 }

@@ -11,10 +11,10 @@ using UPC.TS.Infraestructure;
 
 namespace UPC.TS.DataImplement
 {
-    public class UsuarioData : BaseRepository<USUARIO>, IUsuario, IDisposable
+    public class UsuarioData : BaseRepository<SRV_USUARIO>, IUsuario, IDisposable
     {
         public UsuarioData(IUnitOfWork unit) : base(unit) { }
-        public bool IngresarSistema(USUARIO entidad)
+        public bool IngresarSistema(SRV_USUARIO entidad)
         {
             var existe = this.Get(c => c.LOGUSU == entidad.LOGUSU && c.CLAUSU == entidad.CLAUSU);
             if (existe == null)
@@ -23,7 +23,7 @@ namespace UPC.TS.DataImplement
                 return true;
         }
 
-        public bool ExisteUsuarioReg(USUARIO entidad)
+        public bool ExisteUsuarioReg(SRV_USUARIO entidad)
         {
             var existe = this.Get(c => c.LOGUSU == entidad.LOGUSU);
             if (existe == null)
@@ -32,12 +32,12 @@ namespace UPC.TS.DataImplement
                 return true;
         }
 
-        public USUARIO Registrar(USUARIO entidad)
+        public SRV_USUARIO Registrar(SRV_USUARIO entidad)
         {
-            return (USUARIO)this.Insert(entidad);
+            return (SRV_USUARIO)this.Insert(entidad);
         }
 
-        public USUARIO Actualizar(USUARIO entidad)
+        public SRV_USUARIO Actualizar(SRV_USUARIO entidad)
         {
             throw new NotImplementedException();
         }
@@ -47,12 +47,12 @@ namespace UPC.TS.DataImplement
             throw new NotImplementedException();
         }
 
-        public USUARIO BuscarPorId(int id)
+        public SRV_USUARIO BuscarPorId(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<USUARIO> ListarTodo()
+        public IEnumerable<SRV_USUARIO> ListarTodo()
         {
             throw new NotImplementedException();
         }

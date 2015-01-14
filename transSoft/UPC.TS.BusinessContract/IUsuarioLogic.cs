@@ -11,7 +11,7 @@ namespace UPC.TS.BusinessContract
 {
     public interface IUsuarioLogic 
     {
-        ResponseEntity IngresarSistema(USUARIO entidad);
-        ResponseEntity AgregarUsuarioReserva(USUARIO usuario, CLIENTE cliente);
+        ResponseEntity IngresarSistema(SRV_USUARIO entidad);
+        ResponseEntity AgregarUsuarioReserva(SRV_USUARIO usuario, SRV_CLIENTE cliente);
     }
 }

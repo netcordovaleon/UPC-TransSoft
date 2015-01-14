@@ -9,25 +9,29 @@
 
     <h3 class="text-left"><i class="fa fa-search"></i>&nbsp;Itinerario</h3>
 
-    @using (Html.BeginForm("Programacion", "Reserva", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    @using (Html.BeginForm("Programacion", "Reserva", FormMethod.Post, new { @Id="frmBuqItinerario", @class = "form-horizontal", role = "form" }))
     {
         <div class="radio-inline">
             <label>
                 @Html.RadioButtonFor(c => c.TIPVIA, "S_I", new { @checked="checked", @onclick="seleccionarTipoVia(this);" }) Solo ida
             </label>
+            @Html.ValidationMessageFor(c => c.TIPVIA)
         </div>
         <div class="radio-inline">
             <label>
                 @Html.RadioButtonFor(c => c.TIPVIA, "I_V", new { @onclick = "seleccionarTipoVia(this);" }) Ida y vuelta
             </label>
+            @Html.ValidationMessageFor(c => c.TIPVIA)
         </div>
         <div class="form-group">
             @Html.LabelFor(c=>c.DESORI)
             @Html.DropDownListFor(c => c.DESORI, Model.LIST_ORI, "Seleccione", new { @Class= "form-control" })
+            @Html.ValidationMessageFor(c => c.DESORI)
         </div>
         <div class="form-group">
             @Html.LabelFor(c => c.DESDES)
             @Html.DropDownListFor(c => c.DESDES, Model.LIST_DES, "Seleccione", new { @Class = "form-control" })
+            @Html.ValidationMessageFor(c => c.DESDES)
         </div>
         <div class="form-group">
             @Html.LabelFor(c => c.FECSAL)
@@ -37,6 +41,7 @@
                     <span class="fa fa-calendar"></span>
                 </span>
             </div>
+            @Html.ValidationMessageFor(c => c.FECSAL)
         </div>
         <div class="form-group" id="content_Retorno" style="display:none;">
             @Html.LabelFor(c => c.FECRET)
@@ -46,17 +51,18 @@
                     <span class="fa fa-calendar"></span>
                 </span>
             </div>
+            @Html.ValidationMessageFor(c => c.FECRET)
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary"><i class="fa fa-binoculars"></i>&nbsp;Buscar</button>
+            <button type="submit" onclick="return formBusItinerarioValido();" class="btn btn-primary"><i class="fa fa-binoculars"></i>&nbsp;Buscar</button>
             <button type="reset" class="btn"><i class="fa fa-stop"></i>&nbsp;Cancelar</button>
         </div>
     }
     </div>
     <div class="col-md-9">
         <div class="jumbotron">
-            <h1>ASP.NET</h1>
-            <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+            <h1>CRUZ DEL SUR</h1>
+            <p class="lead">CRUZ DEL SUR is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
             <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
         </div>
 
@@ -64,7 +70,7 @@
             <div class="col-md-4">
                 <h2>Getting started</h2>
                 <p>
-                    ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                    CRUZ DEL SUR gives you a powerful, patterns-based way to build dynamic websites that
                     enables a clean separation of concerns and gives you full control over markup
                     for enjoyable, agile development.
                 </p>
@@ -98,6 +104,18 @@
                 $("#content_Retorno").show();
             else
                 $("#content_Retorno").hide();
+        }
+
+        function formBusItinerarioValido() {
+            var valor = "";
+            $("input:radio[name='TIPVIA']").each(function () {
+                if ($(this).is(":checked")) 
+                    valor = $(this).val();
+            });
+            $("#frmBuqItinerario").data("validator").settings.ignore = (valor != "I_V")? "#FECRET" : "";
+
+            if (!$("#frmBuqItinerario").valid())
+                return false;
         }
 
     </script>

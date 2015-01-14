@@ -12,10 +12,11 @@ namespace UPC.TS.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class PERFIL
+    public partial class SRV_TIPO_SERVICIO
     {
-        public int CODPER { get; set; }
-        public string NOMPER { get; set; }
+        public int CODTIPSER { get; set; }
+        public string NOMTIPSER { get; set; }
+        public string DESTIPSER { get; set; }
         public string ESTREG { get; set; }
     }
 }

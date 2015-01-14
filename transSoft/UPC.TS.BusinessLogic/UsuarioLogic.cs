@@ -29,7 +29,7 @@ namespace UPC.TS.BusinessLogic
             this._clienteData = new ClienteData(_uow);
         }
 
-        public ResponseEntity IngresarSistema(USUARIO entidad)
+        public ResponseEntity IngresarSistema(SRV_USUARIO entidad)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace UPC.TS.BusinessLogic
             }
              
         }
-        public ResponseEntity AgregarUsuarioReserva(USUARIO usuario, CLIENTE cliente)
+        public ResponseEntity AgregarUsuarioReserva(SRV_USUARIO usuario, SRV_CLIENTE cliente)
         {
             using (TransactionScope tran = new TransactionScope()) { 
                 try {
