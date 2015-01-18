@@ -19,7 +19,7 @@ namespace UPC.TS.Web.Models
 
     public class TarifaModels
     {
-        public int CODTAR { get; set; }
+        public int CODTAR { get; set; } 
 
         [Display(Name = "Origen")]
         [Required(ErrorMessage = "Este campo es obligatorio")]
