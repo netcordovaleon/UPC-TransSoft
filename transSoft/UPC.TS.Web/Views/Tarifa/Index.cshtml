@@ -1,0 +1,141 @@
+﻿@model UPC.TS.Web.Models.TarifasModel
+
+@{
+    ViewBag.Title = "Mantenimiento de Tarifa";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">Filtro(s) Busqueda</div>
+    <div class="panel-body">
+
+        @using (Html.BeginForm("Index", "Tarifa", FormMethod.Post, new { @Id = "frmBuqTarifa", @class = "form-horizontal", role = "form" }))
+        {
+            <div class="row">
+                <div class="col-md-4">
+                    @Html.LabelFor(c => c.tarifa.ORITAR)
+                    @Html.DropDownListFor(c => c.tarifa.ORITAR, Model.tarifa.LIST_ORI, "Seleccione", new { @class = "form-control" })
+                </div>
+                <div class="col-md-4">
+                    @Html.LabelFor(c => c.tarifa.DESTAR)
+                    @Html.DropDownListFor(c => c.tarifa.DESTAR, Model.tarifa.LIST_ORI, "Seleccione", new { @class = "form-control" })
+                </div>
+                <div class="col-md-3">
+                    @Html.LabelFor(c => c.tarifa.CODESTTAR)
+                    @Html.DropDownListFor(c => c.tarifa.CODESTTAR, Model.tarifa.LIST_ESTTAR, "Seleccione", new { @class = "form-control" })    
+                </div>
+            </div>
+            <button id="btnBuscarTarifa" type="button" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp;Buscar</button>
+        }
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Tarifas</div>
+    <div class="panel-body">
+        <table id="tblTarifas" class="display upctbgrid" cellspacing="0" style="width:100%;">
+            <thead>
+                <tr>            
+                    <th style="width:5%;">&nbsp;</th>
+                    <th style="width:5%;">&nbsp;</th>
+                    <th style="width:5%;">&nbsp;</th>
+                    <th>Origen</th>
+                    <th>Destino</th>
+                    
+                    <th style="width:5%;">Precio</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.LIST_TARIFA)
+                {
+                    <tr>
+                        <td><button type="button" onclick='SeleccionarTarifa(@item.CODTAR)' class="btn btn-primary pull-right"><i class="fa fa-pencil"></i></button></td>
+                        <td><button type="button" onclick='EliminarTarifa(@item.CODTAR)' class="btn pull-right"><i class="fa fa-trash-o"></i></button></td>
+                        <td>
+                            @if (item.CODESTTAR == "P")
+                            {
+                                <button type="button" disabled onclick='PublicarTarifa(@item.CODTAR)' class="btn pull-right"><i class="fa fa-file"></i></button>    
+                            }
+                            else
+                            {
+                                <button type="button" onclick='PublicarTarifa(@item.CODTAR)' class="btn pull-right"><i class="fa fa-file"></i></button>    
+                            }
+                            
+                        </td>
+                        <td>@item.ORITAR</td>
+                        <td>@item.DESTAR</td>
+                         
+                        <td>@item.PRETAR</td>
+                        <td>@(item.CODESTTAR == "P" ? "Publicado" : "No publicado")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <br />
+        <button type="button" id="btnRegistroTarifa" class="btn btn-primary pull-right"><i class="fa fa-file"></i>Nuevo Registro</button>
+       
+    </div>
+</div>
+
+<div class="modal fade" id="pnlRegistroTarifa"></div>
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            $("#btnRegistroTarifa").click(function () { RegistrarPasajero(); });
+            $("#btnBuscarTarifa").click(function () { BuscarTarifa(); });
+        });
+
+        function SeleccionarTarifa(id) {
+            ModificarPasajero(id);
+        }
+
+
+        function EliminarTarifa(id) {
+            if (!confirm("Esta seguro que desea eliminar la tarifa")) return;
+            $.ajax({
+                url: '@Url.Action("EliminarTarifa", "Tarifa")',
+                type: 'POST',
+                async: true,
+                data: { id : id},
+                success: function (result) {
+                    showNotifyByData(result);
+                    document.forms[0].submit();
+                },
+                error: errorAjax
+            });
+        }
+
+        function PublicarTarifa(id){
+            if (!confirm("Esta seguro que desea publicar la tarifa")) return;
+            $.ajax({
+                url: '@Url.Action("PublicarTarifa", "Tarifa")',
+                type: 'POST',
+                async: true,
+                data: { id : id },
+                success: function (result) {
+                    showNotifyByData(result);
+                    document.forms[0].submit();
+                },
+                error: errorAjax
+            });
+        }
+
+        function BuscarTarifa() {
+            $("#frmBuqTarifa").data("validator").settings.ignore = "input, select";
+            document.forms[0].submit();
+        }
+
+        function RegistrarPasajero() {
+            $("#pnlRegistroTarifa").load('@Url.Action("RegistroTarifa", "Tarifa")').modal('toggle');
+        }
+
+        function ModificarPasajero(id) {
+            $("#pnlRegistroTarifa").load('@Url.Action("RegistroTarifa", "Tarifa")' + "?id=" + id).modal('toggle');
+        }
+
+</script>
+
+}

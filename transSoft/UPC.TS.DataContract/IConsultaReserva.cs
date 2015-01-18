@@ -5,14 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using UPC.TS.DataContract.Infraestructura;
 using UPC.TS.Infraestructure.Contratos;
-using UPC.TS.Infraestructure.Entidades;
 using UPC.TS.Entities;
 
 namespace UPC.TS.DataContract
 {
-    public interface IUsuario : IOperacionesCRUD<SRV_USUARIO> 
+    public interface IConsultaReserva
     {
-        bool IngresarSistema(SRV_USUARIO entidad);
-        bool ExisteUsuarioReg(SRV_USUARIO entidad); 
+        IEnumerable<SRV_VW_RESERVAS> ListarReservaPorUsuario(string CORCLI);
+        IEnumerable<SRV_VW_RESERVAS> ListarReservaPorUsuarioyReserva(int CODRES, string CORCLI);
     }
 }

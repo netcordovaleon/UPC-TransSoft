@@ -11,5 +11,5 @@ namespace UPC.TS.DataContract
     public interface IPasajero : IOperacionesCRUD<SRV_PASAJERO> 
     {
         IEnumerable<SRV_PASAJERO> ListarPasajeroPorReserva(int CODRES);
-    }
+    } 
 }

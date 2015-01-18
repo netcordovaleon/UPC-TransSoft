@@ -1,0 +1,87 @@
+﻿@model UPC.TS.Web.Models.TarifaModels
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">Registro de Tarifa</h4>
+        </div>
+        <div class="modal-body">
+
+                @using (Html.BeginForm("", "", FormMethod.Post, new { @Id = "frmRegTarifa", @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.HiddenFor(c => c.CODTAR)
+                    <div class="row">
+                        <div class="col-md-4">
+                            @Html.LabelFor(c => c.ORITAR)
+                            @Html.DropDownListFor(c => c.ORITAR, Model.LIST_ORI, "Seleccione", new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.ORITAR)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(c => c.DESTAR)
+                            @Html.DropDownListFor(c => c.DESTAR, Model.LIST_DES, "Seleccione", new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.DESTAR)
+                        </div>
+                    </div>
+                    @*<div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(c => c.CODTIPSER)
+                            @Html.TextBoxFor(c => c.CODTIPSER, new { @Class = "form-control" })
+                        </div>
+                    </div>*@
+                    @Html.HiddenFor(c => c.CODTIPSER, new { @Value = "1" })
+                    <div class="row">
+                        <div class="col-md-4">
+                            @Html.LabelFor(c => c.PRETAR)
+                            @Html.TextBoxFor(c => c.PRETAR, new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.PRETAR)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(c => c.CODESTTAR)
+                            @Html.DropDownListFor(c => c.CODESTTAR, Model.LIST_ESTTAR, "Seleccione", new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.CODESTTAR)
+                        </div>
+                    </div>
+                }
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            <button type="button" id="btnGrabarTarifa" class="btn btn-primary">Guardar</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnGrabarTarifa").click(function () { GrabarTarifa(); });
+    });
+
+    function GrabarTarifa(id) {
+        if (!formRegTarifaValido()) return;
+        if (!confirm("Esta seguro que desea registrar la tarifa")) return;
+
+        $.ajax({
+            url: '@Url.Action("GrabarTarifa", "Tarifa")',
+            type: 'POST',
+            async: true,
+            data: $("#frmRegTarifa").serialize(),
+            success: function (result) {
+                showNotifyByData(result);
+                document.forms[0].submit();
+            },
+            error: errorAjax
+        });
+    }
+
+
+    function formRegTarifaValido() {
+        if (!$("#frmRegTarifa").valid())
+            return false;
+        else
+            return true;
+    }
+
+</script>

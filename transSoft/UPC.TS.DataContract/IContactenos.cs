@@ -10,6 +10,6 @@ namespace UPC.TS.DataContract
 {
     public interface IContactenos : IOperacionesCRUD<contactenos>
     {
-       bool grabarContactenos(contactenos entity);
+       bool grabarContactenos(contactenos entity); 
     }
 }

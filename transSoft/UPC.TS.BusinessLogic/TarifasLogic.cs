@@ -31,8 +31,12 @@ namespace UPC.TS.BusinessLogic
             {
                 if (entidad.CODTAR.Equals(0))
                     _tarifasData.Registrar(entidad);
-                else
-                    _tarifasData.Actualizar(entidad);
+                else {
+                    var tarifa = _tarifasData.BuscarPorId(entidad.CODTAR);
+                    tarifa.PRETAR = entidad.PRETAR;
+                    tarifa.CODESTTAR = entidad.CODESTTAR;
+                    _tarifasData.Actualizar(tarifa);
+                }
                 return new ResponseEntity("Se grabo los datos de la tarifa satisfactoriamente", true);
             }
             catch (Exception)

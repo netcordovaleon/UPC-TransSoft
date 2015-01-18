@@ -1,0 +1,79 @@
+﻿@model UPC.TS.Web.Models.ReservaModels
+@{
+    ViewBag.Title = "Anular Reserva";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">Filtro(s) Busqueda</div>
+    <div class="panel-body">
+
+@using (Html.BeginForm("AnularReserva", "Reserva", FormMethod.Post, new { @Id="frmBuqItinerario", @class = "form-horizontal", role = "form" }))
+    {
+        <div class="row">
+            <div class="col-md-3">
+                @Html.LabelFor(c => c.filtros.CODRES)
+                @Html.TextBoxFor(c => c.filtros.CODRES, new { @class = "form-control" })
+            </div>
+        </div>
+        <button id="btnBuscarReserva" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp;Buscar</button>
+    }
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Reservas activas del Usuario</div>
+    <div class="panel-body">
+        <table id="tblProgramacion" class="display upctbgrid" cellspacing="0" style="width:100%;">
+            <thead>
+                <tr>
+                    <th class="center" style="width:5%;">&nbsp;</th>
+                    <th>Origen</th>
+                    <th>Destino</th>
+                    <th>Fecha Reserva</th>
+                    <th>Fecha Salida</th>
+                    <th>Horario</th>
+                    <th>Tipo Viaje</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.listaReservasVista)
+                {
+                    <tr>
+                        <td><a class="btn btn" href="javascript:void(0);" onclick="javascript: AnularReserva(@item.CODRES);"><i class="fa fa-ban"></i></a></td>
+                        <td>@item.ORITAR</td>
+                        <td>@item.DESTAR</td>
+                        <td>@item.FECRES</td>
+                        <td>@item.FECSALPRO</td>
+                        <td>@item.HORSALPRO</td>
+                        <td>@item.TIPVIA</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts {
+
+    <script type="text/javascript" language="javascript">
+
+        function AnularReserva(CODRES) {
+            if (!confirm("¿Esta seguro que desea anular esta reserva?")) return;
+            $.ajax({
+                url: '@Url.Action("AnularReservaActiva", "Reserva")',
+                type: 'POST',
+                async: true,
+                data: { 'CODRES': CODRES },
+                success: function (result) {
+                    if (result.Success) {
+                        document.location.href = '@Url.Action("AnularReserva","Reserva")';
+                    } else {
+                        showNotifyByData(result);
+                    }
+                },
+                error: errorAjax
+            });
+        }
+
+    </script>
+}

@@ -1,0 +1,101 @@
+﻿@model UPC.TS.Web.Models.PasajeroModels
+
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Modificacion de Datos</h4>
+            </div>
+            <div class="modal-body">
+                
+                @using (Html.BeginForm("", "", FormMethod.Post, new { @Id = "frmModificarPasajero", @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.HiddenFor(c => c.CODPAS)
+                    @Html.HiddenFor(c => c.CODRES)
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(c => c.TIPDOC)
+                            @Html.DropDownListFor(c => c.TIPDOC, Model.LIST_TIPDOC, "Seleccione", new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.TIPDOC)
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(c => c.NUMDOC)
+                            @Html.TextBoxFor(c => c.NUMDOC, new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.NUMDOC)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(c => c.SEXPAS)
+                            @Html.DropDownListFor(c => c.SEXPAS, Model.LIST_SEXO, "Seleccione", new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.SEXPAS)
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(c => c.NOMPAS)
+                            @Html.TextBoxFor(c => c.NOMPAS, new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.NOMPAS)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(c => c.APEPPAS)
+                            @Html.TextBoxFor(c => c.APEPPAS, new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.APEPPAS)
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(c => c.APEMPAS)
+                            @Html.TextBoxFor(c => c.APEMPAS, new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.APEMPAS)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.LabelFor(c => c.DIRPAS)
+                            @Html.TextBoxFor(c => c.DIRPAS, new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.DIRPAS)
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.LabelFor(c => c.TELPAS)
+                            @Html.TextBoxFor(c => c.TELPAS, new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.TELPAS)
+                        </div>
+                        <div class="col-md-6">
+                            @Html.LabelFor(c => c.CELPAS)
+                            @Html.TextBoxFor(c => c.CELPAS, new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.CELPAS)
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnModificarPasajero" class="btn btn-primary">Guardar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#btnModificarPasajero").click(function () { guardarDatosPasajero(); });
+    });
+
+    function guardarDatosPasajero() { 
+        $.ajax({
+            url: '@Url.Action("GrabarPasajero", "Pasajero")',
+            type: 'POST',
+            async: true,
+            data: $("#frmModificarPasajero").serialize(),
+            success: function (result) {
+                showNotifyByData(result);
+                SeleccionarReserva('@Model.CODRES');
+            },
+            error: errorAjax
+        });
+    }
+
+</script>
