@@ -11,6 +11,7 @@ namespace UPC.TS.DataContract
 {
     public interface IConsultaReserva
     {
+        IEnumerable<SRV_VW_RESERVAS> ObtenerReservasUsuario(string CORCLI, int? codReserva = null);
         IEnumerable<SRV_VW_RESERVAS> ListarReservaPorUsuario(string CORCLI);
         IEnumerable<SRV_VW_RESERVAS> ListarReservaPorUsuarioyReserva(int CODRES, string CORCLI);
     }

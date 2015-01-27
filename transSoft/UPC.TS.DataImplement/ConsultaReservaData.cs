@@ -16,6 +16,13 @@ namespace UPC.TS.DataImplement
     {
         public ConsultaReservaData(IUnitOfWork unit) : base(unit) { }
 
+        public IEnumerable<SRV_VW_RESERVAS> ObtenerReservasUsuario(string CORCLI, int? codReserva = null)
+        {
+            if (codReserva.HasValue)
+                return this.GetMany(c => c.CORCLI.Equals(CORCLI) && c.CODRES == codReserva);
+            return this.GetMany(c => c.CORCLI.Equals(CORCLI));
+        }
+
         public IEnumerable<SRV_VW_RESERVAS> ListarReservaPorUsuario(string CORCLI)
         {
             return this.GetMany(c => c.CORCLI.Equals(CORCLI) && c.ESTTRAN == EstadoTranReserva.RESERVADO);

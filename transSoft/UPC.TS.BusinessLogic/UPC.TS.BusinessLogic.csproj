@@ -41,15 +41,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClienteLogic.cs" />
+    <Compile Include="CompraLogic.cs" />
     <Compile Include="ConsultaAsientosDESLogic.cs" />
     <Compile Include="ConsultaAsientosORILogic.cs" />
+    <Compile Include="ConsultaPersonalLogic.cs" />
     <Compile Include="ConsultaProgramacionLogic.cs" />
     <Compile Include="ConsultaReservaLogic.cs" />
     <Compile Include="ContactenosLogic.cs" />
     <Compile Include="PasajeroLogic.cs" />
+    <Compile Include="PersonalLogic.cs" />
+    <Compile Include="PromocionLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReservaLogic.cs" />
     <Compile Include="TarifasLogic.cs" />
+    <Compile Include="TipoTarjetaLogic.cs" />
     <Compile Include="UsuarioLogic.cs" />
   </ItemGroup>
   <ItemGroup>

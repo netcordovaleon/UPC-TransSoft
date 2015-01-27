@@ -42,12 +42,14 @@
             <PropertyRef Name="CODCOM" />
           </Key>
           <Property Name="CODCOM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CODCON" Type="varchar" MaxLength="10" />
           <Property Name="FECCOM" Type="datetime" />
-          <Property Name="MONTO" Type="decimal" Precision="19" Scale="2" />
+          <Property Name="SUBTOT" Type="decimal" Precision="19" Scale="2" />
+          <Property Name="VALIGV" Type="decimal" Precision="19" Scale="2" />
+          <Property Name="MONTOT" Type="decimal" Precision="19" Scale="2" />
           <Property Name="CODRES" Type="int" />
-          <Property Name="CODCUP" Type="int" />
-          <Property Name="MEDPAGO" Type="char" MaxLength="1" />
           <Property Name="CODTARJETA" Type="int" />
+          <Property Name="ESTREG" Type="char" MaxLength="1" />
         </EntityType>
         <EntityType Name="SRV_CUPONES">
           <Key>
@@ -151,10 +153,12 @@
           </Key>
           <Property Name="CODTARJETA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NUMTAR" Type="varchar" MaxLength="50" />
-          <Property Name="CODTAR" Type="varchar" MaxLength="10" />
+          <Property Name="CODVER" Type="varchar" MaxLength="10" />
+          <Property Name="NOMTIT" Type="varchar" MaxLength="10" />
+          <Property Name="APETIT" Type="varchar" MaxLength="10" />
+          <Property Name="FECEXP" Type="varchar" MaxLength="10" />
           <Property Name="ESTREG" Type="char" MaxLength="1" />
           <Property Name="CODTIPTAR" Type="int" />
-          <Property Name="CODCLI" Type="int" />
         </EntityType>
         <EntityType Name="SRV_TIPO_SERVICIO">
           <Key>
@@ -172,6 +176,7 @@
           <Property Name="CODTIPTAR" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NOMTIPTAR" Type="varchar" MaxLength="50" />
           <Property Name="ESTREG" Type="char" MaxLength="1" />
+          <Property Name="MEDPAG" Type="char" MaxLength="1" />
         </EntityType>
         <EntityType Name="SRV_USUARIO">
           <Key>
@@ -216,6 +221,20 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.SRV_VW_ASIENTOS_RESERVADOSORI
           <Property Name="NUMASI" Type="varchar" MaxLength="20" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'db_qmadera.dbo.SRV_VW_CONSULTA_PERSONAL' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="SRV_VW_CONSULTA_PERSONAL">
+          <Key>
+            <PropertyRef Name="CODPER" />
+            <PropertyRef Name="CODUSU" />
+          </Key>
+          <Property Name="CODPER" Type="int" Nullable="false" />
+          <Property Name="CODUSU" Type="int" Nullable="false" />
+          <Property Name="DNIPER" Type="char" MaxLength="8" />
+          <Property Name="NOMPER" Type="varchar" MaxLength="50" />
+          <Property Name="APEPER" Type="varchar" MaxLength="50" />
+          <Property Name="LOGUSU" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'db_qmadera.dbo.SRV_VW_CONSULTA_PROGRAMACION' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="SRV_VW_CONSULTA_PROGRAMACION">
           <Key>
@@ -247,6 +266,42 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.SRV_VW_RESERVAS' no tiene def
           <Property Name="CORCLI" Type="varchar" MaxLength="50" />
           <Property Name="ESTTRAN" Type="char" MaxLength="1" />
         </EntityType>
+        <Association Name="R_12">
+          <End Role="SRV_RESERVA" Type="Self.SRV_RESERVA" Multiplicity="0..1" />
+          <End Role="SRV_COMPRA" Type="Self.SRV_COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SRV_RESERVA">
+              <PropertyRef Name="CODRES" />
+            </Principal>
+            <Dependent Role="SRV_COMPRA">
+              <PropertyRef Name="CODRES" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_16">
+          <End Role="SRV_TIPO_TARJETA" Type="Self.SRV_TIPO_TARJETA" Multiplicity="0..1" />
+          <End Role="SRV_TARJETA" Type="Self.SRV_TARJETA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SRV_TIPO_TARJETA">
+              <PropertyRef Name="CODTIPTAR" />
+            </Principal>
+            <Dependent Role="SRV_TARJETA">
+              <PropertyRef Name="CODTIPTAR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_18">
+          <End Role="SRV_TARJETA" Type="Self.SRV_TARJETA" Multiplicity="0..1" />
+          <End Role="SRV_COMPRA" Type="Self.SRV_COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SRV_TARJETA">
+              <PropertyRef Name="CODTARJETA" />
+            </Principal>
+            <Dependent Role="SRV_COMPRA">
+              <PropertyRef Name="CODTARJETA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="UPCEntitiesBDStoreContainer">
           <EntitySet Name="contactenos" EntityType="Self.contactenos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SRV_BUS" EntityType="Self.SRV_BUS" Schema="dbo" store:Type="Tables" />
@@ -279,6 +334,16 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.SRV_VW_RESERVAS' no tiene def
     [SRV_VW_ASIENTOS_RESERVADOSORI].[NUMASI] AS [NUMASI]
     FROM [dbo].[SRV_VW_ASIENTOS_RESERVADOSORI] AS [SRV_VW_ASIENTOS_RESERVADOSORI]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="SRV_VW_CONSULTA_PERSONAL" EntityType="Self.SRV_VW_CONSULTA_PERSONAL" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SRV_VW_CONSULTA_PERSONAL].[CODPER] AS [CODPER], 
+    [SRV_VW_CONSULTA_PERSONAL].[CODUSU] AS [CODUSU], 
+    [SRV_VW_CONSULTA_PERSONAL].[DNIPER] AS [DNIPER], 
+    [SRV_VW_CONSULTA_PERSONAL].[NOMPER] AS [NOMPER], 
+    [SRV_VW_CONSULTA_PERSONAL].[APEPER] AS [APEPER], 
+    [SRV_VW_CONSULTA_PERSONAL].[LOGUSU] AS [LOGUSU]
+    FROM [dbo].[SRV_VW_CONSULTA_PERSONAL] AS [SRV_VW_CONSULTA_PERSONAL]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="SRV_VW_CONSULTA_PROGRAMACION" EntityType="Self.SRV_VW_CONSULTA_PROGRAMACION" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [SRV_VW_CONSULTA_PROGRAMACION].[CODPRO] AS [CODPRO], 
@@ -304,6 +369,18 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.SRV_VW_RESERVAS' no tiene def
     [SRV_VW_RESERVAS].[ESTTRAN] AS [ESTTRAN]
     FROM [dbo].[SRV_VW_RESERVAS] AS [SRV_VW_RESERVAS]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="R_12" Association="Self.R_12">
+            <End Role="SRV_RESERVA" EntitySet="SRV_RESERVA" />
+            <End Role="SRV_COMPRA" EntitySet="SRV_COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="R_16" Association="Self.R_16">
+            <End Role="SRV_TIPO_TARJETA" EntitySet="SRV_TIPO_TARJETA" />
+            <End Role="SRV_TARJETA" EntitySet="SRV_TARJETA" />
+          </AssociationSet>
+          <AssociationSet Name="R_18" Association="Self.R_18">
+            <End Role="SRV_TARJETA" EntitySet="SRV_TARJETA" />
+            <End Role="SRV_COMPRA" EntitySet="SRV_COMPRA" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -331,6 +408,19 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.SRV_VW_RESERVAS' no tiene def
           <EntitySet Name="SRV_VW_CONSULTA_PROGRAMACION" EntityType="UPCEntitiesBD.SRV_VW_CONSULTA_PROGRAMACION" />
           <EntitySet Name="SRV_VW_RESERVAS" EntityType="UPCEntitiesBD.SRV_VW_RESERVAS" />
           <EntitySet Name="SRV_TARIFA" EntityType="UPCEntitiesBD.SRV_TARIFA" />
+          <EntitySet Name="SRV_VW_CONSULTA_PERSONAL" EntityType="UPCEntitiesBD.SRV_VW_CONSULTA_PERSONAL" />
+          <AssociationSet Name="R_12" Association="UPCEntitiesBD.R_12">
+            <End Role="SRV_RESERVA" EntitySet="SRV_RESERVA" />
+            <End Role="SRV_COMPRA" EntitySet="SRV_COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="R_18" Association="UPCEntitiesBD.R_18">
+            <End Role="SRV_TARJETA" EntitySet="SRV_TARJETA" />
+            <End Role="SRV_COMPRA" EntitySet="SRV_COMPRA" />
+          </AssociationSet>
+          <AssociationSet Name="R_16" Association="UPCEntitiesBD.R_16">
+            <End Role="SRV_TIPO_TARJETA" EntitySet="SRV_TIPO_TARJETA" />
+            <End Role="SRV_TARJETA" EntitySet="SRV_TARJETA" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="contactenos">
           <Key>
@@ -385,6 +475,13 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.SRV_VW_RESERVAS' no tiene def
           <Property Name="CODCUP" Type="Int32" />
           <Property Name="MEDPAGO" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="CODTARJETA" Type="Int32" />
+          <Property Name="CODCON" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="SUBTOT" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="VALIGV" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="MONTOT" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="ESTREG" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="SRV_RESERVA" Relationship="UPCEntitiesBD.R_12" FromRole="SRV_COMPRA" ToRole="SRV_RESERVA" />
+          <NavigationProperty Name="SRV_TARJETA" Relationship="UPCEntitiesBD.R_18" FromRole="SRV_COMPRA" ToRole="SRV_TARJETA" />
         </EntityType>
         <EntityType Name="SRV_CUPONES">
           <Key>
@@ -469,6 +566,7 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.SRV_VW_RESERVAS' no tiene def
           <Property Name="CODCLI" Type="Int32" />
           <Property Name="CODPRO" Type="Int32" />
           <Property Name="CODPRODES" Type="Int32" />
+          <NavigationProperty Name="SRV_COMPRA" Relationship="UPCEntitiesBD.R_12" FromRole="SRV_RESERVA" ToRole="SRV_COMPRA" />
         </EntityType>
         <EntityType Name="SRV_TARJETA">
           <Key>
@@ -480,6 +578,12 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.SRV_VW_RESERVAS' no tiene def
           <Property Name="ESTREG" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="CODTIPTAR" Type="Int32" />
           <Property Name="CODCLI" Type="Int32" />
+          <Property Name="CODVER" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NOMTIT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="APETIT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="FECEXP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SRV_COMPRA" Relationship="UPCEntitiesBD.R_18" FromRole="SRV_TARJETA" ToRole="SRV_COMPRA" />
+          <NavigationProperty Name="SRV_TIPO_TARJETA" Relationship="UPCEntitiesBD.R_16" FromRole="SRV_TARJETA" ToRole="SRV_TIPO_TARJETA" />
         </EntityType>
         <EntityType Name="SRV_TIPO_SERVICIO">
           <Key>
@@ -497,6 +601,8 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.SRV_VW_RESERVAS' no tiene def
           <Property Name="CODTIPTAR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NOMTIPTAR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ESTREG" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="MEDPAG" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="SRV_TARJETA" Relationship="UPCEntitiesBD.R_16" FromRole="SRV_TIPO_TARJETA" ToRole="SRV_TARJETA" />
         </EntityType>
         <EntityType Name="SRV_USUARIO">
           <Key>
@@ -566,6 +672,54 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.SRV_VW_RESERVAS' no tiene def
           <Property Name="CODTIPSER" Type="Int32" />
           <Property Name="CODESTTAR" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>
+        <EntityType Name="SRV_VW_CONSULTA_PERSONAL">
+          <Key>
+            <PropertyRef Name="CODPER" />
+            <PropertyRef Name="CODUSU" />
+          </Key>
+          <Property Name="CODPER" Type="Int32" Nullable="false" />
+          <Property Name="CODUSU" Type="Int32" Nullable="false" />
+          <Property Name="DNIPER" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="NOMPER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="APEPER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LOGUSU" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="R_12">
+          <End Type="UPCEntitiesBD.SRV_RESERVA" Role="SRV_RESERVA" Multiplicity="0..1" />
+          <End Type="UPCEntitiesBD.SRV_COMPRA" Role="SRV_COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SRV_RESERVA">
+              <PropertyRef Name="CODRES" />
+            </Principal>
+            <Dependent Role="SRV_COMPRA">
+              <PropertyRef Name="CODRES" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_18">
+          <End Type="UPCEntitiesBD.SRV_TARJETA" Role="SRV_TARJETA" Multiplicity="0..1" />
+          <End Type="UPCEntitiesBD.SRV_COMPRA" Role="SRV_COMPRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SRV_TARJETA">
+              <PropertyRef Name="CODTARJETA" />
+            </Principal>
+            <Dependent Role="SRV_COMPRA">
+              <PropertyRef Name="CODTARJETA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_16">
+          <End Type="UPCEntitiesBD.SRV_TIPO_TARJETA" Role="SRV_TIPO_TARJETA" Multiplicity="0..1" />
+          <End Type="UPCEntitiesBD.SRV_TARJETA" Role="SRV_TARJETA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SRV_TIPO_TARJETA">
+              <PropertyRef Name="CODTIPTAR" />
+            </Principal>
+            <Dependent Role="SRV_TARJETA">
+              <PropertyRef Name="CODTIPTAR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -621,11 +775,13 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.SRV_VW_RESERVAS' no tiene def
           <EntitySetMapping Name="SRV_COMPRA">
             <EntityTypeMapping TypeName="UPCEntitiesBD.SRV_COMPRA">
               <MappingFragment StoreEntitySet="SRV_COMPRA">
+                <ScalarProperty Name="ESTREG" ColumnName="ESTREG" />
+                <ScalarProperty Name="MONTOT" ColumnName="MONTOT" />
+                <ScalarProperty Name="VALIGV" ColumnName="VALIGV" />
+                <ScalarProperty Name="SUBTOT" ColumnName="SUBTOT" />
+                <ScalarProperty Name="CODCON" ColumnName="CODCON" />
                 <ScalarProperty Name="CODTARJETA" ColumnName="CODTARJETA" />
-                <ScalarProperty Name="MEDPAGO" ColumnName="MEDPAGO" />
-                <ScalarProperty Name="CODCUP" ColumnName="CODCUP" />
                 <ScalarProperty Name="CODRES" ColumnName="CODRES" />
-                <ScalarProperty Name="MONTO" ColumnName="MONTO" />
                 <ScalarProperty Name="FECCOM" ColumnName="FECCOM" />
                 <ScalarProperty Name="CODCOM" ColumnName="CODCOM" />
               </MappingFragment>
@@ -725,10 +881,12 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.SRV_VW_RESERVAS' no tiene def
           <EntitySetMapping Name="SRV_TARJETA">
             <EntityTypeMapping TypeName="UPCEntitiesBD.SRV_TARJETA">
               <MappingFragment StoreEntitySet="SRV_TARJETA">
-                <ScalarProperty Name="CODCLI" ColumnName="CODCLI" />
+                <ScalarProperty Name="FECEXP" ColumnName="FECEXP" />
+                <ScalarProperty Name="APETIT" ColumnName="APETIT" />
+                <ScalarProperty Name="NOMTIT" ColumnName="NOMTIT" />
+                <ScalarProperty Name="CODVER" ColumnName="CODVER" />
                 <ScalarProperty Name="CODTIPTAR" ColumnName="CODTIPTAR" />
                 <ScalarProperty Name="ESTREG" ColumnName="ESTREG" />
-                <ScalarProperty Name="CODTAR" ColumnName="CODTAR" />
                 <ScalarProperty Name="NUMTAR" ColumnName="NUMTAR" />
                 <ScalarProperty Name="CODTARJETA" ColumnName="CODTARJETA" />
               </MappingFragment>
@@ -747,6 +905,7 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.SRV_VW_RESERVAS' no tiene def
           <EntitySetMapping Name="SRV_TIPO_TARJETA">
             <EntityTypeMapping TypeName="UPCEntitiesBD.SRV_TIPO_TARJETA">
               <MappingFragment StoreEntitySet="SRV_TIPO_TARJETA">
+                <ScalarProperty Name="MEDPAG" ColumnName="MEDPAG" />
                 <ScalarProperty Name="ESTREG" ColumnName="ESTREG" />
                 <ScalarProperty Name="NOMTIPTAR" ColumnName="NOMTIPTAR" />
                 <ScalarProperty Name="CODTIPTAR" ColumnName="CODTIPTAR" />
@@ -821,6 +980,18 @@ advertencia 6002: La tabla o vista 'db_qmadera.dbo.SRV_VW_RESERVAS' no tiene def
                 <ScalarProperty Name="DESTAR" ColumnName="DESTAR" />
                 <ScalarProperty Name="ORITAR" ColumnName="ORITAR" />
                 <ScalarProperty Name="CODTAR" ColumnName="CODTAR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SRV_VW_CONSULTA_PERSONAL">
+            <EntityTypeMapping TypeName="UPCEntitiesBD.SRV_VW_CONSULTA_PERSONAL">
+              <MappingFragment StoreEntitySet="SRV_VW_CONSULTA_PERSONAL">
+                <ScalarProperty Name="LOGUSU" ColumnName="LOGUSU" />
+                <ScalarProperty Name="APEPER" ColumnName="APEPER" />
+                <ScalarProperty Name="NOMPER" ColumnName="NOMPER" />
+                <ScalarProperty Name="DNIPER" ColumnName="DNIPER" />
+                <ScalarProperty Name="CODUSU" ColumnName="CODUSU" />
+                <ScalarProperty Name="CODPER" ColumnName="CODPER" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

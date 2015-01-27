@@ -19,7 +19,7 @@ namespace UPC.TS.Web.Models
 
     public class TarifaModels
     {
-        public int CODTAR { get; set; } 
+        public int CODTAR { get; set; }
 
         [Display(Name = "Origen")]
         [Required(ErrorMessage = "Este campo es obligatorio")]
@@ -28,6 +28,7 @@ namespace UPC.TS.Web.Models
         [Required(ErrorMessage = "Este campo es obligatorio")]
         public string DESTAR { get; set; }
         [Display(Name = "Precio")]
+        [RegularExpression(@"^\d+(?:\.\d{1,2})?$", ErrorMessage = "Ingrese un número valido ")]
         [Required(ErrorMessage = "Este campo es obligatorio")]
         public Nullable<decimal> PRETAR { get; set; }
         public string ESTREG { get; set; }

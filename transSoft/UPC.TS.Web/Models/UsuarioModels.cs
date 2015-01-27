@@ -9,10 +9,11 @@ namespace UPC.TS.Web.Models
     public class UsuarioModels
     {
         public int CODUSU { get; set; }
-        [Display(Name = "Ingrese password")]
+        [Display(Name = "Ingrese contraseña")]
         [Required(ErrorMessage = "Este campo es obligatorio")]
         public string CLAUSU { get; set; }
-        [Display(Name = "Repita Password")]
+        [Display(Name = "Repita contraseña")]
+        [Compare("CLAUSU", ErrorMessage = "Las contraseñas deben coincidir")]
         public string CLAUSU_REP { get; set; }
         public string ESTREG { get; set; }
         [Display(Name="Ingrese correo electronico")]

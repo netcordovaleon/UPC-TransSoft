@@ -13,6 +13,6 @@ namespace UPC.TS.DataContract
     public interface IUsuario : IOperacionesCRUD<SRV_USUARIO> 
     {
         bool IngresarSistema(SRV_USUARIO entidad);
-        bool ExisteUsuarioReg(SRV_USUARIO entidad); 
+        bool ExisteUsuarioReg(SRV_USUARIO entidad);
     }
 }

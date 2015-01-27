@@ -27,14 +27,20 @@
 
                     @if (Session[UPC.TS.Infraestructure.Constantes.Sesiones.sessionUsuarioLog] != null)
                     {
-                        if (Session[UPC.TS.Infraestructure.Constantes.Sesiones.sessionTipoPerfil] == "USU") { 
+                        if (Session[UPC.TS.Infraestructure.Constantes.Sesiones.sessionTipoPerfil] == "USU")
+                        {
+                            <li>@Html.ActionLink("Pagar Reserva", "PagarReservas", "Reserva")</li>
                             <li>@Html.ActionLink("Anular Reserva", "AnularReserva", "Reserva")</li>
                             <li>@Html.ActionLink("Mantenimiento Pasajero", "BuscarReservas", "Pasajero")</li>                        
                         }
                         else { 
                             <li>@Html.ActionLink("Ges. Tarifa", "Index", "Tarifa")</li>
+                            <li>@Html.ActionLink("Ges. Promoción", "Index", "Promocion")</li>
+                            <li>@Html.ActionLink("Ges. Personal", "Index", "Personal")</li>
+                            <li>@Html.ActionLink("Ges. Medio Pago", "Index", "TipoTarjeta")</li>
+                            <li>@Html.ActionLink("Proyección de Ventas", "ProyeccionDeVentas", "Reportes")</li>
                         }
-                        
+
 
                     }
 

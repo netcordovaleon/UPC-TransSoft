@@ -118,6 +118,9 @@
     <Compile Include="SRV_VW_ASIENTOS_RESERVADOSORI.cs">
       <DependentUpon>model.tt</DependentUpon>
     </Compile>
+    <Compile Include="SRV_VW_CONSULTA_PERSONAL.cs">
+      <DependentUpon>model.tt</DependentUpon>
+    </Compile>
     <Compile Include="SRV_VW_CONSULTA_PROGRAMACION.cs">
       <DependentUpon>model.tt</DependentUpon>
     </Compile>

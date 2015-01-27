@@ -25,10 +25,11 @@ namespace UPC.TS.Infraestructure.Entidades
             this.Title = getTitle(Infraestructure.Constantes.TypeResponse.error);
         }
 
-        public ResponseEntity(string _message, bool _success = false)
+        public ResponseEntity(string _message, bool _success = false, object _data = null)
         {
             this.Message = _message;
             this.Success = _success;
+            this.Data = _data;
             if (_success)
             {
                 this.TypeResponse = Infraestructure.Constantes.TypeResponse.success.ToString();

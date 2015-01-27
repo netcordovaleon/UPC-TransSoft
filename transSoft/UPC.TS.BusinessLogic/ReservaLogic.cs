@@ -21,13 +21,21 @@ namespace UPC.TS.BusinessLogic
         private readonly IUnitOfWork _uow;
         private readonly IReserva _reservaData;
         private readonly IPasajero _pasajeroData;
+        private readonly ICompra _compraData;
+        private readonly ITarjeta _tarjetaData;
         public ReservaLogic()
         {
             this._uow = new UnitOfWork();
             this._reservaData = new ReservaData(_uow);
             this._pasajeroData = new PasajeroData(_uow);
+            this._compraData = new CompraData(_uow);
+            this._tarjetaData = new TarjetaData(_uow);
         }
 
+        public SRV_RESERVA BuscarPorId(int id)
+        {
+            return this._reservaData.BuscarPorId(id);
+        }
 
         public ResponseEntity RegistrarReserva(List<SRV_PASAJERO> listPasajero, SRV_RESERVA reserva)
         {
@@ -60,6 +68,39 @@ namespace UPC.TS.BusinessLogic
             }
             catch (Exception)
             {
+                return new ResponseEntity(Response.ErrorGeneral);
+            }
+        }
+
+        public ResponseEntity PagarReserva(int codReserva, SRV_TARJETA tarjeta, SRV_COMPRA compra)
+        {
+            try
+            {
+                using(var scope = new TransactionScope())
+                {
+                    var reserva = _reservaData.BuscarPorId(codReserva);
+
+                    if(reserva.ESTTRAN != EstadoTranReserva.RESERVADO)
+                        return new ResponseEntity("La reserva no se encuentra en estado RESERVADO");
+
+                    var tarjetaReg = this._tarjetaData.Registrar(tarjeta);
+
+                    compra.CODTARJETA = tarjetaReg.CODTARJETA;
+                    compra.CODCON = DateTime.Now.ToString("mmyy") + "PE" + reserva.CODRES.ToString("000");
+
+                    var compraReg = this._compraData.Registrar(compra);
+
+                    reserva.ESTTRAN = EstadoTranReserva.PAGADO;
+                    _reservaData.Actualizar(reserva);
+
+                    scope.Complete();
+                }
+                
+                return new ResponseEntity("Se realizo el pago satisfactoriamente", true, compra.CODCON);
+            }
+            catch (Exception)
+            {
+
                 return new ResponseEntity(Response.ErrorGeneral);
             }
         }

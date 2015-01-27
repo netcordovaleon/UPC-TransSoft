@@ -26,6 +26,10 @@
         <EntityTypeShape EntityType="UPCEntitiesBD.SRV_VW_CONSULTA_PROGRAMACION" Width="1.5" PointX="11.75" PointY="6.75" />
         <EntityTypeShape EntityType="UPCEntitiesBD.SRV_VW_RESERVAS" Width="1.5" PointX="11.75" PointY="10.75" />
         <EntityTypeShape EntityType="UPCEntitiesBD.SRV_TARIFA" Width="1.5" PointX="7.375" PointY="13.75" />
+        <EntityTypeShape EntityType="UPCEntitiesBD.SRV_VW_CONSULTA_PERSONAL" Width="1.5" PointX="14.375" PointY="0.75" />
+        <AssociationConnector Association="UPCEntitiesBD.R_12" />
+        <AssociationConnector Association="UPCEntitiesBD.R_18" />
+        <AssociationConnector Association="UPCEntitiesBD.R_16" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

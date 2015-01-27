@@ -177,11 +177,16 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Configuration\Unity.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DescuentoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PasajeroController.cs" />
+    <Compile Include="Controllers\PersonalController.cs" />
+    <Compile Include="Controllers\PromocionController.cs" />
+    <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Controllers\ReservaController.cs" />
     <Compile Include="Controllers\SeguridadController.cs" />
     <Compile Include="Controllers\TarifaController.cs" />
+    <Compile Include="Controllers\TipoTarjetaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -190,13 +195,24 @@
     <Compile Include="Models\ContactenosModels.cs" />
     <Compile Include="Models\FiltrosReservaModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\PagarReservaModels.cs" />
     <Compile Include="Models\PasajeroModels.cs" />
+    <Compile Include="Models\PersonalModels.cs" />
+    <Compile Include="Models\PromocionModels.cs" />
+    <Compile Include="Models\ReporteVentaModels.cs" />
     <Compile Include="Models\ReservaModels.cs" />
     <Compile Include="Models\ReservaUsuarioModels.cs" />
     <Compile Include="Models\ReservaVistaModels.cs" />
     <Compile Include="Models\TarifaModels.cs" />
+    <Compile Include="Models\TipoTarjetaModels.cs" />
     <Compile Include="Models\UsuarioModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reportes\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -217,6 +233,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Reportes\WebForm1.aspx" />
     <Content Include="Scripts\bootstrap-datepicker.es.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -305,6 +322,18 @@
     <Content Include="Views\Pasajero\_ModPasajero.cshtml" />
     <Content Include="Views\Tarifa\Index.cshtml" />
     <Content Include="Views\Tarifa\_RegistroTarifa.cshtml" />
+    <Content Include="Views\Personal\Index.cshtml" />
+    <Content Include="Views\Personal\_EditarPersonal.cshtml" />
+    <Content Include="Views\Personal\_RegistroPersonal.cshtml" />
+    <Content Include="Views\Promocion\Index.cshtml" />
+    <Content Include="Views\Promocion\_RegistroPromocion.cshtml" />
+    <Content Include="Views\Reportes\ProyeccionDeVentas.cshtml" />
+    <Content Include="Views\Reserva\PagarReserva.cshtml" />
+    <Content Include="Views\Reserva\PagarReservas.cshtml" />
+    <Content Include="Views\Reserva\_RegistrarPago.cshtml" />
+    <Content Include="Views\TipoTarjeta\Index.cshtml" />
+    <Content Include="Views\TipoTarjeta\_EditarTipoTarjeta.cshtml" />
+    <Content Include="Views\TipoTarjeta\_RegistroTipoTarjeta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -333,6 +362,9 @@
       <Project>{f57758b2-99d3-4c55-8bb9-0a38d6ee2edd}</Project>
       <Name>UPC.TS.Infraestructure</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reportes\rptProyeccionVenta.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

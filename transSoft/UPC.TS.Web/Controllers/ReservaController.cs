@@ -25,6 +25,9 @@ namespace UPC.TS.Web.Controllers
         IConsultaAsientosORILogic _consultaAsientosORILogic;
         IConsultaAsientosDESLogic _consultaAsientosDESLogic;
         IConsultaReservaLogic _consultaReservaLogic;
+        IPasajeroLogic _pasajeroLogic;
+        ITipoTarjetaLogic _tipoTarjetaLogic;
+
         public ReservaController()
         {
             
@@ -35,6 +38,8 @@ namespace UPC.TS.Web.Controllers
             this._consultaAsientosORILogic = Configuration.Unity.Container.Resolve<IConsultaAsientosORILogic>();
             this._consultaAsientosDESLogic = Configuration.Unity.Container.Resolve<IConsultaAsientosDESLogic>();
             this._consultaReservaLogic = Configuration.Unity.Container.Resolve<IConsultaReservaLogic>();
+            this._pasajeroLogic = Configuration.Unity.Container.Resolve<IPasajeroLogic>();
+            this._tipoTarjetaLogic = Configuration.Unity.Container.Resolve<ITipoTarjetaLogic>();
         }
 
         #endregion
@@ -111,6 +116,7 @@ namespace UPC.TS.Web.Controllers
                  FECRES = DateTime.Now,
                  ESTTRAN = Infraestructure.Enum.EstadoTranReserva.RESERVADO,
                  CODCLI = _clienteLogic.ObtenerUsuarioPorCorreo(Session[Sesiones.sessionUsuarioLog].ToString()).CODCLI,
+                 ESTREG = "1"
             };
             if (CODPRODES.HasValue) {
                 if (CODPRODES.Value != 0)
@@ -232,5 +238,70 @@ namespace UPC.TS.Web.Controllers
         }
 
         #endregion
+
+        public ActionResult PagarReservas()
+        {
+            var model = new ReservaModels();
+            var listaReservas = _consultaReservaLogic.ObtenerReservasUsuario(Session[Sesiones.sessionUsuarioLog].ToString());
+            model.listaReservasVista = model.castReservaVistaType((List<SRV_VW_RESERVAS>)listaReservas);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult BuscarReservas(ReservaModels model)
+        {
+            var listaReservas = new List<SRV_VW_RESERVAS>();
+            if (!model.filtros.CODRES.HasValue)
+                listaReservas = _consultaReservaLogic.ObtenerReservasUsuario(Session[Sesiones.sessionUsuarioLog].ToString()).ToList();
+            else
+                listaReservas = _consultaReservaLogic.ObtenerReservasUsuario(Session[Sesiones.sessionUsuarioLog].ToString(), model.filtros.CODRES.Value).ToList();
+            model.listaReservasVista = model.castReservaVistaType((List<SRV_VW_RESERVAS>)listaReservas);
+            return View(model);
+        }
+
+        public ActionResult PagarReserva(int id)
+        {
+            var model = new PagarReservaModels();
+
+            var reserva = this._reservaLogic.BuscarPorId(id);
+
+            var pasajeros = this._pasajeroLogic.ListarPasajeroPorReserva(reserva.CODRES);
+
+            var rutas = new List<SRV_VW_CONSULTA_PROGRAMACION>();
+
+            rutas.Add(this._consultaProgramacionLogic.BuscarPorId(reserva.CODPRO.Value));
+            if(reserva.CODPRODES.HasValue)
+                rutas.Add(this._consultaProgramacionLogic.BuscarPorId(reserva.CODPRODES.Value));
+
+            model.CODRES = reserva.CODRES;
+            model.FECRES = reserva.FECRES.Value.ToString("dd/MM/yyyy");
+            model.Compra.CODRES = reserva.CODRES;
+            model.Compra.FECCOM = DateTime.Now;
+            model.listaPasajeros = model.castPasajerosType(pasajeros);
+            model.listaProgramacion = model.castProgramacionType(rutas);
+
+            var numeroPasajeros = reserva.CODPRODES.HasValue ? pasajeros.Count() / 2 : pasajeros.Count();
+
+            var totalPasaje = rutas.Sum(c => c.PRETAR.Value);
+
+            model.Compra.MONTOT = totalPasaje * numeroPasajeros;
+            model.Compra.VALIGV = Math.Round(model.Compra.MONTOT.Value * (decimal)(0.18), 2);
+            model.Compra.SUBTOT = model.Compra.MONTOT - model.Compra.VALIGV;
+
+            var lista = this._tipoTarjetaLogic.ListarTodo();
+            model.Tarjeta.ESTREG = "1";
+            model.Tarjeta.LIST_TIPTAR = model.Tarjeta.castTipoTarjetaType(lista.ToList());
+
+            return View(model);
+        }
+
+        public JsonResult GrabarCompra(PagarReservaModels pagarreserva)
+        {
+            var codReserva = pagarreserva.CODRES;
+            var compra = Mapper.Map<CompraModels, SRV_COMPRA>(pagarreserva.Compra);
+            var tarjeta = Mapper.Map<TarjetaModels, SRV_TARJETA>(pagarreserva.Tarjeta);
+            var result = this._reservaLogic.PagarReserva(codReserva, tarjeta, compra);
+            return Json(result);
+        }
     }
 }

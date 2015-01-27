@@ -60,7 +60,8 @@ namespace UPC.TS.Web.Models
                      HORSALPRO = item.HORSALPRO,
                      ORITAR = item.ORITAR,
                      DESTAR = item.DESTAR,
-                     TIPVIA = item.TIPVIA
+                     TIPVIA = item.TIPVIA,
+                     ESTTRAN = item.ESTTRAN
                 });
             }
             return listadoFinal;

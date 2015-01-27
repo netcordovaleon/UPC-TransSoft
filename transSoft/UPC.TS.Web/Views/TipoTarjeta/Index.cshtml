@@ -1,0 +1,123 @@
+﻿@model UPC.TS.Web.Models.TipoTarjetaModel
+
+@{
+    ViewBag.Title = "Consulta Medio de Pago";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">Filtro(s) Busqueda</div>
+    <div class="panel-body">
+
+        @using (Html.BeginForm("Index", "TipoTarjeta", FormMethod.Post, new { @Id = "frmBuqTipoTarjeta", @class = "form", role = "form" }))
+        {
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(c => c.TipoTarjeta.MEDPAG)
+                        @Html.DropDownListFor(c => c.TipoTarjeta.MEDPAG, Model.TipoTarjeta.LIST_MEDPAGO, "Seleccione", new { @Class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                       @Html.LabelFor(c => c.TipoTarjeta.NOMTIPTAR)
+                        @Html.TextBoxFor(c => c.TipoTarjeta.NOMTIPTAR, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(c => c.TipoTarjeta.ESTREG)
+                        @Html.DropDownListFor(c => c.TipoTarjeta.ESTREG, Model.TipoTarjeta.LIST_ESTREG, "Seleccione", new { @Class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="btnBuscarTipoTarjeta" type="button" class="btn btn-primary"><i class="fa fa-search fa-fw"></i>&nbsp;Buscar</button>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">TipoTarjeta</div>
+    <div class="panel-body">
+        <table id="tblTipoTarjeta" class="display upctbgrid" cellspacing="0" style="width:100%;">
+            <thead>
+                <tr>
+                    <th style="width:5%;">&nbsp;</th>
+                    <th style="width:5%;">&nbsp;</th>
+                    <th>Código</th>
+                    <th>Tipo de Pago</th>
+                    <th>Descripción</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.LIST_TARJETA)
+                {
+                    <tr>
+                        <td><button type="button" onclick='SeleccionarTipoTarjeta(@item.CODTIPTAR)' class="btn btn-primary"><i class="fa fa-pencil fa-fw"></i></button></td>
+                        <td><button type="button" onclick='EliminarTipoTarjeta(@item.CODTIPTAR)' class="btn btn-danger"><i class="fa fa-trash-o fa-fw"></i></button></td>
+                        <td>@item.CODTIPTAR</td>
+                        <td>@item.MEDPAGDES</td>
+                        <td>@item.NOMTIPTAR</td>
+                        <td>@(item.ESTREG.Equals("1") ? "Activo" : "Inactivo")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <br />
+        <button type="button" id="btnRegistroTipoTarjeta" class="btn btn-primary pull-right"><i class="fa fa-file fa-fw"></i>Nuevo Registro</button>
+
+    </div>
+</div>
+
+<div class="modal fade" id="pnlRegistroTipoTarjeta"></div>
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            $("#btnRegistroTipoTarjeta").click(function () { RegistroTipoTarjeta(); });
+            $("#btnBuscarTipoTarjeta").click(function () { BuscarTipoTarjeta(); });
+        });
+
+        function SeleccionarTipoTarjeta(id) {
+            ModificarTipoTarjeta(id);
+        }
+
+
+        function EliminarTipoTarjeta(id) {
+            if (!confirm("Esta seguro que desea Inactivar Medio de Pago")) return;
+            $.ajax({
+                url: '@Url.Action("EliminarTipoTarjeta", "TipoTarjeta")',
+                type: 'POST',
+                async: true,
+                data: { id : id},
+                success: function (result) {
+                    showNotifyByData(result);
+                    document.forms[0].submit();
+                },
+                error: errorAjax
+            });
+        }
+
+        function BuscarTipoTarjeta() {
+            $("#frmBuqTipoTarjeta").data("validator").settings.ignore = "#frmBuqTipoTarjeta input, #frmBuqTipoTarjeta select";
+            document.forms[0].submit();
+        }
+
+        function RegistroTipoTarjeta() {
+            $("#pnlRegistroTipoTarjeta").load('@Url.Action("RegistroTipoTarjeta", "TipoTarjeta")').modal('toggle');
+        }
+
+        function ModificarTipoTarjeta(id) {
+            $("#pnlRegistroTipoTarjeta").load('@Url.Action("RegistroTipoTarjeta", "TipoTarjeta")' + "?id=" + id).modal('toggle');
+        }
+
+    </script>
+
+}

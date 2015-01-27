@@ -11,6 +11,7 @@ namespace UPC.TS.DataContract
 {
     public interface IConsultaProgramacion
     {
-        IEnumerable<SRV_VW_CONSULTA_PROGRAMACION> ListarProgramacion(string ORITAR, string DESTAR, string FECSALPRO); 
+        SRV_VW_CONSULTA_PROGRAMACION BuscarPorId(int id);
+        IEnumerable<SRV_VW_CONSULTA_PROGRAMACION> ListarProgramacion(string ORITAR, string DESTAR, string FECSALPRO);
     }
 }

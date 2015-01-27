@@ -11,6 +11,7 @@ namespace UPC.TS.BusinessContract
 {
     public interface IConsultaReservaLogic
     {
+        IEnumerable<SRV_VW_RESERVAS> ObtenerReservasUsuario(string CORCLI, int? codReserva = null);
         IEnumerable<SRV_VW_RESERVAS> ListarReservaPorUsuario(string correoCliente);
         IEnumerable<SRV_VW_RESERVAS> ListarReservaPorUsuarioyReserva(int codReserva, string correoCliente);
     }

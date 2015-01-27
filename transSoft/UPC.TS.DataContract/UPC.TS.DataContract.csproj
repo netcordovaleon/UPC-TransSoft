@@ -46,8 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ICliente.cs" />
+    <Compile Include="ICompra.cs" />
     <Compile Include="IConsultaAsientosDES.cs" />
     <Compile Include="IConsultaAsientosORI.cs" />
+    <Compile Include="IConsultaPersonal.cs" />
     <Compile Include="IConsultaProgramacion.cs" />
     <Compile Include="IConsultaReserva.cs" />
     <Compile Include="IContactenos.cs" />
@@ -55,8 +57,12 @@
     <Compile Include="Infraestructura\IDbRepository.cs" />
     <Compile Include="Infraestructura\IUnitOfWork.cs" />
     <Compile Include="IPasajero.cs" />
+    <Compile Include="IPersonal.cs" />
+    <Compile Include="IPromocion.cs" />
     <Compile Include="IReserva.cs" />
     <Compile Include="ITarifas.cs" />
+    <Compile Include="ITarjeta.cs" />
+    <Compile Include="ITipoTarjeta.cs" />
     <Compile Include="IUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

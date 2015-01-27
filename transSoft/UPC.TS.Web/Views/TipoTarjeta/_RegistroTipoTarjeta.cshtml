@@ -1,0 +1,80 @@
+﻿@model UPC.TS.Web.Models.TipoTarjetaModels
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">Registro de Medio de Pago</h4>
+        </div>
+        <div class="modal-body">
+
+            @using (Html.BeginForm("", "", FormMethod.Post, new { @Id = "frmRegTipoTarjeta", @class = "form", role = "form" }))
+            {
+                @Html.HiddenFor(c => c.CODTIPTAR)
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.MEDPAG)
+                            @Html.DropDownListFor(c => c.MEDPAG, Model.LIST_MEDPAGO, "Seleccione", new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.MEDPAG)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.NOMTIPTAR)
+                            @Html.TextBoxFor(c => c.NOMTIPTAR, new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.NOMTIPTAR)
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.ESTREG)
+                            @Html.DropDownListFor(c => c.ESTREG, Model.LIST_ESTREG, "Seleccione", new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.ESTREG)
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-remove fa-fw"></i> Cerrar</button>
+            <button type="button" id="btnGrabarTipoTarjeta" class="btn btn-primary"><i class="fa fa-save fa-fw"></i> Guardar</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnGrabarTipoTarjeta").click(function () { GrabarTipoTarjeta(); });
+
+    });
+
+    function GrabarTipoTarjeta()
+    {
+        if (!formRegTipoTarjetaValido()) return;
+        if (!confirm("Esta seguro que desea registrar el Medio de Pago")) return;
+
+        $.ajax({
+            url: '@Url.Action("GrabarTipoTarjeta", "TipoTarjeta")',
+            type: 'POST',
+            async: true,
+            data: $("#frmRegTipoTarjeta").serialize(),
+            success: function (result) {
+                showNotifyByData(result);
+                document.forms[0].submit();
+            },
+            error: errorAjax
+        });
+    }
+
+
+    function formRegTipoTarjetaValido() {
+        $("#frmRegTipoTarjeta").updateValidation();
+        if (!$("#frmRegTipoTarjeta").valid())
+            return false;
+        else
+            return true;
+    }
+
+</script>

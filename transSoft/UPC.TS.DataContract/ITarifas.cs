@@ -11,7 +11,7 @@ namespace UPC.TS.DataContract
     public interface ITarifas  : IOperacionesCRUD<SRV_TARIFA> 
     {
         IEnumerable<SRV_TARIFA> ListarOrigen();
-        IEnumerable<SRV_TARIFA> ListarDestino(); 
+        IEnumerable<SRV_TARIFA> ListarDestino();
         IEnumerable<SRV_TARIFA> ListarTarifaFiltro(SRV_TARIFA entidad);
     }
 }

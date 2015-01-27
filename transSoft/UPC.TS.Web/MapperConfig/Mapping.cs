@@ -23,8 +23,11 @@ namespace UPC.TS.Web.MapperConfig
             Mapper.CreateMap<UsuarioModels, SRV_USUARIO>();
             Mapper.CreateMap<PasajeroModels, SRV_PASAJERO>();
             Mapper.CreateMap<TarifaModels, SRV_TARIFA>();
-
-            
+            Mapper.CreateMap<PromocionModels, SRV_PROGRAMACION>();
+            Mapper.CreateMap<PersonalModels, SRV_PERSONAL>();
+            Mapper.CreateMap<TipoTarjetaModels, SRV_TIPO_TARJETA>();
+            Mapper.CreateMap<TarjetaModels, SRV_TARJETA>();
+            Mapper.CreateMap<CompraModels, SRV_COMPRA>();
             #endregion
 
             #region Mapping Entity to WebModel
@@ -33,6 +36,11 @@ namespace UPC.TS.Web.MapperConfig
             Mapper.CreateMap<contactenos, ContactenosModels>();
             Mapper.CreateMap<SRV_USUARIO, UsuarioModels>();
             Mapper.CreateMap<SRV_PASAJERO, PasajeroModels>();
+            Mapper.CreateMap<SRV_PROGRAMACION, PromocionModels>();
+            Mapper.CreateMap<SRV_PERSONAL, PersonalModels>();
+            Mapper.CreateMap<SRV_TIPO_TARJETA, TipoTarjetaModels>();
+            Mapper.CreateMap<SRV_TARJETA, TarjetaModels>();
+            Mapper.CreateMap<SRV_COMPRA, CompraModels>();
             #endregion
         }    
     }

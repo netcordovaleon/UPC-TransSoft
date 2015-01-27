@@ -8,25 +8,36 @@
     <div class="panel-heading">Filtro(s) Busqueda</div>
     <div class="panel-body">
 
-        @using (Html.BeginForm("Index", "Tarifa", FormMethod.Post, new { @Id = "frmBuqTarifa", @class = "form-horizontal", role = "form" }))
+        @using (Html.BeginForm("Index", "Tarifa", FormMethod.Post, new { @Id = "frmBuqTarifa", @class = "form", role = "form" }))
         {
             <div class="row">
                 <div class="col-md-4">
-                    @Html.LabelFor(c => c.tarifa.ORITAR)
-                    @Html.DropDownListFor(c => c.tarifa.ORITAR, Model.tarifa.LIST_ORI, "Seleccione", new { @class = "form-control" })
+                    <div class="form-group">
+                        @Html.LabelFor(c => c.tarifa.ORITAR)
+                        @Html.DropDownListFor(c => c.tarifa.ORITAR, Model.tarifa.LIST_ORI, "Seleccione", new { @class = "form-control" })
+                    </div>
                 </div>
                 <div class="col-md-4">
-                    @Html.LabelFor(c => c.tarifa.DESTAR)
-                    @Html.DropDownListFor(c => c.tarifa.DESTAR, Model.tarifa.LIST_ORI, "Seleccione", new { @class = "form-control" })
+                    <div class="form-group">
+                        @Html.LabelFor(c => c.tarifa.DESTAR)
+                        @Html.DropDownListFor(c => c.tarifa.DESTAR, Model.tarifa.LIST_ORI, "Seleccione", new { @class = "form-control" })
+                    </div>
                 </div>
                 <div class="col-md-3">
-                    @Html.LabelFor(c => c.tarifa.CODESTTAR)
-                    @Html.DropDownListFor(c => c.tarifa.CODESTTAR, Model.tarifa.LIST_ESTTAR, "Seleccione", new { @class = "form-control" })    
+                    <div class="form-group">
+                        @Html.LabelFor(c => c.tarifa.CODESTTAR)
+                        @Html.DropDownListFor(c => c.tarifa.CODESTTAR, Model.tarifa.LIST_ESTTAR, "Seleccione", new { @class = "form-control" })
+                    </div>
                 </div>
             </div>
-            <button id="btnBuscarTarifa" type="button" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp;Buscar</button>
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="btnBuscarTarifa" type="button" class="btn btn-primary"><i class="fa fa-search fa-fw"></i>&nbsp;Buscar</button>
+                </div>
+            </div>
+            
         }
-    </div> 
+    </div>
 </div>
 
 <div class="panel panel-default">
@@ -49,16 +60,16 @@
                 @foreach (var item in Model.LIST_TARIFA)
                 {
                     <tr>
-                        <td><button type="button" onclick='SeleccionarTarifa(@item.CODTAR)' class="btn btn-primary pull-right"><i class="fa fa-pencil"></i></button></td>
-                        <td><button type="button" onclick='EliminarTarifa(@item.CODTAR)' class="btn pull-right"><i class="fa fa-trash-o"></i></button></td>
+                        <td><button type="button" onclick='SeleccionarTarifa(@item.CODTAR)' class="btn btn-primary"><i class="fa fa-pencil fa-fw"></i></button></td>
+                        <td><button type="button" onclick='EliminarTarifa(@item.CODTAR)' class="btn btn-danger"><i class="fa fa-trash-o fa-fw"></i></button></td>
                         <td>
                             @if (item.CODESTTAR == "P")
                             {
-                                <button type="button" disabled onclick='PublicarTarifa(@item.CODTAR)' class="btn pull-right"><i class="fa fa-file"></i></button>    
+                                <button type="button" disabled onclick='PublicarTarifa(@item.CODTAR)' class="btn pull-right"><i class="fa fa-file fa-fw"></i></button>    
                             }
                             else
                             {
-                                <button type="button" onclick='PublicarTarifa(@item.CODTAR)' class="btn pull-right"><i class="fa fa-file"></i></button>    
+                                <button type="button" onclick='PublicarTarifa(@item.CODTAR)' class="btn pull-right"><i class="fa fa-file fa-fw"></i></button>    
                             }
                             
                         </td>
@@ -72,7 +83,7 @@
             </tbody>
         </table>
         <br />
-        <button type="button" id="btnRegistroTarifa" class="btn btn-primary pull-right"><i class="fa fa-file"></i>Nuevo Registro</button>
+        <button type="button" id="btnRegistroTarifa" class="btn btn-primary pull-right"><i class="fa fa-file fa-fw"></i>Nuevo Registro</button>
        
     </div>
 </div>
@@ -124,7 +135,7 @@
         }
 
         function BuscarTarifa() {
-            $("#frmBuqTarifa").data("validator").settings.ignore = "input, select";
+            $("#frmBuqTarifa").data("validator").settings.ignore = "#frmBuqTarifa input, #frmBuqTarifa select";
             document.forms[0].submit();
         }
 

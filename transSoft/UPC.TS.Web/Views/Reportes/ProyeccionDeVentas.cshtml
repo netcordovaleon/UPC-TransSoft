@@ -1,0 +1,122 @@
+﻿@model UPC.TS.Web.Models.ReporteVentaModel
+
+@{
+    ViewBag.Title = "Proyeccion de Ventas";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">Filtro(s) Busqueda</div>
+    <div class="panel-body">
+
+        @using (Html.BeginForm("ProyeccionDeVentas", "Reportes", FormMethod.Post, new { @Id = "frmBuqVenta", @class = "form", role = "form" }))
+        {
+            @Html.HiddenFor(m=> m.GENREP)
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(c => c.Reporte.TIPBUS)
+                        @Html.DropDownListFor(c => c.Reporte.TIPBUS, Model.LIST_TIPBUS, new { @Class = "form-control" })
+                        @Html.ValidationMessageFor(c => c.Reporte.TIPBUS)
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(c => c.Reporte.FECINI)
+                        <div class="input-group date">
+                            @Html.TextBoxFor(c => c.Reporte.FECINI, new { @Class = "form-control" })
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar fa-fw"></i>
+                            </span>
+                        </div>
+                        @Html.ValidationMessageFor(c => c.Reporte.FECINI)
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(c => c.Reporte.FECFIN)
+                        <div class="input-group date">
+                            @Html.TextBoxFor(c => c.Reporte.FECFIN, new { @Class = "form-control" })
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar fa-fw"></i>
+                            </span>
+                        </div>
+                        @Html.ValidationMessageFor(c => c.Reporte.FECFIN)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="btnGenerar" type="button" class="btn btn-primary"><i class="fa fa-cogs fa-fw"></i>&nbsp;Generar</button>&nbsp;
+                    @if (Model.LIST_VENTA.Any())
+                    {
+                        <button id="btnExportar" type="button" class="btn btn-success"><i class="fa fa-file-excel-o fa-fw"></i>&nbsp;Exportar a Excel</button>
+                    }                    
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Promociones</div>
+    <div class="panel-body">
+        <table id="tblPromociones" class="display upctbgrid" cellspacing="0" style="width:100%;">
+            <thead>
+                <tr>
+                    <th>Descripción</th>
+                    <th>Nro. Compras</th>
+                    <th>Monto Total Compras</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.LIST_VENTA)
+                {
+                    <tr>
+                        <td>@item.DESREP</td>
+                        <td>@item.TOTCOM</td>
+                        <td>@item.MONTOT</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<div class="modal fade" id="pnlRegistroPromocion"></div>
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            $("#btnGenerar").click(GenerarReporte);
+            $("#btnExportar").click(ExportarReporte);
+            $('#Reporte_FECINI').datepicker().next().on("click", function () { $(this).prev().focus(); });
+            $('#Reporte_FECFIN').datepicker().next().on("click", function () { $(this).prev().focus(); });
+        });
+
+        function GenerarReporte() {
+            $("#GENREP").val("G");
+            if (!formBuqVentaValido()) return;
+            document.forms[0].submit();
+        }
+
+        function ExportarReporte() {
+            $("#GENREP").val("E");
+            if (!formBuqVentaValido()) return;
+            document.forms[0].submit();
+        }
+
+        function formBuqVentaValido() {
+            $("#frmBuqVenta").updateValidation();
+            if (!$("#frmBuqVenta").valid())
+                return false;
+            else
+                return true;
+        }
+
+    </script>
+
+}

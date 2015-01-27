@@ -29,6 +29,11 @@ namespace UPC.TS.BusinessLogic
             this._clienteData = new ClienteData(_uow);
         }
 
+        public SRV_USUARIO BuscarPorId(int id)
+        {
+            return this._usuarioData.BuscarPorId(id);
+        }
+
         public ResponseEntity IngresarSistema(SRV_USUARIO entidad)
         {
             try
@@ -67,6 +72,26 @@ namespace UPC.TS.BusinessLogic
                     tran.Dispose();
                     return new ResponseEntity(Response.ErrorGeneral);
                 }
+            }
+        }
+
+        public ResponseEntity Registrar(SRV_USUARIO usuario)
+        {
+            try
+            {
+
+                var existeUsuario = _usuarioData.ExisteUsuarioReg(usuario);
+                if (existeUsuario)
+                {
+                    return new ResponseEntity("El correo que ingreso ya se encuentra registrado");
+                }
+                usuario.CODPER = (int)PerfilesSistema.USUARIOSISTEMA;
+                var usuarioReg = _usuarioData.Registrar(usuario);
+                return new ResponseEntity("Registro un usuario satisfactoriamente", true, usuarioReg.CODUSU);
+            }
+            catch (Exception)
+            {
+                return new ResponseEntity(Response.ErrorGeneral);
             }
         }
 

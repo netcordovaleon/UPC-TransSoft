@@ -1,0 +1,268 @@
+﻿@model UPC.TS.Web.Models.PagarReservaModels
+
+@{
+    ViewBag.Title = "PagarReserva";
+}
+
+<h2>Pagar Reserva</h2>
+@using (Html.BeginForm("", "", FormMethod.Post, new { @Id = "frmRegCompra", @class = "form", role = "form" }))
+{
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Datos Reserva</div>
+            <div class="panel-body">                
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.CODRES, new { @class = "col-lg-4 control-label" })
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(m => m.CODRES, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.FECRES, new { @class = "col-lg-4 control-label" })
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(m => m.FECRES, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Rutas de la Reserva</div>
+            <div class="panel-body">
+                <table id="tblReservas" class="display upctbgrid" cellspacing="0" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th>Origen</th>
+                            <th>Destino</th>
+                            <th>Fecha Salida</th>
+                            <th>Horario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.listaProgramacion)
+                        {
+                            <tr>
+                                <td>@item.ORITAR</td>
+                                <td>@item.DESTAR</td>
+                                <td>@item.FECSALPRO</td>
+                                <td>@item.HORSALPRO</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Pasajeros</div>
+            <div class="panel-body">
+                <table id="tblReservas" class="display upctbgrid" cellspacing="0" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th>DNI</th>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Celular</th>
+                            <th>Nro Telefono</th>
+                            <th style="width:5%;">Tipo</th>
+                            <th style="width:5%;">Asiento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.listaPasajeros)
+                        {
+                            <tr>
+                                <td>@item.NUMDOC</td>
+                                <td>@item.NOMPAS</td>
+                                <td>@(string.Format("{0} {1}", item.APEPPAS, item.APEMPAS))</td>
+                                <td>@item.CELPAS</td>
+                                <td>@item.TELPAS</td>
+                                <td>@(item.TIPVIA == "I" ? "IDA" : "REGRESO") </td>
+                                <td>@item.NUMASI_ORI</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Monto a Pagar</div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+                    @Html.HiddenFor(m => m.Compra.CODRES)
+                    @Html.HiddenFor(m => m.Compra.FECCOM)
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Compra.SUBTOT, new { @class = "col-lg-4 control-label" })
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(m => m.Compra.SUBTOT, new { @class = "form-control text-right", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Compra.VALIGV, new { @class = "col-lg-4 control-label" })
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(m => m.Compra.VALIGV, new { @class = "form-control text-right", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Compra.MONTOT, new { @class = "col-lg-4 control-label" })
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(m => m.Compra.MONTOT, new { @class = "form-control text-right", @readonly = "readonly" })
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Medio de Pago</div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+                    @Html.HiddenFor(m => m.Tarjeta.ESTREG)
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Tarjeta.CODTIPTAR, new { @class = "col-lg-4 control-label" })
+                        <div class="col-lg-8">
+                            @Html.DropDownListFor(c => c.Tarjeta.CODTIPTAR, Model.Tarjeta.LIST_TIPTAR, "Seleccione", new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.Tarjeta.CODTIPTAR)
+                        </div>                        
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Tarjeta.NUMTAR, new { @class = "col-lg-4 control-label" })
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(m => m.Tarjeta.NUMTAR, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.Tarjeta.NUMTAR)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Tarjeta.NOMTIT, new { @class = "col-lg-4 control-label" })
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(m => m.Tarjeta.NOMTIT, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.Tarjeta.NOMTIT)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Tarjeta.APETIT, new { @class = "col-lg-4 control-label" })
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(m => m.Tarjeta.APETIT, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.Tarjeta.APETIT)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Tarjeta.CODVER, new { @class = "col-lg-4 control-label" })
+                        <div class="col-lg-8">
+                            @Html.TextBoxFor(m => m.Tarjeta.CODVER, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.Tarjeta.CODVER)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Tarjeta.FECEXP, new { @class = "col-lg-4 control-label" })
+                        <div class="col-lg-8">                            
+                            <div class="input-group date">
+                                @Html.TextBoxFor(m => m.Tarjeta.FECEXP, new { @class = "form-control" })
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar fa-fw"></i>
+                                </span>
+                            </div>
+                            @Html.ValidationMessageFor(c => c.Tarjeta.FECEXP)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <button class="btn btn-primary" id="btnGrabarCompra">Comprar Ahora</button>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}
+<div class="modal fade" id="pnlRegistroCompra">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Pago Confirmado</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="col-lg-12 text-center">
+                        <h1>Pago Realizado Correctamente</h1><br />
+                        <label>Código de confirmación:</label><label style="font-size: 24px" id="codiConfirmacion"></label><br />
+                        <label style="font-size:8px">Se enviará un correo de confirmación a la cuenta registrada</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-12 text-center">
+                        <button type="button" id="btnGrabarAceptar" class="btn btn-primary" data-dismiss="modal">ACEPTAR</button>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnGrabarCompra").click(function () { GrabarCompra(); });
+        $('#Tarjeta_FECEXP').datepicker({
+            minViewMode: 'months',
+            format: 'mm/yyyy'
+        }).next().on("click", function () { $(this).prev().focus(); });
+
+        $('#pnlRegistroPromocion').on('hidden.bs.modal', function (e) {
+            //document.location = '@Url.Action("PagarReseras", "Reserva")';
+            console.log("hide")
+        })
+    });
+
+    function GrabarCompra() {
+        if (!formRegCompraValido()) return;
+        if (!confirm("Esta seguro que desea realizar el pago")) return;
+        
+        $.ajax({
+            url: '@Url.Action("GrabarCompra", "Reserva")',
+            type: 'POST',
+            async: true,
+            data: $("#frmRegCompra").serialize(),
+            success: function (result) {
+                $("#codiConfirmacion").text(result.Data);
+                $("#pnlRegistroCompra").modal('toggle');
+            }
+        });
+    }
+
+
+    function formRegCompraValido() {
+        $("#frmRegCompra").updateValidation();
+        if (!$("#frmRegCompra").valid())
+            return false;
+        else
+            return true;
+    }
+
+</script>
+}

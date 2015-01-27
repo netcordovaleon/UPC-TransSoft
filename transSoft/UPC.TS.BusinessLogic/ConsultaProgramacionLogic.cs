@@ -24,6 +24,11 @@ namespace UPC.TS.BusinessLogic
             this._consultaProgramacionData = new ConsultaProgramacionData(_uow);
         }
 
+        public SRV_VW_CONSULTA_PROGRAMACION BuscarPorId(int id)
+        {
+            return this._consultaProgramacionData.BuscarPorId(id);
+        }
+
         public IEnumerable<SRV_VW_CONSULTA_PROGRAMACION> ListarProgramacion(string origen, string destino, string fechaSalida)
         {
             return _consultaProgramacionData.ListarProgramacion(origen, destino, fechaSalida);

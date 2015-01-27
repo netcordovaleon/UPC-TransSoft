@@ -1,0 +1,103 @@
+﻿@model UPC.TS.Web.Models.PromocionModels
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">Registro de Promoción</h4>
+        </div>
+        <div class="modal-body">
+
+            @using (Html.BeginForm("", "", FormMethod.Post, new { @Id = "frmRegPromocion", @class = "form", role = "form" }))
+            {
+                @Html.HiddenFor(c => c.CODPROM)
+                @Html.HiddenFor(c => c.ESTREG)
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.DESPROM)
+                            @Html.TextBoxFor(c => c.DESPROM, new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.DESPROM)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.FECINI)
+                            <div class="input-group date">
+                                @Html.TextBoxFor(c => c.FECINI, new { @Class = "form-control" })
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar fa-fw"></i>
+                                </span>
+                            </div>
+                            @Html.ValidationMessageFor(c => c.FECINI)
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.FECFIN)
+                            <div class="input-group date">
+                                @Html.TextBoxFor(c => c.FECFIN, new { @Class = "form-control" })
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar fa-fw"></i>
+                                </span>
+                            </div>
+                            @Html.ValidationMessageFor(c => c.FECFIN)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.PORDESC)
+                            @Html.TextBoxFor(c => c.PORDESC, new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.PORDESC)
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-remove fa-fw"></i> Cerrar</button>
+            <button type="button" id="btnGrabarPromocion" class="btn btn-primary"><i class="fa fa-save fa-fw"></i> Guardar</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnGrabarPromocion").click(function () { GrabarPromocion(); });
+
+        $('#FECINI').datepicker().next().on("click", function () { $(this).prev().focus(); });
+        $('#FECFIN').datepicker().next().on("click", function () { $(this).prev().focus(); });
+
+    });
+
+    function GrabarPromocion()
+    {
+        if (!formRegPromocionValido()) return;
+        if (!confirm("Esta seguro que desea registrar la Promoción")) return;
+
+        $.ajax({
+            url: '@Url.Action("GrabarPromocion", "Promocion")',
+            type: 'POST',
+            async: true,
+            data: $("#frmRegPromocion").serialize(),
+            success: function (result) {
+                showNotifyByData(result);
+                document.forms[0].submit();
+            },
+            error: errorAjax
+        });
+    }
+
+
+    function formRegPromocionValido() {
+        $("#frmRegPromocion").updateValidation();
+        if (!$("#frmRegPromocion").valid())
+            return false;
+        else
+            return true;
+    }
+
+</script>

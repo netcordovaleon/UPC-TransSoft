@@ -14,8 +14,16 @@ namespace UPC.TS.Entities
     
     public partial class SRV_TIPO_TARJETA
     {
+        public SRV_TIPO_TARJETA()
+        {
+            this.SRV_TARJETA = new HashSet<SRV_TARJETA>();
+        }
+    
         public int CODTIPTAR { get; set; }
         public string NOMTIPTAR { get; set; }
         public string ESTREG { get; set; }
+        public string MEDPAG { get; set; }
+    
+        public virtual ICollection<SRV_TARJETA> SRV_TARJETA { get; set; }
     }
 }

@@ -46,5 +46,6 @@ namespace UPC.TS.Entities
         public virtual DbSet<SRV_VW_CONSULTA_PROGRAMACION> SRV_VW_CONSULTA_PROGRAMACION { get; set; }
         public virtual DbSet<SRV_VW_RESERVAS> SRV_VW_RESERVAS { get; set; }
         public virtual DbSet<SRV_TARIFA> SRV_TARIFA { get; set; }
+        public virtual DbSet<SRV_VW_CONSULTA_PERSONAL> SRV_VW_CONSULTA_PERSONAL { get; set; }
     }
 }

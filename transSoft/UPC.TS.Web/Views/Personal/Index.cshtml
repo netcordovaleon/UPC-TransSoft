@@ -1,0 +1,117 @@
+﻿@model UPC.TS.Web.Models.PersonalModel
+
+@{
+    ViewBag.Title = "Mantenimiento de Personal";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">Filtro(s) Busqueda</div>
+    <div class="panel-body">
+
+        @using (Html.BeginForm("Index", "Personal", FormMethod.Post, new { @Id = "frmBuqPersonal", @class = "form", role = "form" }))
+        {
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(c => c.Personal.DNIPER)
+                        @Html.TextBoxFor(c => c.Personal.DNIPER, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(c => c.Personal.Usuario.LOGUSU)
+                        @Html.TextBoxFor(c => c.Personal.Usuario.LOGUSU, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="btnBuscarPersonal" type="button" class="btn btn-primary"><i class="fa fa-search fa-fw"></i>&nbsp;Buscar</button>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Personal</div>
+    <div class="panel-body">
+        <table id="tblPersonal" class="display upctbgrid" cellspacing="0" style="width:100%;">
+            <thead>
+                <tr>
+                    <th style="width:5%;">&nbsp;</th>
+                    <th style="width:5%;">&nbsp;</th>
+                    <th>DNI</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Login</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.LIST_PERSONAL)
+                {
+                    <tr>
+                        <td><button type="button" onclick='SeleccionarPersonal(@item.CODPER)' class="btn btn-primary"><i class="fa fa-pencil fa-fw"></i></button></td>
+                        <td><button type="button" onclick='EliminarPersonal(@item.CODPER)' class="btn btn-danger"><i class="fa fa-trash-o fa-fw"></i></button></td>
+                        <td>@item.DNIPER</td>
+                        <td>@item.NOMPER</td>
+                        <td>@item.APEPER</td>
+                        <td>@item.Usuario.LOGUSU</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <br />
+        <button type="button" id="btnRegistroPersonal" class="btn btn-primary pull-right"><i class="fa fa-file fa-fw"></i>Nuevo Registro</button>
+
+    </div>
+</div>
+
+<div class="modal fade" id="pnlRegistroPersonal"></div>
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            $("#btnRegistroPersonal").click(function () { RegistroPersonal(); });
+            $("#btnBuscarPersonal").click(function () { BuscarPersonal(); });
+        });
+
+        function SeleccionarPersonal(id) {
+            ModificarPersonal(id);
+        }
+
+
+        function EliminarPersonal(id) {
+            if (!confirm("Esta seguro que desea eliminar la Personal")) return;
+            $.ajax({
+                url: '@Url.Action("EliminarPersonal", "Personal")',
+                type: 'POST',
+                async: true,
+                data: { id : id},
+                success: function (result) {
+                    showNotifyByData(result);
+                    document.forms[0].submit();
+                },
+                error: errorAjax
+            });
+        }
+
+        function BuscarPersonal() {
+            $("#frmBuqPersonal").data("validator").settings.ignore = "#frmBuqPersonal input, #frmBuqPersonal select";
+            document.forms[0].submit();
+        }
+
+        function RegistroPersonal() {
+            $("#pnlRegistroPersonal").load('@Url.Action("RegistroPersonal", "Personal")').modal('toggle');
+        }
+
+        function ModificarPersonal(id) {
+            $("#pnlRegistroPersonal").load('@Url.Action("RegistroPersonal", "Personal")' + "?id=" + id).modal('toggle');
+        }
+
+    </script>
+
+}

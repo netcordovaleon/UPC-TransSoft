@@ -23,6 +23,12 @@ namespace UPC.TS.BusinessLogic
             this._uow = new UnitOfWork();
             this._consultaReservaData = new ConsultaReservaData(_uow);
         }
+
+        public IEnumerable<SRV_VW_RESERVAS> ObtenerReservasUsuario(string CORCLI, int? codReserva = null)
+        {
+            return _consultaReservaData.ObtenerReservasUsuario(CORCLI, codReserva);
+        }
+
         public IEnumerable<SRV_VW_RESERVAS> ListarReservaPorUsuario(string correoCliente)
         {
             return _consultaReservaData.ListarReservaPorUsuario(correoCliente);

@@ -39,7 +39,7 @@ namespace UPC.TS.DataImplement
 
         public SRV_USUARIO Actualizar(SRV_USUARIO entidad)
         {
-            throw new NotImplementedException();
+            return (SRV_USUARIO)this.Update(entidad);
         }
 
         public bool Eliminar(int id)
@@ -49,7 +49,7 @@ namespace UPC.TS.DataImplement
 
         public SRV_USUARIO BuscarPorId(int id)
         {
-            throw new NotImplementedException();
+            return this.Single(id);
         }
 
         public IEnumerable<SRV_USUARIO> ListarTodo()

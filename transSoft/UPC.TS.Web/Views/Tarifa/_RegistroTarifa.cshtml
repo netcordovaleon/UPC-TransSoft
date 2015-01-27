@@ -11,7 +11,7 @@
                 {
                     @Html.HiddenFor(c => c.CODTAR)
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             @Html.LabelFor(c => c.ORITAR)
                             @Html.DropDownListFor(c => c.ORITAR, Model.LIST_ORI, "Seleccione", new { @Class = "form-control" })
                             @Html.ValidationMessageFor(c => c.ORITAR)
@@ -32,7 +32,7 @@
                     </div>*@
                     @Html.HiddenFor(c => c.CODTIPSER, new { @Value = "1" })
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             @Html.LabelFor(c => c.PRETAR)
                             @Html.TextBoxFor(c => c.PRETAR, new { @Class = "form-control" })
                             @Html.ValidationMessageFor(c => c.PRETAR)
@@ -49,19 +49,55 @@
 
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            <button type="button" id="btnGrabarTarifa" class="btn btn-primary">Guardar</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-remove fa-fw"></i>Cerrar</button>
+            <button type="button" id="btnGrabarTarifa" class="btn btn-primary"><i class="fa fa-save fa-fw"></i>Guardar</button>
         </div>
     </div>
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
         $("#btnGrabarTarifa").click(function () { GrabarTarifa(); });
+        CargarFormulario();
     });
 
+
+    function CargarFormulario() {
+        if ($("#CODTAR").val() == 0 || $("#CODTAR").val() == null || $("#CODTAR").val() == "") {
+            $("#DESTAR").prop("disabled", false);
+            $("#ORITAR").prop("disabled", false);
+        } else {
+            $("#DESTAR").prop("disabled", true);
+            $("#ORITAR").prop("disabled", true);
+        }
+    }
+
     function GrabarTarifa(id) {
+        //if ($("#ORITAR").val() == "" || $("#DESTAR").val() == null) {
+        //    alert("Debe seleccionar un origen");
+        //    return;
+        //}
+
+        //if ($("#DESTAR").val() == "" || $("#DESTAR").val() == null) {
+        //    alert("Debe seleccionar un destino");
+        //    return;
+        //}
+
+        //if ($("#PRETAR").val() == "" || $("#PRETAR").val() < 1) {
+        //    alert("El precio debe ser mayor a 0 (cero)");
+        //    return;
+        //}
+
+        //if ($("#CODESTTAR").val() == "" || $("#CODESTTAR").val() == null) {
+        //    alert("Debe espeficicar el estado de la tarifa");
+        //    return;
+        //}
+
         if (!formRegTarifaValido()) return;
         if (!confirm("Esta seguro que desea registrar la tarifa")) return;
+
+
+        $("#DESTAR").prop("disabled", false);
+        $("#ORITAR").prop("disabled", false);
 
         $.ajax({
             url: '@Url.Action("GrabarTarifa", "Tarifa")',
@@ -70,7 +106,7 @@
             data: $("#frmRegTarifa").serialize(),
             success: function (result) {
                 showNotifyByData(result);
-                document.forms[0].submit(); 
+                document.forms[0].submit();
             },
             error: errorAjax
         });
@@ -78,6 +114,7 @@
 
 
     function formRegTarifaValido() {
+        $("#frmRegTarifa").updateValidation();
         if (!$("#frmRegTarifa").valid())
             return false;
         else

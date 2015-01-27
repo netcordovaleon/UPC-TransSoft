@@ -10,5 +10,6 @@ namespace UPC.TS.Infraestructure.Enum
     {
         public const string RESERVADO = "R";
         public const string ANULADO = "A";
+        public const string PAGADO = "P";
     }
 }

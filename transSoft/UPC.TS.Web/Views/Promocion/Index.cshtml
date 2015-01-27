@@ -1,0 +1,135 @@
+﻿@model UPC.TS.Web.Models.PromocionModel
+
+@{
+    ViewBag.Title = "Mantenimiento de Promocion";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">Filtro(s) Busqueda</div>
+    <div class="panel-body">
+
+        @using (Html.BeginForm("Index", "Promocion", FormMethod.Post, new { @Id = "frmBuqPromocion", @class = "form", role = "form" }))
+        {
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(c => c.Promocion.DESPROM)
+                        @Html.TextBoxFor(c => c.Promocion.DESPROM, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(c => c.Promocion.FECINI)
+                        <div class="input-group date">
+                            @Html.TextBoxFor(c => c.Promocion.FECINI, new { @Class = "form-control" })
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar fa-fw"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(c => c.Promocion.FECFIN)
+                        <div class="input-group date">
+                            @Html.TextBoxFor(c => c.Promocion.FECFIN, new { @Class = "form-control" })
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar fa-fw"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="btnBuscarPromocion" type="button" class="btn btn-primary"><i class="fa fa-search fa-fw"></i>&nbsp;Buscar</button>
+                </div>
+            </div>
+            
+        }
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Promociones</div>
+    <div class="panel-body">
+        <table id="tblPromociones" class="display upctbgrid" cellspacing="0" style="width:100%;">
+            <thead>
+                <tr>
+                    <th style="width:5%;">&nbsp;</th>
+                    <th style="width:5%;">&nbsp;</th>
+                    <th>Descripción</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Termino</th>
+                    <th>% Dscto</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.LIST_PROMOCIONES)
+                {
+                    <tr>
+                        <td><button type="button" onclick='SeleccionarPromocion(@item.CODPROM)' class="btn btn-primary"><i class="fa fa-pencil fa-fw"></i></button></td>
+                        <td><button type="button" onclick='EliminarPromocion(@item.CODPROM)' class="btn btn-danger"><i class="fa fa-trash-o fa-fw"></i></button></td>
+                        <td>@item.DESPROM</td>
+                        <td>@item.FECINI</td>
+                        <td>@item.FECFIN</td>
+                        <td>@item.PORDESC</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <br />
+        <button type="button" id="btnRegistroPromocion" class="btn btn-primary pull-right"><i class="fa fa-file fa-fw"></i>Nuevo Registro</button>
+
+    </div>
+</div>
+
+<div class="modal fade" id="pnlRegistroPromocion"></div>
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            $("#btnRegistroPromocion").click(function () { RegistroPromocion(); });
+            $("#btnBuscarPromocion").click(function () { BuscarPromocion(); });
+            $('#Promocion_FECINI').datepicker().next().on("click", function () { $(this).prev().focus(); });
+            $('#Promocion_FECFIN').datepicker().next().on("click", function () { $(this).prev().focus(); });
+        });
+
+        function SeleccionarPromocion(id) {
+            ModificarPromocion(id);
+        }
+
+
+        function EliminarPromocion(id) {
+            if (!confirm("Esta seguro que desea eliminar la Promocion")) return;
+            $.ajax({
+                url: '@Url.Action("EliminarPromocion", "Promocion")',
+                type: 'POST',
+                async: true,
+                data: { id : id},
+                success: function (result) {
+                    showNotifyByData(result);
+                    document.forms[0].submit();
+                },
+                error: errorAjax
+            });
+        }
+
+        function BuscarPromocion() {
+            $("#frmBuqPromocion").data("validator").settings.ignore = "#frmBuqPromocion input, #frmBuqPromocion select";
+            document.forms[0].submit();
+        }
+
+        function RegistroPromocion() {
+            $("#pnlRegistroPromocion").load('@Url.Action("RegistroPromocion", "Promocion")').modal('toggle');
+        }
+
+        function ModificarPromocion(id) {
+            $("#pnlRegistroPromocion").load('@Url.Action("RegistroPromocion", "Promocion")' + "?id=" + id).modal('toggle');
+        }
+
+    </script>
+
+}

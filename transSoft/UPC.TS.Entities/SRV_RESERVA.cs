@@ -14,6 +14,11 @@ namespace UPC.TS.Entities
     
     public partial class SRV_RESERVA
     {
+        public SRV_RESERVA()
+        {
+            this.SRV_COMPRA = new HashSet<SRV_COMPRA>();
+        }
+    
         public int CODRES { get; set; }
         public Nullable<System.DateTime> FECRES { get; set; }
         public string ESTREG { get; set; }
@@ -21,5 +26,7 @@ namespace UPC.TS.Entities
         public Nullable<int> CODCLI { get; set; }
         public Nullable<int> CODPRO { get; set; }
         public Nullable<int> CODPRODES { get; set; }
+    
+        public virtual ICollection<SRV_COMPRA> SRV_COMPRA { get; set; }
     }
 }

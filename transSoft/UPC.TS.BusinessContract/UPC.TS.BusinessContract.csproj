@@ -40,14 +40,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IClienteLogic.cs" />
+    <Compile Include="ICompraLogic.cs" />
     <Compile Include="IConsultaAsientosDESLogic.cs" />
     <Compile Include="IConsultaAsientosORILogic.cs" />
+    <Compile Include="IConsultaPersonalLogic.cs" />
     <Compile Include="IConsultaProgramacionLogic.cs" />
     <Compile Include="IConsultaReservaLogic.cs" />
     <Compile Include="IContactenosLogic.cs" />
     <Compile Include="IPasajeroLogic.cs" />
+    <Compile Include="IPersonalLogic.cs" />
+    <Compile Include="IPromocionLogic.cs" />
     <Compile Include="IReservaLogic.cs" />
     <Compile Include="ITarifasLogic.cs" />
+    <Compile Include="ITipoTarjetaLogic.cs" />
     <Compile Include="IUsuarioLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

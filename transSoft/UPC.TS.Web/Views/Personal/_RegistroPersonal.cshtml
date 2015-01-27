@@ -1,0 +1,116 @@
+﻿@model UPC.TS.Web.Models.PersonalModels
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">Registro de Personal</h4>
+        </div>
+        <div class="modal-body">
+
+            @using (Html.BeginForm("", "", FormMethod.Post, new { @Id = "frmRegPersonal", @class = "form", role = "form" }))
+            {
+                @Html.HiddenFor(c => c.CODPER)
+                @Html.HiddenFor(c => c.CODUSU)
+                @Html.HiddenFor(c => c.Usuario.CODUSU)
+                @Html.HiddenFor(c => c.ESTREG)
+                @Html.HiddenFor(c => c.Usuario.ESTREG)
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.DNIPER)
+                            @Html.TextBoxFor(c => c.DNIPER, new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.DNIPER)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.NOMPER)
+                            @Html.TextBoxFor(c => c.NOMPER, new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.NOMPER)
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.APEPER)
+                            @Html.TextBoxFor(c => c.APEPER, new { @Class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.APEPER)
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Datos Usuario</div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(c => c.Usuario.LOGUSU)
+                                        @Html.TextBoxFor(c => c.Usuario.LOGUSU, new { @Class = "form-control", @placeholder = "correo@dominio.com" })
+                                        @Html.ValidationMessageFor(c => c.Usuario.LOGUSU)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(c => c.Usuario.CLAUSU)
+                                        @Html.PasswordFor(c => c.Usuario.CLAUSU, new { @Class = "form-control" })
+                                        @Html.ValidationMessageFor(c => c.Usuario.CLAUSU)
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(c => c.Usuario.CLAUSU_REP)
+                                        @Html.PasswordFor(c => c.Usuario.CLAUSU_REP, new { @Class = "form-control" })
+                                        @Html.ValidationMessageFor(c => c.Usuario.CLAUSU_REP)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-remove fa-fw"></i> Cerrar</button>
+            <button type="button" id="btnGrabarPersonal" class="btn btn-primary"><i class="fa fa-save fa-fw"></i> Guardar</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnGrabarPersonal").click(function () { GrabarPersonal(); });
+
+    });
+
+    function GrabarPersonal()
+    {
+        if (!formRegPersonalValido()) return;
+        if (!confirm("Esta seguro que desea registrar al Personal")) return;
+
+        $.ajax({
+            url: '@Url.Action("GrabarPersonal", "Personal")',
+            type: 'POST',
+            async: true,
+            data: $("#frmRegPersonal").serialize(),
+            success: function (result) {
+                showNotifyByData(result);
+                document.forms[0].submit();
+            },
+            error: errorAjax
+        });
+    }
+
+
+    function formRegPersonalValido() {
+        $("#frmRegPersonal").updateValidation();
+        if (!$("#frmRegPersonal").valid())
+            return false;
+        else
+            return true;
+    }
+
+</script>

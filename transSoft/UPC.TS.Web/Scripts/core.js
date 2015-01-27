@@ -55,3 +55,29 @@ function showNotify(title, message, typeMessage) {
         type: typeMessage
     });
 }
+
+/*Extensiones*/
+$.fn.updateValidation = function () {
+    var form = this.closest("form").removeData("validator").removeData("unobtrusiveValidation");
+    $.validator.unobtrusive.parse(form);
+    return this;
+};
+
+$.fn.cleanValidation = function () {
+    $(this).find(".field-validation-error").each(function () {
+        $(this).removeClass("field-validation-error").addClass("field-validation-valid");
+    });
+    $(this).find(".input-validation-error").each(function () {
+        $(this).removeClass("input-validation-error").addClass("valid");
+    });
+    $(this).find(".validation-summary-errors").each(function () {
+        $(this).find("ul").empty();
+        $(this).removeClass("validation-summary-errors").addClass("validation-summary-valid");
+    });
+    $(this).updateValidation();
+};
+
+//$.validator.methods.number = function (value, element) {
+//    //return !isNaN($.parseFloat(value));
+//    return this.optional(element) || /^-?(?:d+|d{1,3}(?:[s.,]d{3})+)(?:[.,]d+)?$/.test(value);
+//}
